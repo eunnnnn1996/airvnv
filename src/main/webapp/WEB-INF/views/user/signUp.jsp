@@ -105,25 +105,20 @@
 		})
 		
 		/* 비밀번호 확인 체크 */
-		
-			let passwdCheckNum = 0;
-		
-			 $('#passwd').keyup(function(){
-			      $('#password-massage').html('');
-			    });
+	let passwdCheckNum = 0;
+	 $('#passwd').keyup(function(){
+	      $('#password-massage').html('');
+	    });
+	    $('#passwd2').keyup(function(){
 
-			    $('#passwd2').keyup(function(){
-
-			        if($('#passwd').val() != $('#passwd2').val()){
-			          $('#password-massage').html('비밀번호 일치하지 않음<br><br>');
-			          $('#password-massage').attr('color', '#f82a2aa3');
-			        } else{
-			          $('#password-massage').html('비밀번호 일치함<br><br>');
-			          $('#password-massage').attr('color', '#199894b3');
-			        }
-
-			    });			
-			
+	        if($('#passwd').val() != $('#passwd2').val()){
+	          $('#password-massage').html('비밀번호 일치하지 않음<br><br>');
+	          $('#password-massage').attr('color', '#f82a2aa3');
+	        } else{
+	          $('#password-massage').html('비밀번호 일치함<br><br>');
+	          $('#password-massage').attr('color', '#199894b3');
+	        }
+	    });			
 	});
 </script>
 <!-- 우편번호 스크립트 시작 -->

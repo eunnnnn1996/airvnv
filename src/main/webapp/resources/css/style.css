@@ -192,9 +192,18 @@ input[id="zipcode"]{
 	display:inline-block;
 	font-size:22px;
 	padding-top:3%;
-	padding-right:3%;
+	padding-right:10%;
 }
-
+.sub{
+	padding-left:50px;
+	padding-top:10px;
+	position: relative;
+	border: solid 1px #d3d3d3; 
+}
+.sub li{
+	padding-bottom:20px;	
+	
+}
 
 /* 회원가입 박스 */
 .sign-box{
