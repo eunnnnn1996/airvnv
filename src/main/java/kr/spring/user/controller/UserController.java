@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.user.service.UserService;
 import kr.spring.user.vo.UserVO;
@@ -87,12 +88,78 @@ public class UserController {
 		}
 		return "common/resultView";
 	}
-		//로그아웃
-		@RequestMapping("/user/logout.do")
-		public String processLogout(HttpSession session) {
-			
-			session.invalidate();
+	
+	//로그아웃
+	@RequestMapping("/user/logout.do")
+	public String processLogout(HttpSession session) {
+		
+		session.invalidate();
 
-			return "redirect:/main/main.do";
-		}
+		return "redirect:/main/main.do";
+	}
+	
+	//myPage
+	@RequestMapping("/user/myPage.do")
+	public String myPageForm(HttpSession session, Model model) {
+		
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		UserVO user = userService.selectUser(user_num);
+
+		model.addAttribute("user",user);
+		
+		return "myPage";
+	}
+	// 이미지 출력
+	@RequestMapping("/user/photoView.do")
+	public ModelAndView viewImage(HttpSession session) {
+
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		UserVO userVO = userService.selectUser(user_num);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", userVO.getPhoto());
+		mav.addObject("filename", userVO.getPhoto_name());
+
+		return mav;
+	}
+	//회원 정보수정
+	@RequestMapping("/user/userUpdate.do")
+	public String updateForm(Model model, UserVO user, HttpSession session
+														,HttpServletRequest request) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		user.setUser_num(user_num);
+		
+		userService.updateUserId(user);
+		
+		model.addAttribute("message", "정보 수정 완료"); 
+		model.addAttribute("url", request.getContextPath() + "/main/main.do");
+		
+		return "common/resultView";
+	}
+	//회원 탈퇴
+	@RequestMapping("/user/userDelete.do")
+	public String updateForm(UserVO userVO,Model model,HttpSession session ,HttpServletRequest request) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		//회원탈퇴view에서 입력한 비밀번호
+		String deletePasswd = userVO.getPasswd();
+		UserVO userCheckVO = userService.selectUser(user_num);
+		
+		System.out.println("내가 쓴 비밀번호 : " +deletePasswd);
+		System.out.println("진짜 비밀번호 : " +userCheckVO.getPasswd());
+		
+	    if(deletePasswd.equals(userCheckVO.getPasswd())) {
+		  userService.deleteUser(userCheckVO);
+		  session.invalidate(); //로그아웃
+		  model.addAttribute("message", "회원탈퇴 완료"); 
+		  model.addAttribute("url", request.getContextPath() + "/main/main.do");
+	    }else {
+	      model.addAttribute("message", "비밀번호가 일치하지 않습니다"); 
+		  model.addAttribute("url", request.getContextPath() + "/user/myPage.do");
+	    }
+	
+		
+		
+		return "common/resultView";
+	}
 }

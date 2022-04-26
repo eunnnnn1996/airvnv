@@ -41,7 +41,7 @@
 				<ul class="sub">
 					<li>내 글 보기</li>
 					<li>관심 글 보기</li>
-					<li>설정</li>
+					<li><a href="${pageContext.request.contextPath}/user/myPage.do">설정</a></li>
 				</ul>
 			<!-- 드롭다운 끝 -->			
 		</c:if>

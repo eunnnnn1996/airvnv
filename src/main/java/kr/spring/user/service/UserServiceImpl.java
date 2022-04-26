@@ -33,6 +33,32 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userMapper.selectCheckUser(user_id);
 	}
+
+	@Override
+	public UserVO selectUser(Integer user_num) {
+		// TODO Auto-generated method stub
+		return userMapper.selectUser(user_num);
+	}
+
+	@Override
+	public void updateProfile(UserVO user) {
+		// TODO Auto-generated method stub
+		userMapper.updateProfile(user);
+	}
+
+	@Override
+	public void updateUserId(UserVO user) {
+		// TODO Auto-generated method stub
+		userMapper.updateUserId(user);
+		userMapper.updateUserNamePhone(user);
+	}
+
+	@Override
+	public void deleteUser(UserVO userVO) {
+		// TODO Auto-generated method stub
+		userMapper.deleteUser(userVO);
+		userMapper.updateUserAuth(userVO);
+	}
 	
 	
 }
