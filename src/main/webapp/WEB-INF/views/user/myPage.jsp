@@ -5,7 +5,6 @@
  <!-- 제이쿼리, css 임포트 -->   
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-    
 <script type="text/javascript">
 	$(function(){
 		//프로필 사진 업로드
@@ -89,6 +88,7 @@
 		
 	});
 </script>
+<div class="mypage-relative">
 	<div class="mypage-out">
 		<div class="mypage-in">
 			<h1>내 정보 수정</h1>
@@ -156,8 +156,8 @@
 		</div>			
 	</div>	
 	<a class="userDelete-btn">회원탈퇴</a>
-		
 </div>		
+</div>
 <script>
 	$(document).ready(function(){
 		$(".userDelete-btn").click(function(){

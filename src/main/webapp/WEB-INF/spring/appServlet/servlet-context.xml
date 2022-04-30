@@ -31,7 +31,7 @@
 			<beans:list>
 				<beans:value>/WEB-INF/tiles-def/main.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/user.xml</beans:value>
-				<beans:value>/WEB-INF/tiles-def/two.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/house.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/three.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/four.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/five.xml</beans:value>

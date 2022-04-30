@@ -35,11 +35,13 @@ create table amarket(
 	address3 varchar2(90) not null, --몇 호
 	trade_type number(1) default 1 not null, --디폴트 1, 1.월세 2.전세
 	trade_short number(1) default 2 not null, --디폴트 1, 1.가능 2.불가능
-	otherpay number(50) not null,
+	otherpay number(30) not null, --관리비
 	elevator number(1) default 1 not null, --디폴트 1, 1.가능 2.불가능 (엘리베이터)
 	parking number(1) default 1 not null, --디폴트 1, 1.가능 2.불가능 (주차)
 	veranda number(1) default 1 not null, --디폴트 1, 1.가능 2.불가능 (베란다)
-	optionitem varchar2(300) , --디폴트 1, 1.가능 2.불가능	
+	optionitem varchar2(300) ,	
+	reg_date date default sysdate not null,
+	modify_date date,
 	user_num number not null,
 	constraint amarket_pk primary key (market_num),
 	constraint amarket_fk foreign key (user_num) references auser (user_num)

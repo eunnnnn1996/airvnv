@@ -39,6 +39,7 @@
 			<!-- 드롭다운 시작 -->
 			[<span class="nickname">${user_name}</span>]
 				<ul class="sub">
+					<li><a href="${pageContext.request.contextPath}/house/houseInsert.do">방 내놓기</a></li>
 					<li>내 글 보기</li>
 					<li>관심 글 보기</li>
 					<li><a href="${pageContext.request.contextPath}/user/myPage.do">설정</a></li>

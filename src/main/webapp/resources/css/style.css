@@ -195,10 +195,12 @@ input[id="zipcode"]{
 	padding-right:10%;
 }
 .sub{
+	width:170px;
 	padding-left:50px;
 	padding-top:10px;
-	position: relative;
+	position:absolute;
 	border: solid 1px #d3d3d3; 
+	background-color:#fff;
 }
 .sub li{
 	padding-bottom:20px;	
@@ -232,9 +234,12 @@ input[id="zipcode"]{
 }
 /* 구분선 스타일 */
 hr{
-	border:0.1px solid #f7f7f7; 
+	border:0.1px solid #d7d7d7; 
 }
-
+.title-hr{
+	border:0.1px solid #d7d7d7;
+	margin-top:20px;	
+}
 .sign-in-box label{
 	font-size:22px;
 	font-weight:700;
@@ -320,6 +325,9 @@ hr{
 	display:flex;
 	width:100%;
 }
+.mypage-relative{
+	/* position:absolute;	 */
+}
 .mypage-in{
 	padding-left:300px;
 	padding-top:100px;
@@ -390,13 +398,153 @@ hr{
 
 
 
+/* 방 내놓기 css */
+.market-main{
+	padding-top:50px;
+	padding-left:150px;
+	width:100%;
+	margin: auto;
+}
+.market-title{
+	text-align:center;	
+	padding-bottom:50px;
+}
+.market-title b{
+	font-size:26px;
+}
+.market-content-first p{
+	padding-left:20px;	
+	font-size:20px;
+}
+.market-content-first{
+	/* padding-left:20px; */
+	width : 100%;
+    height: 100%;
+    border: 1px solid #d3d3d3;
+}
+.market-content-second{
+/* 	padding-left:20px; */
+	width : 100%;
+    height: 90px;
+    border: 1px solid #d3d3d3;
+    margin-top:20px;
+}
+.market-title2{
+	text-align:center;	
+	padding-bottom:50px;
+	margin-top:25px;
+}
+.market-title2 b{
+	font-size:26px;
+	
+}
+.market-gps-second{
+/* 	padding-left:20px; */
+	width : 100%;
+    height: 90px;
+    border: 1px solid #d3d3d3;
+    margin-top:20px;
+}
+.market-gps{
+	text-align:center;	
+	padding-bottom:30px;
+	margin-top:25px;
+	padding-left:250px;
+}
+.market-gps span b{
+	float:right;
+	font-size:13px;
+	color:#d7d7d7;
+	padding-top:5px;
+	padding-right:10px;
+}
+.market-gps b{
+	font-size:26px;
+	text-align:center;
+	margin-bottom:10px;
+}
+.gps-title{
+	width:200px;
+	height:300px;
+	background-color:#f1f1f1;
+}
+.sort-gps{
+	font-size:24px;
+	font-weight:700;
+}
+.gps-content{
+	text-align:center;
+	padding-top:25px;
+}
+.gps-list-content{
+	display:flex;
+}
+.market-content-four{
+	margin-top:20px;
+	width : 100%;
+    height: 200px;
+    border: 1px solid #d3d3d3;
+    display:flex;
+}
+.four-title{
+	width:200px;
+	height:200px;
+	background-color:#f1f1f1;
+}
+.sort-four-content{
+	text-align:center;
+	padding-top:90px;
+}
+.four-gpscon{
+	padding-top:20px;
+	display:flex;
+}
+.otherpay-sty{
+	height:50px;
+	width:50px;
+	margin-left:100px;
+	font-size:22px;
+}
+/* /////////////// */
+
+.market-content-third{
+	margin-top:20px;
+	width : 100%;
+    height: 90px;
+    border: 1px solid #d3d3d3;
+    display:flex;
+}
+.third-title{
+	width:200px;
+	height:90px;
+	background-color:#f1f1f1;
+}
+.sort-choice{
+	font-size:24px;
+	font-weight:700;
+}
+.sort-content{
+	text-align:center;
+	padding-top:25px;
+}
+.third-radio{	
+	padding-top:20px;
+	display:flex;
+}
+.third-radio label{
+	width:110px;
+	height:40px;
+	padding-top:10px;
+	margin-left:15px;
+	text-align:center;
+	border: 1px solid #d3d3d3;
+	font-size:20px;
+}
 
 
-
-
-
-
-
+.type-btn{
+	opacity:0; /* 라디오버튼 동그라미 없애기 */
+}
 
 
 

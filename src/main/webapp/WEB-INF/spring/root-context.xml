@@ -69,7 +69,7 @@
 	     class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="typeAliasesPackage" value="kr.spring.user.vo,
-		                                           kr.spring.board.vo"/>
+		                                           kr.spring.houseboard.vo"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.spring.**.dao"/>
