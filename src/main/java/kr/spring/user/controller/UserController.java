@@ -1,5 +1,9 @@
 package kr.spring.user.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -12,17 +16,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.houseboard.service.HouseService;
+import kr.spring.houseboard.vo.HouseVO;
+import kr.spring.houseboard.vo.PaymentVO;
 import kr.spring.user.service.UserService;
 import kr.spring.user.vo.UserVO;
 import kr.spring.util.AuthBlockException;
 import kr.spring.util.AuthCheckException;
+import kr.spring.util.PagingUtil;
 
 @Controller
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private HouseService houseService;
 	
 	@ModelAttribute
 	public UserVO initCommand() {
@@ -109,6 +120,76 @@ public class UserController {
 		
 		return "myPage";
 	}
+	//내가 예약한 방
+	@RequestMapping("/user/myReservation.do")
+	public ModelAndView myReservationForm(HttpSession session,
+			@RequestParam(value="pageNum",defaultValue="1")
+			int currentPage,
+			@RequestParam(value="keyfield",defaultValue="")
+			String keyfield,
+			@RequestParam(value="keyword",defaultValue="")
+			String keyword) {
+		
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("user_num", user_num);
+		
+		int count = houseService.selectRowCountPayment(map);
+		
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"myReservation.do");
+		
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		List<PaymentVO> list = null;
+		if(count > 0) {
+			list = houseService.selectListPayment(map);
+		}
+		
+		ModelAndView mav  = new ModelAndView();
+		mav.setViewName("myReservation");
+		mav.addObject("count", count);
+		mav.addObject("list",list);
+		mav.addObject("pagingHtml",page.getPagingHtml());
+		
+		return mav;
+	}
+	//내가 예약한 방 예약취소
+	@RequestMapping("/user/reservationCencel.do")
+	public String Cencel(HttpSession session,int date_num,int onoff) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		
+		if(onoff == 1) {
+			houseService.cencelUpdate(user_num, date_num);
+		}else if(onoff == 2) {
+			houseService.cencelUpdateReset(user_num, date_num);
+		}
+		return "redirect:/user/myReservation.do";
+	}
+	//내가 예약한 방 목록삭제
+	@RequestMapping("/user/reservationDelete.do")
+	public String reservationDelete(HttpSession session,Model model,
+										HttpServletRequest request,int date_num,int onoff) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		
+		if(onoff == 2) {
+			houseService.deleteReservation(user_num, date_num);
+			model.addAttribute("message", "삭제 완료"); 
+			model.addAttribute("url", request.getContextPath() + "/user/myReservation.do");
+			return "common/resultView";
+		}else if(onoff == 1) {
+			model.addAttribute("message", "예약 중단 후 삭제하세요"); 
+			model.addAttribute("url", request.getContextPath() + "/user/myReservation.do");
+			return "common/resultView";
+		}
+		model.addAttribute("message", "오류"); 
+		model.addAttribute("url", request.getContextPath() + "/user/myReservation.do");
+		return "common/resultView";
+	}
+	
 	// 이미지 출력
 	@RequestMapping("/user/photoView.do")
 	public ModelAndView viewImage(HttpSession session) {
@@ -145,9 +226,6 @@ public class UserController {
 		String deletePasswd = userVO.getPasswd();
 		UserVO userCheckVO = userService.selectUser(user_num);
 		
-		System.out.println("내가 쓴 비밀번호 : " +deletePasswd);
-		System.out.println("진짜 비밀번호 : " +userCheckVO.getPasswd());
-		
 	    if(deletePasswd.equals(userCheckVO.getPasswd())) {
 		  userService.deleteUser(userCheckVO);
 		  session.invalidate(); //로그아웃
@@ -157,9 +235,77 @@ public class UserController {
 	      model.addAttribute("message", "비밀번호가 일치하지 않습니다"); 
 		  model.addAttribute("url", request.getContextPath() + "/user/myPage.do");
 	    }
-	
-		
 		
 		return "common/resultView";
 	}
+	
+	@RequestMapping("/user/myPost.do")
+	public ModelAndView myPost(HttpSession session,
+			@RequestParam(value="pageNum",defaultValue="1")
+			int currentPage,
+			@RequestParam(value="keyfield",defaultValue="")
+			String keyfield,
+			@RequestParam(value="keyword",defaultValue="")
+			String keyword) {
+		
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("user_num", user_num);
+		
+		int count = userService.selectRowCountPostHouse(map);
+		
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"myPost.do");
+		
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		List<HouseVO> list = null;
+		
+		if(count > 0) {
+			list = userService.selectListPostHouse(map);
+		}
+		ModelAndView mav  = new ModelAndView();
+		mav.setViewName("myPost");
+		mav.addObject("count", count);
+		mav.addObject("list",list);
+		mav.addObject("pagingHtml",page.getPagingHtml());
+		
+		return mav;
+	} 
+		//내가 게시한방 게시중단 및 재시작
+		@RequestMapping("/user/postCencel.do")
+		public String postCencel(HttpSession session,int market_num,int onoff) {
+			Integer user_num = (Integer) session.getAttribute("user_num");
+			
+			if(onoff == 1) {
+				userService.postCencelUpdate(user_num, market_num);
+			}else if(onoff == 2) {
+				userService.postCencelUpdateReset(user_num, market_num);
+			}
+			return "redirect:/user/myPost.do";
+		}
+		//내가 게시한방 삭제
+		@RequestMapping("/user/postDelete.do")
+		public String postDelete(HttpSession session,Model model,
+											HttpServletRequest request,int market_num,int onoff) {
+			Integer user_num = (Integer) session.getAttribute("user_num");
+			
+			if(onoff == 2) {
+				houseService.DeleteMarketDetail(user_num,market_num);
+				model.addAttribute("message", "삭제 완료"); 
+				model.addAttribute("url", request.getContextPath() + "/user/myPost.do");
+				return "common/resultView";
+			}else if(onoff == 1) {
+				model.addAttribute("message", "게시 중단 후 삭제하세요"); 
+				model.addAttribute("url", request.getContextPath() + "/user/myPost.do");
+				return "common/resultView";
+			}
+			model.addAttribute("message", "오류"); 
+			model.addAttribute("url", request.getContextPath() + "/user/myPost.do");
+			return "common/resultView";
+		}
+	
 }

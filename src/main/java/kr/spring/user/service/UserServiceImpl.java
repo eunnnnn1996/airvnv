@@ -1,9 +1,13 @@
 package kr.spring.user.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.user.dao.UserMapper;
 import kr.spring.user.vo.UserVO;
 
@@ -58,6 +62,37 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		userMapper.deleteUser(userVO);
 		userMapper.updateUserAuth(userVO);
+	}
+
+	@Override
+	public List<HouseVO> selectListPostHouse(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectListPostHouse(map);
+	}
+
+	@Override
+	public int selectRowCountPostHouse(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectRowCountPostHouse(map);
+	}
+
+	@Override
+	public void postCencelUpdate(Integer user_num, int market_num) {
+		// TODO Auto-generated method stub
+		userMapper.postCencelUpdate(user_num, market_num);
+	}
+
+	@Override
+	public void postCencelUpdateReset(Integer user_num, int market_num) {
+		// TODO Auto-generated method stub
+		userMapper.postCencelUpdateReset(user_num, market_num);
+	}
+
+	@Override
+	public void deletePost(Integer user_num, int market_num) {
+		// TODO Auto-generated method stub
+		userMapper.deletePost(user_num, market_num);
+		
 	}
 	
 	

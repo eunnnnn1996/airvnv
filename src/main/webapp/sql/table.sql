@@ -21,25 +21,28 @@ create table auser_detail(
 	constraint auser_detail_pk primary key (user_num),
 	constraint auser_detail_fk foreign key (user_num) references auser (user_num)
 );
+alter table amarket_detail add onoff number(1) default 1 not null;
 create sequence auser_seq;
 
 --게시판 (매물 등록)
 
 create table amarket(
 	market_num number not null,
-	market_type number(1) default 1 not null, --디폴트 1, 1.원룸 2.투룸 3.쓰리룸 4.오피스텔 5.아파트
+	market_type number(1) default 1 not null, --디폴트 1, 1.호텔 2.펜션 3.게스트하우스 4.아파트 5.기타
 	market_type_sort number(1) default 1 not null, --디폴트 1, 1.단독주택 2.다가구 3.빌라 4.상가
 	zipcode varchar2(5) not null, --자동
 	address1 varchar2(90) not null, --자동
 	address2 varchar2(90) not null, --몇 동
 	address3 varchar2(90) not null, --몇 호
-	trade_type number(1) default 1 not null, --디폴트 1, 1.월세 2.전세
+	trade_type number(1) default 1 not null, --디폴트 1, 1.현장결제 2.온라인결제
 	trade_short number(1) default 2 not null, --디폴트 1, 1.가능 2.불가능
-	otherpay number(30) not null, --관리비
+	otherpay number(30) not null, --하루당 비용
 	elevator number(1) default 1 not null, --디폴트 1, 1.가능 2.불가능 (엘리베이터)
 	parking number(1) default 1 not null, --디폴트 1, 1.가능 2.불가능 (주차)
 	veranda number(1) default 1 not null, --디폴트 1, 1.가능 2.불가능 (베란다)
 	optionitem varchar2(300) ,	
+	photo blob,
+	photo_name varchar2(100),
 	reg_date date default sysdate not null,
 	modify_date date,
 	user_num number not null,
@@ -66,12 +69,78 @@ create table amarket_photo(
 	constraint amarket_photo_fk foreign key (user_num) references auser (user_num)
 );
 
+create table houselike(
+	houselike_num number not null,
+	market_num number not null,
+	user_num number not null,
+	alike number(1) not null,
+	constraint houselike_pk primary key(houselike_num),
+	constraint house_fk1 foreign key(market_num) references amarket(market_num),
+	constraint auser_fk2 foreign key(user_num) references auser(user_num)
+);
 
+create sequence houselike_seq;
 
+create table areview(
+    review_num number not null,
+    areview_content clob not null,
+    zipcode varchar2(5) not null,
+    address1 varchar2(90) not null,
+	address2 varchar2(90) not null,
+	address3 varchar2(90) not null,
+    reg_date date default sysdate not null,
+    user_num number not null,
+	constraint areview_pk primary key (review_num),
+	constraint areview_fk1 foreign key (user_num) references auser (user_num)
+);
+create sequence areview_seq;
 
+create table areview_rate(
+    areview_rate_num number not null,
+    traffic number not null,
+    building number not null,
+    environment number not null,
+    room number not null,
+    review_num number not null,
+    user_num number not null,
+    constraint areview_rate_pk primary key (areview_rate_num),
+    constraint areview_rate_fk1 foreign key (review_num) references areview (review_num),
+    constraint areview_rate_fk2 foreign key (user_num) references auser (user_num)
+);
+create sequence areview_rate_seq;
 
+create table apayment(
+    date_num number not null,
+    startdate date not null,
+    enddate date not null,
+    price varchar2(50),
+    market_num number not null,
+    user_num number not null,
+    constraint apayment_pk primary key (date_num),
+	constraint apayment_fk1 foreign key (user_num) references auser (user_num),
+    constraint apayment_fk2 foreign key (market_num) references amarket (market_num)
+);
+create sequence adate_seq;
 
+create table arate(
+    rate_num number not null,
+    title varchar(30) not null,
+    content clob not null,
+    all_rate number(1) not null, --총 점
+    accuracy_rate number(1) not null, --사진에 대한 정확성
+    clean_rate number(1) not null, --청결
+    ease_rate number(1) not null, --편의성 
+    position_rate number(1) not null, --위치
+    communication_rate number(1) not null, --커뮤니케이션
+    reg_date date default sysdate not null,
+    user_num number not null,
+    market_num number not null,
+    constraint arate_pk primary key (rate_num),
+	constraint arate_fk1 foreign key (user_num) references auser (user_num),
+    constraint arate_fk2 foreign key (market_num) references amarket (market_num)
+);
 
+create sequence arate_seq;
 
 
 

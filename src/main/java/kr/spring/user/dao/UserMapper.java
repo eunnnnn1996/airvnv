@@ -1,10 +1,15 @@
 package kr.spring.user.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.user.vo.UserVO;
 
 public interface UserMapper {
@@ -36,6 +41,14 @@ public interface UserMapper {
 	//유저 삭제 후 auth를 0(탈퇴)으로 변경
 	@Update("update auser set user_auth = '0' where user_num = #{user_num}")
 	public void updateUserAuth(UserVO userVO);
-	
-	
+	//내가 올린 방 리스트
+	public List<HouseVO> selectListPostHouse(Map<String,Object> map);
+	//내가 올린 방 갯수
+	public int selectRowCountPostHouse(Map<String,Object> map);
+	@Update("update amarket_detail set onoff = 2 where user_num = #{user_num} and market_num = #{market_num}")
+	public void postCencelUpdate(@Param("user_num") Integer user_num,@Param("market_num") int market_num);
+	@Update("update amarket_detail set onoff = 1 where user_num = #{user_num} and market_num = #{market_num}")
+	public void postCencelUpdateReset(@Param("user_num") Integer user_num,@Param("market_num") int market_num);
+	@Delete("delete from amarket_detail where user_num = #{user_num} and market_num = #{market_num}")
+	public void deletePost(@Param("user_num") Integer user_num,@Param("market_num") int market_num);
 }

@@ -1,0 +1,107 @@
+/* 회원가입 박스 */
+* {
+	margin: 0;
+	padding: 0;
+}
+.main-outer {
+	margin-left: 300px;
+	margin-top: 150px;
+	width: 1200px;
+	height: 500px;
+}
+
+.main-inner {
+	width: 100%;
+	height: 500px;
+	margin: auto;
+}
+.sign-box{
+	position: relative;
+ 	margin:auto;
+	width:800px;
+	height:1550px;
+	border: 2px solid #f1f1f1;
+}
+.sign-box h3{
+	font-size:40px;
+	padding-bottom:50px;
+}
+.sign-content{
+	font-size:22px;
+	padding-top:20px;
+}
+.sign-in-box{
+	padding-left:150px;
+	padding-top:100px;
+	padding-bottom:500px;
+	display: inline-block;
+}
+/* 구분선 스타일 */
+hr{
+	border:0.1px solid #d7d7d7; 
+}
+.title-hr{
+	border:0.1px solid #d7d7d7;
+	margin-top:20px;	
+}
+.sign-in-box label{
+	font-size:22px;
+	font-weight:700;
+	width:200px;
+	color:#a9a9a9;
+}
+
+.sign-label{
+	padding-bottom:10px; 
+	padding-top:30px;
+}
+
+.sign-in-box .in-put{
+	margin-top:20px;
+	width:500px;	
+	height:70px;
+	padding-left:15px;
+	border:0.1px solid #e9e9e9;
+	font-size:22px;
+	border-radius: 12px;
+}
+.sign-in-box .in-put-post{
+	margin-top:20px;
+	width:350px;	
+	height:70px;
+	padding-left:15px;
+	border:0.1px solid #e9e9e9;
+	font-size:22px;
+	border-radius: 12px;
+}
+.address-btn{
+	margin-left:30px;
+	width:100px;
+	height:70px;
+	background-color:#fff;
+	border:0.1px solid #e9e9e9;
+	color:gray;
+	border-radius: 12px;
+}
+.sign-btn{
+	font-size:24px;
+	margin-top:70px;
+	width:500px;
+	height:60px;
+	background-color:#0092db;
+	border:0.1px solid #0092db;
+	color:#fff;
+	font-weight: bold;
+	display:inline-block;
+}
+.sign-btn:hover{
+	background-color:#0088cc;
+	border:0.1px solid #0088cc;	
+	cursor:pointer;
+}
+.sign-message{
+	color:gray;
+	font-size:18px;
+	padding-top:30px;
+	text-align:center;
+}

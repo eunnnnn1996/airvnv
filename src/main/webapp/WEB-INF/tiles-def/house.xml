@@ -9,6 +9,34 @@
     	<put-attribute name="title" value="방 내놓기"/>
     	<put-attribute name="body" value="/WEB-INF/views/house/houseInsert.jsp"/>
     </definition>
+    <definition name="houseDetail" extends="main">
+    	<put-attribute name="title" value="방 자세히 보기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/houseDetail.jsp"/>
+    </definition>
+    <definition name="houseModify" extends="main">
+    	<put-attribute name="title" value="방 정보 수정하기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/houseModify.jsp"/>
+    </definition>
+	<definition name="reviewMain" extends="main">
+    	<put-attribute name="title" value="리뷰 메인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/reviewMain.jsp"/>
+    </definition>
+    <definition name="reviewInsert" extends="main">
+    	<put-attribute name="title" value="리뷰 작성"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/reviewInsert.jsp"/>
+    </definition>
+    <definition name="testMain" extends="main">
+    	<put-attribute name="title" value="리뷰 작성"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/testMain.jsp"/>
+    </definition>
+    <definition name="rateMain" template="/WEB-INF/views/template/deleteHeader.jsp">
+    	<put-attribute name="title" value="리뷰메인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/rateMain.jsp"/>
+    </definition>
+    <definition name="rateInsert" template="/WEB-INF/views/template/deleteHeader.jsp">
+    	<put-attribute name="title" value="리뷰작성"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/rateInsert.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

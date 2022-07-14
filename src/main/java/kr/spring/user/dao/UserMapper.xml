@@ -3,5 +3,30 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.user.dao.UserMapper">
- 
+	<!-- 내가 게시한 방 조회 -->
+	<select id="selectListPostHouse" parameterType="map" resultType="houseVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT 
+		a.market_num,
+		<![CDATA[
+		REPLACE(REPLACE(d.market_title, '<', '&lt;'),'>','&gt;') market_title,
+		]]>
+		u.user_num,
+		a.address1,
+		a.address2,
+		a.address3,
+		a.otherpay,
+		a.reg_date,
+		d.onoff
+		from amarket a
+	    join amarket_detail d on a.market_num = d.market_num
+	    join auser u  on a.user_num = u.user_num where u.user_num = #{user_num}
+		ORDER BY a.market_num DESC)a)
+	</select>
+	<select id="selectRowCountPostHouse" parameterType="map" resultType="integer">
+		SELECT
+		COUNT(*)
+		from amarket a
+    	join amarket_detail d on a.market_num = d.market_num
+    	join auser u  on a.user_num = u.user_num where u.user_num = #{user_num}
+	</select>
 </mapper>

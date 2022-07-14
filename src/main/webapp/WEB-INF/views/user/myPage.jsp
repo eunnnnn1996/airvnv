@@ -4,14 +4,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
  <!-- 제이쿼리, css 임포트 -->   
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
 <script type="text/javascript">
 	$(function(){
-		//프로필 사진 업로드
-		$('#photo_btn').click(function(){
-			$('#photo_choice').show();
-			$(this).hide();
-		});
 		
 		//처음 화면에 보여지는 이미지 읽기
 		let photo_path = $('.my-photo').attr('src');
@@ -67,7 +64,6 @@
 						alert('프로필 사진이 수정되었습니다.');
 						photo_path = $('.my-photo').attr('src');
 						$('#upload').val('');
-						$('#photo_choice').hide();
 						$('#photo_btn').show();
 					}else{
 						alert('파일 전송 오류 발생');
@@ -82,82 +78,92 @@
 		$('#photo_reset').click(function(){
 			$('.my-photo').attr('src',photo_path);
 			$('#upload').val('');
-			$('#photo_choice').hide();
 			$('#photo_btn').show();
 		});
 		
 	});
 </script>
-<div class="mypage-relative">
-	<div class="mypage-out">
-		<div class="mypage-in">
-			<h1>내 정보 수정</h1>
-			<ul>
-			<li>
-				<c:if test="${empty user.photo_name}">
-				<img src="${pageContext.request.contextPath}/resources/images/face.png"
-				                     width="200" height="200" class="my-photo">
-				
-				</c:if>
-				<c:if test="${!empty user.photo_name}">
-				<img src="${pageContext.request.contextPath}/user/photoView.do"
-				                     width="200" height="200" class="my-photo">
-				</c:if>
-			</li>
-			<li>
-				<div>
-					<input type="button" value="수정" id="photo_btn" class="btn-black">
-				</div>
-				<div id="photo_choice" style="display:none;">
-					<input type="file" id="upload" accept="image/gif,image/png,image/jpeg" class="btn btn-outline-secondary" style="border:none;">
-					<input type="button" value="전송" id="photo_submit" class="btn-black">
-					<input type="button" value="취소" id="photo_reset" class="btn-black">
-				</div>
-			</li>
-		</ul>
+
+<div class="main-outer">
+	<div class="main-inner">
+		<div class="my-title"><b>MY 정보</b></div>
+		<div class="my-menu">
+			<ul style="display: inline-block;">
+				<li><p><a href="${pageContext.request.contextPath}/user/myPage.do">내 정보</a></p></li>
+				<li><p><a href="${pageContext.request.contextPath}/user/myPost.do">내가 올린 방</a></p></li>
+				<li><p><a href="${pageContext.request.contextPath}/user/myReservation.do">내가 예약한 방</a></p></li>
+				<li><p>내 후기</p></li>								
+			</ul>
+		</div>
+		<div class="my-info">
+			<ul style="display: inline-block;">
+				<li>
+					<c:if test="${empty user.photo_name}">
+					<img src="${pageContext.request.contextPath}/resources/images/face.png"
+					                     width="200" height="200" class="my-photo">
+					
+					</c:if>
+					<c:if test="${!empty user.photo_name}">
+					<img src="${pageContext.request.contextPath}/user/photoView.do"
+					                     width="200" height="200" class="my-photo">
+					</c:if>
+				</li>
+				<li>
+					<div id="photo_choice">
+						<input type="file" id="upload" accept="image/gif,image/png,image/jpeg" class="btn btn-outline-secondary" style="border:none;">
+						<input type="button" value="전송" id="photo_submit" class="btn-black">
+						<input type="button" value="취소" id="photo_reset" class="btn-black">
+					</div>
+				</li>
+					<form:form modelAttribute="user" action="userUpdate.do" enctype="multipart/form-data">
+				<li>
+			        <p>아이디</p><br>
+					<form:input class="my-con" path="user_id"/>
+					<form:errors path="user_id" cssClass="error-color"/><br>
+				</li>
+				<li>
+					<p>닉네임</p><br>
+					<form:input class="my-con" path="user_name"/>
+					<form:errors path="user_name" cssClass="error-color"/><br>
+				</li>
+				<li>
+					<p style="padding-right:90px;">휴대폰번호</p><br>
+					<form:input class="my-con" path="phone"/>
+					<form:errors path="phone" cssClass="error-color"/><br>
+				</li>
+				<li>		
+					<form:button>확인</form:button>
+				</li>
+					</form:form>	
+				<li>
+					<div class="modal-bg2">
+					<div class="userDelete-modal">
+						<img class="exit-img" src="${pageContext.request.contextPath}/resources/images/cross.png">
+						<b class="del-title">정말 탈퇴하시겠습니까?</b> <br>
+						<b class="del-title-sub">회원탈퇴를 신청하기전에 아래 안내 사항을 한번 더 확인해주세요.</b>
+						<p>1. 회원 탈퇴 시, 현재 로그인된 아이디는 즉시 탈퇴 처리됩니다.</p>
+						<p>2. 회원 탈퇴 시, 회원 전용 웹 서비스 이용이 불가합니다.</p>
+						<p>3. 탈퇴 시 회원 정보 및 찜 서비스, 등록한 게시물 이용 기록이 모두 삭제됩니다.</p>
+						<p>4. 회원 정보 및 서비스 이용 기록은 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.</p>
+						<p>5. 광고를 위한 매물이 등록되어 있을 경우, 탈퇴 시 모든 정보는 삭제 처리됩니다.</p>
+						<div class="delete-form">
+							<form action="${pageContext.request.contextPath}/user/userDelete.do" method="post">
+							  <input type="hidden" name="${user.user_num}">
+							  <label style="font-size:16px">비밀번호</label>
+							  <input class="delete-passwd" type="text" name="passwd">
+							  <input type="submit" value="확인">
+							</form>
+						</div>
+					</div>			
+				</div>	
+				<a class="userDelete-btn">회원탈퇴</a>
+				</li>
+			</ul>
 		</div>
 	</div>
-		<div class="nick-name">
-			<div class="nick-input">
-		        <form:form modelAttribute="user" action="userUpdate.do" enctype="multipart/form-data">
-		        	<form:label path="user_id">아이디</form:label>
-					<form:input path="user_id"/>
-					<form:errors path="user_id" cssClass="error-color"/><br>
-					
-					<form:label path="user_name">닉네임</form:label>
-					<form:input path="user_name"/>
-					<form:errors path="user_name" cssClass="error-color"/><br>
-					
-					<form:label path="phone">휴대폰번호</form:label>
-					<form:input path="phone"/>
-					<form:errors path="phone" cssClass="error-color"/><br>
-					
-					<form:button>확인</form:button>
-				</form:form>
-			</div>
-	<div class="modal-bg2">
-		<div class="userDelete-modal">
-			<img class="exit-img" src="${pageContext.request.contextPath}/resources/images/cross.png">
-			<b class="del-title">정말 탈퇴하시겠습니까?</b> <br>
-			<b class="del-title-sub">회원탈퇴를 신청하기전에 아래 안내 사항을 한번 더 확인해주세요.</b>
-			<p>1. 회원 탈퇴 시, 현재 로그인된 아이디는 즉시 탈퇴 처리됩니다.</p>
-			<p>2. 회원 탈퇴 시, 회원 전용 웹 서비스 이용이 불가합니다.</p>
-			<p>3. 탈퇴 시 회원 정보 및 찜 서비스, 등록한 게시물 이용 기록이 모두 삭제됩니다.</p>
-			<p>4. 회원 정보 및 서비스 이용 기록은 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.</p>
-			<p>5. 광고를 위한 매물이 등록되어 있을 경우, 탈퇴 시 모든 정보는 삭제 처리됩니다.</p>
-			<div class="delete-form">
-				<form action="${pageContext.request.contextPath}/user/userDelete.do" method="post">
-				  <input type="hidden" name="${user.user_num}">
-				  <label style="font-size:16px">비밀번호</label>
-				  <input class="delete-passwd" type="text" name="passwd">
-				  <input type="submit" value="확인">
-				</form>
-			</div>
-		</div>			
-	</div>	
-	<a class="userDelete-btn">회원탈퇴</a>
-</div>		
 </div>
+
+
 <script>
 	$(document).ready(function(){
 		$(".userDelete-btn").click(function(){

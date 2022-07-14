@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 개인스타일 임포트 -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
 <script>
 	$(document).ready(function(){
 		$(".login-btn").click(function(){
@@ -17,14 +17,22 @@
 	});
 </script>    
 <!-- 상단 시작 -->
-	<div class="main-title"><a href="${pageContext.request.contextPath}/main/main.do">제목</a></div>
+<div class="main-main">
+	<div class="main-title">
+		<a href="${pageContext.request.contextPath}/main/main.do">
+			<img src="${pageContext.request.contextPath}/resources/images/logo.png" height="50px">
+		</a>
+	</div>
 	<div class="main-menu">
 		<c:if test="${!empty user_num}">
+			<a href="${pageContext.request.contextPath}/house/reviewMain.do">후기</a>
 			<a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a>
 		</c:if>
 		<c:if test="${empty user_num}">
-			<a href="${pageContext.request.contextPath}/user/signUp.do">회원가입</a>
-			<a class="login-btn">로그인</a>
+			<a href="${pageContext.request.contextPath}/house/reviewMain.do"><b>방 리뷰</b></a>
+			<a href="${pageContext.request.contextPath}/user/signUp.do"><b>회원가입</b></a>
+			<a class="login-btn"><b>로그인</b></a>
+			
 		</c:if>
 		<c:if test="${!empty user_num && !empty user_photo}">
 	    	<img src="${pageContext.request.contextPath}/user/photoView.do" 
@@ -46,6 +54,6 @@
 				</ul>
 			<!-- 드롭다운 끝 -->			
 		</c:if>
-		
 	</div>
+</div>	
 <!-- 상단 끝 -->

@@ -167,7 +167,7 @@ label{
 	width:100px;
 	float:left;
 }
-input[type="text"],input[type="password"],input[type="email"]{
+input[type="password"],input[type="email"]{
 	width:200px;
 }
 #register_form input[id="id"]{
@@ -178,148 +178,6 @@ input[id="zipcode"]{
 }
 .error-color{
 		color:red;
-}
-
-/* 헤더 스타일 */
-.main-title{
-	float:left;
-	font-size:22px;
-	padding-top:3%;
-	padding-left:10%;
-}
-.main-menu{
-	float:right;
-	display:inline-block;
-	font-size:22px;
-	padding-top:3%;
-	padding-right:10%;
-}
-.sub{
-	width:170px;
-	padding-left:50px;
-	padding-top:10px;
-	position:absolute;
-	border: solid 1px #d3d3d3; 
-	background-color:#fff;
-}
-.sub li{
-	padding-bottom:20px;	
-	
-}
-
-/* 회원가입 박스 */
-.sign-box{
-	position:absolute;
-	width:800px;
-	height:900px;
-	top:50%;
-	left:50%;
-	margin:-400px 0 0 -450px;
-	border: solid 1px #f7f7f7;
-	text-align:left;
-}
-.sign-box h3{
-	font-size:40px;
-	padding-bottom:50px;
-}
-.sign-content{
-	font-size:22px;
-	padding-top:20px;
-}
-.sign-in-box{
-	padding-left:150px;
-	padding-top:100px;
-	padding-bottom:500px;
-	display: inline-block;
-}
-/* 구분선 스타일 */
-hr{
-	border:0.1px solid #d7d7d7; 
-}
-.title-hr{
-	border:0.1px solid #d7d7d7;
-	margin-top:20px;	
-}
-.sign-in-box label{
-	font-size:22px;
-	font-weight:700;
-	width:200px;
-}
-
-.sign-label{
-	padding-bottom:10px; 
-	padding-top:30px;
-}
-
-.sign-in-box input{
-	margin-top:20px;
-	width:500px;	
-	height:50px;
-	border:0.1px solid #d3d3d3;
-}
-.sign-btn{
-	font-size:18px;
-	margin-top:20px;
-	width:500px;
-	height:60px;
-	background-color:#326cf9;
-	color:#fff;
-}
-.sign-btn:hover{
-	background-color:#2e61dc;	
-	cursor:pointer;
-}
-/* 로그인모달창 백그라운드 */
-.modal-bg{
-	display:none;
-	position: absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	background:rgba(0,0,0,0.5);
-}
-
-.login-modal{
-	position: absolute;
-	left:calc(50% - 450px);
-	top:calc(50% - 350px);
-	width:900px;
-	height:700px;
-	background:#fff;
-	border-radius: 10px;
-}
-.login-form{
-	position: absolute;
-	left:calc(50% - 250px);
-	top:calc(50% - 300px);	
-}
-.login-form input{
-	margin-top:20px;
-	margin-bottom:20px;
-	width:500px;	
-	height:70px;
-	border-radius: 10px;
-	border: 1px solid #d3d3d3;
-}
-.login-form b{
-	padding-bottom:500px;	
-}
-.login-title{
-	font-size:50px;	
-}
-.login-content{
-	font-size:25px;	
-}
-
-.modal-header{
-	height:5%;
-	/* background-color:#f7f7f7; */
-	font-size:15px;
-}
-.exit-img{
-	cursor:pointer;
-	float:right;		
 }
 .mypage-out{
 	display:flex;
@@ -396,169 +254,27 @@ hr{
 	height:30px;
 }
 
-
-
-/* 방 내놓기 css */
-.market-main{
-	padding-top:50px;
-	padding-left:150px;
-	width:100%;
-	margin: auto;
-}
-.market-title{
-	text-align:center;	
-	padding-bottom:50px;
-}
-.market-title b{
-	font-size:26px;
-}
-.market-content-first p{
-	padding-left:20px;	
-	font-size:20px;
-}
-.market-content-first{
-	/* padding-left:20px; */
-	width : 100%;
-    height: 100%;
-    border: 1px solid #d3d3d3;
-}
-.market-content-second{
-/* 	padding-left:20px; */
-	width : 100%;
-    height: 90px;
-    border: 1px solid #d3d3d3;
-    margin-top:20px;
-}
-.market-title2{
-	text-align:center;	
-	padding-bottom:50px;
-	margin-top:25px;
-}
-.market-title2 b{
-	font-size:26px;
-	
-}
-.market-gps-second{
-/* 	padding-left:20px; */
-	width : 100%;
-    height: 90px;
-    border: 1px solid #d3d3d3;
-    margin-top:20px;
-}
-.market-gps{
-	text-align:center;	
-	padding-bottom:30px;
-	margin-top:25px;
-	padding-left:250px;
-}
-.market-gps span b{
-	float:right;
-	font-size:13px;
-	color:#d7d7d7;
-	padding-top:5px;
-	padding-right:10px;
-}
-.market-gps b{
-	font-size:26px;
-	text-align:center;
-	margin-bottom:10px;
-}
-.gps-title{
-	width:200px;
-	height:300px;
-	background-color:#f1f1f1;
-}
-.sort-gps{
-	font-size:24px;
-	font-weight:700;
-}
-.gps-content{
-	text-align:center;
-	padding-top:25px;
-}
-.gps-list-content{
-	display:flex;
-}
-.market-content-four{
-	margin-top:20px;
-	width : 100%;
-    height: 200px;
-    border: 1px solid #d3d3d3;
-    display:flex;
-}
-.four-title{
-	width:200px;
-	height:200px;
-	background-color:#f1f1f1;
-}
-.sort-four-content{
-	text-align:center;
-	padding-top:90px;
-}
-.four-gpscon{
-	padding-top:20px;
-	display:flex;
-}
-.otherpay-sty{
-	height:50px;
-	width:50px;
-	margin-left:100px;
-	font-size:22px;
-}
-/* /////////////// */
-
-.market-content-third{
-	margin-top:20px;
-	width : 100%;
-    height: 90px;
-    border: 1px solid #d3d3d3;
-    display:flex;
-}
-.third-title{
-	width:200px;
-	height:90px;
-	background-color:#f1f1f1;
-}
-.sort-choice{
-	font-size:24px;
-	font-weight:700;
-}
-.sort-content{
-	text-align:center;
-	padding-top:25px;
-}
-.third-radio{	
-	padding-top:20px;
-	display:flex;
-}
-.third-radio label{
-	width:110px;
-	height:40px;
-	padding-top:10px;
-	margin-left:15px;
-	text-align:center;
-	border: 1px solid #d3d3d3;
-	font-size:20px;
+.search {
+  position: relative;
+  width: 300px;
+  margin:0 auto;
 }
 
-
-.type-btn{
-	opacity:0; /* 라디오버튼 동그라미 없애기 */
+.search-input {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.search-img {
+  position : absolute;
+  width: 17px;
+  top: 10px;
+  right:0px;
+  margin: 0;
+}
 
 
 

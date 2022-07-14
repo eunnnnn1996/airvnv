@@ -2,61 +2,66 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/signup.css">
 
-<div class="sign-box">
-	<div class="sign-in-box">    
-		<h3>회원정보 입력</h3>
-		<hr size="1" noshade>
-		<b class="sign-content">살아방 서비스 이용을 위해 아래 정보를 입력해주세요.</b>	
-		<form:form modelAttribute="userVO" action="signUp.do" enctype="multipart/form-data" id="sign_form">
-			<form:errors element="div" cssClass="error-color"/>
-				<div class="sign-label">
-				<form:label path="user_id">아이디</form:label>
-				</div><br>
-				<form:input path="user_id" placeholder="아이디 입력"/>
-				<span id="message_id"></span><br>
-				<form:errors path="user_id" cssClass="error-color"/>
-				<div class="sign-label">	
-				<form:label path="user_name">닉네임</form:label>
-				</div><br>
-				<form:input path="user_name" placeholder="한글 또는 영문만 가능"/>
-				<span id="message_id"></span><br>
-				<form:errors path="user_name" cssClass="error-color"/>
-				<div class="sign-label">
-				<form:label path="passwd">비밀번호</form:label>
-				</div><br>
-				<form:password path="passwd"/><br>
-				<form:errors path="passwd" cssClass="error-color"/>
-				<!-- 비밀번호 확인 -->
-				<div class="sign-label">
-				<form:label path="passwd2">비밀번호 확인</form:label>
-				</div><br>
-				<form:password path="passwd2"/><br>
-				<form:errors path="passwd2" cssClass="error-color"/>
-				<span id="password-massage"></span>
-				<!-- 비밀번호 확인 -->
-				<div class="sign-label">
-				<form:label path="phone">전화번호</form:label>
-				</div><br>
-				<form:input path="phone"/><br>
-				<form:errors path="phone" cssClass="error-color"/>
-				<div class="sign-label">
-				<form:label path="zipcode">주소</form:label>
-				</div><br>
-				<form:input path="zipcode" onclick="sample2_execDaumPostcode()" style="width:350px"/>
-				<input type="button" class="btn-black postcode" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" style="width:125px;height:50px;margin-left:20px"><br>
-				<form:errors path="zipcode" cssClass="error-color"/>
-				<br>
-				<form:input path="address1" placeholder="주소"/><br>
-				<form:errors path="address1" cssClass="error-color"/>
-				<br>
-				<form:input path="address2" placeholder="동,호수 입력"/><br>
-				<form:errors path="address2" cssClass="error-color"/><br>			
-				<form:button id="signbtncheck" class="sign-btn">확인</form:button>
-		</form:form>
-	</div>	
+<div class="main-outer">
+	<div class="main-inner">
+		<div class="sign-box">
+			<div class="sign-in-box">    
+				<h3>딱 이것만 체크하면 가입완료!</h3>
+				<form:form modelAttribute="userVO" action="signUp.do" enctype="multipart/form-data" id="sign_form">
+					<form:errors element="div" cssClass="error-color"/>
+						<div class="sign-label">
+						<form:label path="user_id">아이디</form:label>
+						</div><br>
+						<form:input class="in-put" path="user_id" placeholder="아이디 입력"/>
+						<span id="message_id"></span><br>
+						<form:errors path="user_id" cssClass="error-color"/>
+						<div class="sign-label">	
+						<form:label path="user_name">닉네임</form:label>
+						</div><br>
+						<form:input class="in-put" path="user_name" placeholder="한글 또는 영문만 가능"/>
+						<span id="message_id"></span><br>
+						<form:errors path="user_name" cssClass="error-color"/>
+						<div class="sign-label">
+						<form:label path="passwd">비밀번호</form:label>
+						</div><br>
+						<form:password class="in-put" path="passwd"/><br>
+						<form:errors path="passwd" cssClass="error-color"/>
+						<!-- 비밀번호 확인 -->
+						<div class="sign-label">
+						<form:label path="passwd2">비밀번호 확인</form:label>
+						</div><br>
+						<form:password class="in-put" path="passwd2"/><br>
+						<form:errors path="passwd2" cssClass="error-color"/>
+						<span id="password-massage"></span>
+						<!-- 비밀번호 확인 -->
+						<div class="sign-label">
+						<form:label path="phone">전화번호</form:label>
+						</div><br>
+						<form:input class="in-put" path="phone"/><br>
+						<form:errors path="phone" cssClass="error-color"/>
+						<div class="sign-label">
+						<form:label path="zipcode">주소</form:label>
+						</div><br>
+						<form:input class="in-put-post" path="zipcode" onclick="sample2_execDaumPostcode()" style="width:350px"/>
+						<input type="button" class="btn-black postcode address-btn" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
+						<form:errors path="zipcode" cssClass="error-color"/>
+						<br>
+						<form:input class="in-put" path="address1" placeholder="주소"/><br>
+						<form:errors path="address1" cssClass="error-color"/>
+						<br>
+						<form:input class="in-put" path="address2" placeholder="동,호수 입력"/><br>
+						<form:errors path="address2" cssClass="error-color"/><br>			
+						<form:button id="signbtncheck" class="sign-btn">버튼만 누르면 가입완료!</form:button>
+				</form:form>				
+			</div>	
+		</div>
+		<div class="sign-message">
+			<b>AIRVNV는 회원님의 원활한 서비스 이용에 필요한 정보를 <br>적절한 전자적 수단을 통해 제공하고 있습니다.</b>
+		</div>
 </div>
-
+</div>
 <script type="text/javascript">
 	$(function(){
 		let checkId=0;

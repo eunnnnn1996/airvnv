@@ -3,5 +3,104 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.houseboard.dao.HouseMapper">
- 
+ <select id="selectList" parameterType="map" resultType="houseVO">
+	   SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT 
+		m.market_num,
+					<![CDATA[
+					REPLACE(REPLACE(d.market_title, '<', '&lt;'),'>','&gt;') market_title,
+					]]>
+					m.market_type,
+					m.address1,
+					m.address2,
+					m.address3,
+					m.trade_type,
+					m.trade_short,
+					m.otherpay,
+					m.elevator,
+					m.parking,
+					m.veranda,
+					m.optionitem,
+					m.photo_name,
+					m.reg_date,
+					m.modify_date,
+					d.market_content		
+					FROM amarket m
+					JOIN auser u 
+					ON m.user_num = u.user_num
+					JOIN amarket_detail d
+					ON m.market_num = d.market_num
+					ORDER BY m.market_num DESC)a)
+		 	 
+		<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+
+	</select>
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+		COUNT(*)
+		FROM amarket m
+		JOIN auser u 
+		ON m.user_num = u.user_num
+	</select>
+	
+	
+	<!-- 예약한 방 조회 -->
+	<select id="selectListPayment" parameterType="map" resultType="paymentVO">
+	SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT 
+	p.date_num,
+	<![CDATA[
+	REPLACE(REPLACE(d.market_title, '<', '&lt;'),'>','&gt;') market_title,	
+	]]>
+	m.address1,
+	m.address2,
+	m.address3,
+	p.onoff,
+	p.startdate,
+	p.enddate,
+	p.price
+	from apayment p
+	join amarket m on p.market_num = m.market_num
+	join amarket_detail d on p.market_num = d.market_num where p.user_num = #{user_num}
+	ORDER BY m.market_num DESC)a)
+	</select>
+	<select id="selectRowCountPayment" parameterType="map" resultType="integer">
+	SELECT
+	COUNT(*)
+	from apayment p
+	join amarket m on p.market_num = m.market_num
+	join amarket_detail d on p.market_num = d.market_num where p.user_num = #{user_num}
+	</select>
+	
+	<select id="selectListRate" parameterType="map" resultType="rateVO">
+	SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT 
+	r.rate_num,
+	<![CDATA[
+	REPLACE(REPLACE(d.market_title, '<', '&lt;'),'>','&gt;') market_title,	
+	]]>
+    r.title,
+    r.content,
+    r.all_rate,
+    r.accuracy_rate,
+    r.clean_rate,
+    r.ease_rate,
+    r.position_rate,
+    r.communication_rate,
+    r.reg_date,
+    u.user_name,
+    u.address1
+	from arate r
+	join amarket_detail d on r.market_num = d.market_num 
+    join auser_detail u on r.user_num = u.user_num
+    where d.market_num = #{market_num}
+	ORDER BY r.rate_num DESC)a)
+	</select>
+	<select id="selectRowCountRate" parameterType="map" resultType="integer">
+	SELECT
+	COUNT(*)
+	from arate r
+	join amarket_detail d on r.market_num = d.market_num 
+    join auser_detail u on r.user_num = u.user_num
+    where d.market_num = #{market_num}
+	</select>
 </mapper>

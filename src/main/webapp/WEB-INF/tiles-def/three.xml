@@ -5,9 +5,9 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="three" extends="main">
-    	<put-attribute name="title" value="게시판 목록"/>
-    	<put-attribute name="body" value="/WEB-INF/views/board/boardList.jsp"/>
+    <definition name="test">
+    	<put-attribute name="title" value="리뷰 메인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/test.jsp"/>
     </definition>
 </tiles-definitions>
 
