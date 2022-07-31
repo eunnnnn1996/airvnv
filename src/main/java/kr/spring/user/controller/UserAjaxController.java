@@ -1,5 +1,7 @@
 package kr.spring.user.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -8,10 +10,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.houseboard.service.HouseService;
 import kr.spring.user.service.UserService;
 import kr.spring.user.vo.UserVO;
 
@@ -19,6 +23,8 @@ import kr.spring.user.vo.UserVO;
 public class UserAjaxController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private HouseService houseService;
 	
 	@RequestMapping("/user/confirmId.do")
 	@ResponseBody
@@ -63,4 +69,54 @@ public class UserAjaxController {
 		
 		return map;
 	}
+	//월간 조회수 최신화
+	@RequestMapping("/user/hitRefresh")
+	@ResponseBody
+	public Map<String,String> hitRefreshbtn() {
+		
+		Map<String,String> map = new HashMap<String,String>();
+		Map<String,Integer> mapB = new HashMap<String,Integer>();
+		
+		int allhit = houseService.houseAllHitCount();
+		mapB.put("allhit", allhit);
+		//현재 날짜 구하기
+		LocalDate now = LocalDate.now(); 
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM"); 
+		String formatedNow = now.format(formatter);
+		
+		if (formatedNow.equals("2022/01")) {
+			houseService.insertHitMonth(allhit, 1);
+		} else if (formatedNow.equals("2022/02")) {
+			houseService.insertHitMonth(allhit, 2);
+		} else if (formatedNow.equals("2022/03")) {
+			houseService.insertHitMonth(allhit, 3);
+		} else if (formatedNow.equals("2022/04")) {
+			houseService.insertHitMonth(allhit, 4);
+		} else if (formatedNow.equals("2022/05")) {
+			houseService.insertHitMonth(allhit, 5);
+		} else if (formatedNow.equals("2022/06")) {
+			houseService.insertHitMonth(allhit, 6);
+		} else if (formatedNow.equals("2022/07")) {
+			houseService.insertHitMonth(allhit, 7);
+		} else if (formatedNow.equals("2022/08")) {
+			houseService.insertHitMonth(allhit, 8);
+		} else if (formatedNow.equals("2022/09")) {
+			houseService.insertHitMonth(allhit, 9);
+		} else if (formatedNow.equals("2022/10")) {
+			houseService.insertHitMonth(allhit, 10);
+		} else if (formatedNow.equals("2022/11")) {
+			houseService.insertHitMonth(allhit, 11);
+		} else if (formatedNow.equals("2022/12")) {
+			houseService.insertHitMonth(allhit, 12);
+		} else {
+			System.out.println("오류");
+		}
+		
+		map.put("result","success");
+		
+		return map;
+	}
+	
+	
+	
 }

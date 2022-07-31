@@ -21,6 +21,9 @@
 	    join amarket_detail d on a.market_num = d.market_num
 	    join auser u  on a.user_num = u.user_num where u.user_num = #{user_num}
 		ORDER BY a.market_num DESC)a)
+		<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
 	</select>
 	<select id="selectRowCountPostHouse" parameterType="map" resultType="integer">
 		SELECT
@@ -28,5 +31,28 @@
 		from amarket a
     	join amarket_detail d on a.market_num = d.market_num
     	join auser u  on a.user_num = u.user_num where u.user_num = #{user_num}
+	</select>
+	<!-- 모든 회원 정보조회(관리자) -->
+	<select id="selectListUser" parameterType="map" resultType="userVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT 
+		a.user_num,
+		<![CDATA[
+		REPLACE(REPLACE(a.user_id, '<', '&lt;'),'>','&gt;') user_id,
+		]]>
+		a.user_auth,
+		d.user_name,
+		d.phone,
+		d.address1,
+		d.address2,
+		d.reg_date
+		from auser a
+		join auser_detail d on a.user_num = d.user_num
+		ORDER BY a.user_num DESC)a)
+	</select>
+	<select id="selectRowCountListUser" parameterType="map" resultType="integer">
+		SELECT
+		COUNT(*)
+		from auser a
+		join auser_detail d on a.user_num = d.user_num
 	</select>
 </mapper>

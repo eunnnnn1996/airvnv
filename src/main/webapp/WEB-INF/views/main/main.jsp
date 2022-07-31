@@ -2,8 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!-- 부트스트랩 아이콘 임포트 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<!-- lottie 애니메이션 임포트 -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <!-- 슬라이더 임포트 -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -38,11 +43,11 @@ $(document).ready(function() {
 	<div class="result-display">표시할 상품이 없습니다.</div>
 	</c:if>
 	<div class="list-wrap">
+	<p style="font-size:26px; padding-bottom:10px;">인기 TOP6</p>
 	<c:if test="${count > 0}">	
 		<ul>
 		<c:forEach var="house" items="${list}">
-			<li class="item">
-				
+			<li class="item">				
 				<div class="image">
 				<a class="title-image" href="${pageContext.request.contextPath}/house/houseDetail.do?market_num=${house.market_num}">
 						<c:if test="${empty house.photo_name}">							
@@ -54,30 +59,40 @@ $(document).ready(function() {
 				</a>														
 				</div>						
 				<div class="cont">
-					<strong>qwe</strong>
-					<p>내용이 들어갑니다</p>
-					<a class="direct-detail" href="#">바로가기</a>
+					<strong><fmt:formatNumber value="${house.otherpay}" pattern="#,###"/>₩</strong>
+					<p>${house.market_title}</p>
+					<a class="direct-detail" href="${pageContext.request.contextPath}/house/houseDetail.do?market_num=${house.market_num}">바로가기</a>
+					<div class="hit-detail">
+					<p style="font-size:16px;padding-top:5px;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+					  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+					</svg>
+					${house.hit}
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+					  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+					</svg>
+					<%-- <c:forEach varStatus="status" var="i" begin="0" end="${fn:length(list)-1}">
+					${likecount + status.index}
+					</c:forEach> --%>
+					${house.likecount}
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+					  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+					</svg>
+					${house.ratecount}
+					</p>
+					</div>
 				</div>	
 			</li>
 		</c:forEach>
 		</ul>
 	</c:if>
-	<div id="pagenum">${pagingHtml}</div>
+		<div class="all-list"><a href="${pageContext.request.contextPath}/house/allHouse.do">전체보기</a></div>
 	</div>	
 	</div>
 	
-	
-	<!-- 세번째 섹션 -->
-	<div class="section" id="section1">
-	    <div class="slide "><img src="../resources/images/slide/newuser.png" width="100%" height="100%"></div>
-	    <div class="slide active"><img src="../resources/images/slide/sale.png" width="100%" height="100%"></div>
-	    <div class="slide"><img src="../resources/images/slide/jeju.png" width="100%" height="100%"></div>
-	    <div class="slide"><img src="../resources/images/slide/coupon.png" width="100%" height="100%"></div>
-	</div>	
-	
 	<!-- 네번째 섹션  -->
 	<div class="section" id="section3">
-		<div class="swiper">
+	<div class="swiper">
 	  <!-- Additional required wrapper -->
 	  <div class="swiper-wrapper">
 	    <!-- Slides -->
@@ -100,17 +115,7 @@ $(document).ready(function() {
 	</div>
 </div>
 
-<!-- 메인 시작 -->
-	<!-- <div class="search">
-  	<input class="search-input" type="text" placeholder="검색어 입력">
-	  <img class="search-img" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-	</div> -->
-<%-- <div class="main-outer">
-	<div class="main-inner">
-</div>
-	</div>	
 
-	 --%>
 <div class="modal-bg">
 	<!-- 모달창 -->
 	<div class="login-modal">
@@ -123,13 +128,13 @@ $(document).ready(function() {
 			<b class="login-content">로그인</b>
 			<form action="${pageContext.request.contextPath}/user/login.do" method="post">
 				<input name="user_id" id="user_id" placeholder="아이디"><br>
-				<input name="passwd" id="passwd" placeholder="비밀번호"><br>
+				<input type="password" name="passwd" id="passwd" placeholder="비밀번호"><br>
 				<input class="login-btn-main" type="submit" value="로그인" style="background-color:#0092db">
 			</form>
 			
 			<div style="padding-left:40px;">
 			<p style="font-size:18px;color:#0092db;padding-bottom:5px;">비밀번호를 잊어버리셨나요?</p>
-			<p style="font-size:18px;color:#0092db;padding-bottom:15px;">계정이 없으신가요?<b>회원가입</b></p>
+			<p style="font-size:18px;color:#0092db;padding-bottom:15px;">계정이 없으신가요?<b><a style="font-size:18px;color:#0092db;padding-bottom:15px;" href="${pageContext.request.contextPath}/user/signUp.do">회원가입</a></b></p>
 			</div>
 			
 			<!--  -->

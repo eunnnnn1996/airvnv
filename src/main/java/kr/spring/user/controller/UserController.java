@@ -204,6 +204,19 @@ public class UserController {
 
 		return mav;
 	}
+	// 후기 프로필이미지 출력
+	@RequestMapping("/user/ratePhotoView.do")
+	public ModelAndView rateImage(Integer user_num) {
+
+		UserVO userVO = userService.selectUser(user_num);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", userVO.getPhoto());
+		mav.addObject("filename", userVO.getPhoto_name());
+
+		return mav;
+	}
 	//회원 정보수정
 	@RequestMapping("/user/userUpdate.do")
 	public String updateForm(Model model, UserVO user, HttpSession session
@@ -257,7 +270,7 @@ public class UserController {
 		
 		int count = userService.selectRowCountPostHouse(map);
 		
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"myPost.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,5,10,"myPost.do");
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
@@ -306,6 +319,18 @@ public class UserController {
 			model.addAttribute("message", "오류"); 
 			model.addAttribute("url", request.getContextPath() + "/user/myPost.do");
 			return "common/resultView";
+		}	
+		
+		@GetMapping("/user/money.do")
+		public String moneyForm(HttpSession session,Model model) {
+			
+			Integer user_num = (Integer) session.getAttribute("user_num");
+			
+			int price = houseService.incomePriceSelect(user_num);
+			
+			model.addAttribute("price",price);
+			
+			return "money";
 		}
-	
+		
 }

@@ -4,12 +4,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
  <!-- 제이쿼리, css 임포트 -->   
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
 <script type="text/javascript">
 	$(function(){
-		
 		//처음 화면에 보여지는 이미지 읽기
 		let photo_path = $('.my-photo').attr('src');
 		let my_photo;
@@ -37,7 +36,7 @@
 			};
 		});//end of change
 		
-		//이미지를 서버에 전송
+		/* //이미지를 서버에 전송
 		$('#photo_submit').click(function(){
 			if($('#upload').val()==''){
 				alert('파일을 선택하세요!');
@@ -73,14 +72,56 @@
 					alert('네트워크 오류 발생');
 				}
 			});
-		});//end of click
+		});//end of click */
 		
+		//프로필 삭제
 		$('#photo_reset').click(function(){
 			$('.my-photo').attr('src',photo_path);
 			$('#upload').val('');
 			$('#photo_btn').show();
 		});
 		
+		/* mypage에서 프로필사진 클릭시 파일선택 버튼 클릭 */
+		$('.my-photo').click(function(){
+			$('.btn-outline-secondary').click();
+		});
+		
+		$('#profile-btn').click(function(){
+			if($('#upload').val()==''){
+				alert('파일을 선택하세요!');
+				$('#upload').focus();
+				return;
+			}else{
+				$('#photo_submit').click();
+				var form_data = new FormData();
+				form_data.append('upload',my_photo);
+				
+				$.ajax({
+					url:'updateMyPhoto.do',
+					type:'post',
+					data:form_data,
+					dataType:'json',
+					contentType:false,
+					enctype:'multipart/form-data',
+					processData:false,
+					success:function(param){
+						if(param.result == 'logout'){
+							alert('로그인 후 사용하세요!');
+						}else if(param.result == 'success'){
+							alert('프로필 사진이 수정되었습니다.');
+							photo_path = $('.my-photo').attr('src');
+							$('#upload').val('');
+							$('#photo_btn').show();
+						}else{
+							alert('파일 전송 오류 발생');
+						}
+					},
+					errror:function(){
+						alert('네트워크 오류 발생');
+					}
+				});
+			}
+		});
 	});
 </script>
 
@@ -89,10 +130,10 @@
 		<div class="my-title"><b>MY 정보</b></div>
 		<div class="my-menu">
 			<ul style="display: inline-block;">
-				<li><p><a href="${pageContext.request.contextPath}/user/myPage.do">내 정보</a></p></li>
+				<li style="border-radius:12px 0px 0px 12px;"><p><a href="${pageContext.request.contextPath}/user/myPage.do">내 정보</a></p></li>
 				<li><p><a href="${pageContext.request.contextPath}/user/myPost.do">내가 올린 방</a></p></li>
 				<li><p><a href="${pageContext.request.contextPath}/user/myReservation.do">내가 예약한 방</a></p></li>
-				<li><p>내 후기</p></li>								
+				<li style="border-radius:0px 12px 12px 0px;"><p><a href="${pageContext.request.contextPath}/user/money.do">내 수익</a></p></li>								
 			</ul>
 		</div>
 		<div class="my-info">
@@ -110,9 +151,10 @@
 				</li>
 				<li>
 					<div id="photo_choice">
-						<input type="file" id="upload" accept="image/gif,image/png,image/jpeg" class="btn btn-outline-secondary" style="border:none;">
-						<input type="button" value="전송" id="photo_submit" class="btn-black">
-						<input type="button" value="취소" id="photo_reset" class="btn-black">
+						<input type="file" id="upload" accept="image/gif,image/png,image/jpeg" class="btn btn-outline-secondary" style="display:none;">
+						<!-- <input type="button" value="바꾸기" id="photo_submit" class="btn-black"> -->
+						<!-- <input type="button" value="수정" id="photo_btn" class="btn-black"> -->
+						<!-- <input type="button" value="이미지 삭제" id="photo_reset" class="btn-black"> -->
 					</div>
 				</li>
 					<form:form modelAttribute="user" action="userUpdate.do" enctype="multipart/form-data">
@@ -132,11 +174,11 @@
 					<form:errors path="phone" cssClass="error-color"/><br>
 				</li>
 				<li>		
-					<form:button>확인</form:button>
+					<form:button class="profile-btn" id="profile-btn">확인</form:button>
 				</li>
 					</form:form>	
 				<li>
-					<div class="modal-bg2">
+					<%-- <div class="modal-bg2">
 					<div class="userDelete-modal">
 						<img class="exit-img" src="${pageContext.request.contextPath}/resources/images/cross.png">
 						<b class="del-title">정말 탈퇴하시겠습니까?</b> <br>
@@ -155,7 +197,7 @@
 							</form>
 						</div>
 					</div>			
-				</div>	
+				</div>	 --%>
 				<a class="userDelete-btn">회원탈퇴</a>
 				</li>
 			</ul>
@@ -163,16 +205,44 @@
 	</div>
 </div>
 
+<div class="modal-bg">
+<!-- 모달창 -->
+<div class="login-modal">
+	<div class="modal-header">
+		<img class="exit-img" src="${pageContext.request.contextPath}/resources/images/close.png">
+	</div>
+			<!-- 로그인 폼 -->
+			<div class="del-main">		
+				<b class="del-title">정말 탈퇴하시겠습니까?</b> <br>
+				<b class="del-title-sub">회원탈퇴를 신청하기전에 아래 안내 사항을 한번 더 확인해주세요.</b>
+				<div style="padding-top:35px;">
+				<p>1. 회원 탈퇴 시, 현재 로그인된 아이디는 즉시 탈퇴 처리됩니다.</p>
+				<p>2. 회원 탈퇴 시, 회원 전용 웹 서비스 이용이 불가합니다.</p>
+				<p>3. 탈퇴 시 회원 정보 및 찜 서비스, 등록한 게시물 이용 기록이 모두 삭제됩니다.</p>
+				<p>4. 회원 정보 및 서비스 이용 기록은 모두 삭제되며, 데이터는 복구되지 않습니다.</p>
+				<p>5. 광고를 위한 매물이 등록되어 있을 경우, 탈퇴 시 모든 정보는 삭제 처리됩니다.</p>
+				</div>
+			</div>
+			<div class="delete-form">
+				<div style="width:350px; margin:auto;">
+					<form action="${pageContext.request.contextPath}/user/userDelete.do" method="post">
+					  <input type="hidden" name="${user.user_num}">
+					  <label style="font-size:22px;width:80px;padding-top:5px;">비밀번호</label>
+					  <input class="delete-passwd" type="text" name="passwd">
+					  <input class="delete-btn" type="submit" value="확인">
+					</form>
+				</div>
+			</div>
+	</div>
+</div>
 
 <script>
 	$(document).ready(function(){
 		$(".userDelete-btn").click(function(){
-			$(".modal-bg2").css({"display" : "block"});
-			$(".userDelete-modal").css({"display" : "block"});
+			$(".modal-bg").css({"display" : "block"})
 		})
 		$(".exit-img").click(function(){
-			$(".modal-bg2").css({"display" : "none"});
-			$(".userDelete-modal").css({"display" : "none"});
+			$(".modal-bg").css({"display" : "none"})
 		})
 	});
 </script>

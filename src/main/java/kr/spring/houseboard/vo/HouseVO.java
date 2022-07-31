@@ -34,7 +34,62 @@ public class HouseVO {
 	private byte[] photo;
 	private String photo_name;
 	private MultipartFile upload;
+	private String user_id;
+	private int show;
+	private int likecount;
+	private int ratecount;
 	
+	
+	public int getRatecount() {
+		return ratecount;
+	}
+
+	public void setRatecount(int ratecount) {
+		this.ratecount = ratecount;
+	}
+
+	public int getLikecount() {
+		return likecount;
+	}
+
+	public void setLikecount(int likecount) {
+		this.likecount = likecount;
+	}
+
+	public int getShow() {
+		return show;
+	}
+
+	public void setShow(int show) {
+		this.show = show;
+	}
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	//월별 조회수 담기
+	private int allhit;
+	private Date nowdate;
+	public int getAllhit() {
+		return allhit;
+	}
+
+	public void setAllhit(int allhit) {
+		this.allhit = allhit;
+	}
+	
+	public Date getNowdate() {
+		return nowdate;
+	}
+
+	public void setNowdate(Date nowdate) {
+		this.nowdate = nowdate;
+	}
+
 	//이미지 blob 처리
 	public void setUpload(MultipartFile upload) throws IOException{
 		this.upload = upload;
@@ -70,8 +125,17 @@ public class HouseVO {
 	private Date startdate;
 	private Date enddate;
 	private int price;
+	private int hit;
 	
 	
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+
 	public int getPrice() {
 		return price;
 	}

@@ -14,6 +14,7 @@ import kr.spring.houseboard.vo.HouseLikeVO;
 import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.houseboard.vo.PaymentVO;
 import kr.spring.houseboard.vo.RateVO;
+import kr.spring.user.vo.HitVO;
 import kr.spring.user.vo.UserVO;
 
 public interface HouseMapper {
@@ -92,4 +93,28 @@ public interface HouseMapper {
 	public void insertRate(RateVO vo);
 	public List<RateVO> selectListRate(Map<String,Object> map);
 	public int selectRowCountRate(Map<String,Object> map);
+	//댓글 개수
+	@Select("select count(*) from arate where market_num = #{market_num}")
+	public int selectRateCount(int market_num);
+	@Update("update amarket_detail set hit=hit+1 where market_num = #{market_num}")
+	public void marketHit(int market_num);
+	public int houseAllHitCount();
+	//월별 총 조회수를 ahitdate 테이블에 저장
+	public void insertHitMonth(@Param("hit") int hit,@Param("month") int month);
+	//월별 총 조회수 조회하기
+	@Select("select * from ahitdate")
+	public List<HitVO> selectHitMonth();
+	//수익 저장하기 
+	@Insert("insert into aincome values(arate_seq.nextval,#{sumprice},sysdate,#{market_num},#{user_num})")
+	public void incomeInsert(@Param("sumprice") int sumprice,@Param("user_num") Integer user_num, @Param("market_num") int market_num);
+	//수익 더하기
+	@Update("update aincome set sum_income = sum_income + #{sumprice} where market_num = #{market_num}")
+	public void incomeUpdate(@Param("sumprice") int sumprice, @Param("market_num") int market_num);
+	//aincome 테이블에 해당 market_num이 있는지 확인
+	@Select("select count(market_num) exist_num from aincome where market_num = #{market_num}")
+	public int incomeSelect(int market_num);
+	//유저 넘으로 총액 조회하기
+	@Select("select sum(sum_income) from aincome where user_num = #{user_num}")
+	public int incomePriceSelect(Integer user_num);
+
 }

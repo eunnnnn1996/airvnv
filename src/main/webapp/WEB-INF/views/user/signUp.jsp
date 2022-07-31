@@ -20,7 +20,7 @@
 						<div class="sign-label">	
 						<form:label path="user_name">닉네임</form:label>
 						</div><br>
-						<form:input class="in-put" path="user_name" placeholder="한글 또는 영문만 가능"/>
+						<form:input class="in-put" path="user_name" placeholder="한글 또는 영문만 가능"/>						
 						<span id="message_id"></span><br>
 						<form:errors path="user_name" cssClass="error-color"/>
 						<div class="sign-label">
@@ -36,6 +36,11 @@
 						<form:errors path="passwd2" cssClass="error-color"/>
 						<span id="password-massage"></span>
 						<!-- 비밀번호 확인 -->
+						<div class="sign-label">
+						<form:label path="age">나이</form:label>
+						</div><br>
+						<form:input class="in-put" path="age"/><br>
+						<form:errors path="age" cssClass="error-color"/>
 						<div class="sign-label">
 						<form:label path="phone">전화번호</form:label>
 						</div><br>

@@ -25,33 +25,75 @@
 	</div>
 	<div class="main-menu">
 		<c:if test="${!empty user_num}">
-			<a href="${pageContext.request.contextPath}/house/reviewMain.do">후기</a>
+			<%-- <c:if test="${user_auth == 3}">
+				<a href="${pageContext.request.contextPath}/user/stats.do">통계/회원관리</a>
+			</c:if>
+			<a href="${pageContext.request.contextPath}/house/allHouse.do">전체보기</a>
 			<a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a>
-		</c:if>
-		<c:if test="${empty user_num}">
-			<a href="${pageContext.request.contextPath}/house/reviewMain.do"><b>방 리뷰</b></a>
-			<a href="${pageContext.request.contextPath}/user/signUp.do"><b>회원가입</b></a>
-			<a class="login-btn"><b>로그인</b></a>
-			
-		</c:if>
-		<c:if test="${!empty user_num && !empty user_photo}">
-	    	<img src="${pageContext.request.contextPath}/user/photoView.do" 
-	    	                        width="30" height="30" class="my-photo">
-	    </c:if>
-	    <c:if test="${!empty user_num && empty user_photo}">
-	    	<img src="${pageContext.request.contextPath}/resources/images/face.png" 
-	    	                        width="30" height="30" class="my-photo">
-	    </c:if>
-		<c:if test="${!empty user_num && user_auth == 2}">
-			<%-- <a href="${pageContext.request.contextPath}/user/myPage.do">MY페이지</a> --%>
-			<!-- 드롭다운 시작 -->
-			[<span class="nickname">${user_name}</span>]
+			<span class="nickname">${user_name}</span>님 --%>
+			<%-- <c:if test="${user_auth == 2}">
+				<a href="${pageContext.request.contextPath}/house/allHouse.do">전체보기</a>
+				<span class="nickname">${user_name}</span>님
 				<ul class="sub">
 					<li><a href="${pageContext.request.contextPath}/house/houseInsert.do">방 내놓기</a></li>
 					<li>내 글 보기</li>
 					<li>관심 글 보기</li>
 					<li><a href="${pageContext.request.contextPath}/user/myPage.do">설정</a></li>
 				</ul>
+				<a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a>
+			</c:if> --%>
+		</c:if>
+		<c:if test="${!empty user_num && user_auth == 2}">
+			<a href="${pageContext.request.contextPath}/house/allHouse.do">전체보기</a>
+		</c:if>
+		<c:if test="${!empty user_num && user_auth == 3}">
+			<a href="${pageContext.request.contextPath}/house/allHouse.do">전체보기</a>
+			<a href="${pageContext.request.contextPath}/user/stats.do">통계/회원관리</a>
+		</c:if>
+		<c:if test="${empty user_num}">
+			<a href="${pageContext.request.contextPath}/house/allHouse.do">전체보기</a>
+			<a href="${pageContext.request.contextPath}/user/signUp.do">회원가입</a>
+			<a class="login-btn">로그인</a>
+			
+		</c:if>
+		<c:if test="${!empty user_num && !empty user_photo}">
+			<span style="width:20px;height:60px;">
+	    	<img src="${pageContext.request.contextPath}/user/photoView.do" 
+	    	                        width="30" height="30" class="my-photo" style="display:inline-block; vertical-align:middle;">
+	    	</span>
+	    </c:if>
+	    <c:if test="${!empty user_num && empty user_photo}">
+	    	<span style="width:20px;height:60px;">
+	    	<img src="${pageContext.request.contextPath}/resources/images/face.png" 
+	    	                        width="30" height="30" class="my-photo"  style="display:inline-block; vertical-align:middle;">
+			</span>	    	                        
+	    </c:if>
+		<c:if test="${!empty user_num && user_auth == 2}">
+			<!-- 드롭다운 시작 -->
+			<span class="nickname">${user_name}</span>님
+				<div style="float:right;padding-right:80%">
+					<ul class="sub">
+						<li><a href="${pageContext.request.contextPath}/house/houseInsert.do">방 내놓기</a></li>
+						<li>내 글 보기</li>
+						<li>관심 글 보기</li>
+						<li><a href="${pageContext.request.contextPath}/user/myPage.do">설정</a></li>
+					</ul>
+				</div>
+			<a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a>
+			<!-- 드롭다운 끝 -->			
+		</c:if>
+		<c:if test="${!empty user_num && user_auth == 3}">
+			<!-- 드롭다운 시작 -->
+			<span class="nickname">${user_name}</span>님
+				<div style="float:right;padding-right:50%">
+					<ul class="sub">
+						<li><a href="${pageContext.request.contextPath}/house/houseInsert.do">방 내놓기</a></li>
+						<li>내 글 보기</li>
+						<li>관심 글 보기</li>
+						<li><a href="${pageContext.request.contextPath}/user/myPage.do">설정</a></li>
+					</ul>
+				</div>
+			<a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a>
 			<!-- 드롭다운 끝 -->			
 		</c:if>
 	</div>

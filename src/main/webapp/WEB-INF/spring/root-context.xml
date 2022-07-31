@@ -6,6 +6,7 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/context
@@ -13,8 +14,11 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
        http://www.springframework.org/schema/aop
-       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
-       
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/task
+ 	   http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+ 	   
+	<task:annotation-driven /> 
 	<!-- 
 	빈 자동 스캔 - servlet-context.xml에서 Controller를 자동 스캔 설정해서 아래 설정에서는
 	Controller 자동 스캔 제외 

@@ -1,5 +1,6 @@
 package kr.spring.main.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,48 +22,52 @@ import kr.spring.util.PagingUtil;
 
 @Controller
 public class MainController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HouseController.class); //로그찍기
-	
+
+	private static final Logger logger = LoggerFactory.getLogger(HouseController.class); // 로그찍기
+
 	@Autowired
 	private HouseService houseService;
-	
+
 	@RequestMapping("/main/main.do")
-	public ModelAndView main(
-			@RequestParam(value="pageNum",defaultValue="1")
-			int currentPage,
-			@RequestParam(value="keyfield",defaultValue="")
-			String keyfield,
-			@RequestParam(value="keyword",defaultValue="")
-			String keyword) {
-		Map<String,Object> map = new HashMap<String,Object>();
+	public ModelAndView main(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+			@RequestParam(value = "keyfield", defaultValue = "") String keyfield,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 		int count = houseService.selectRowCount(map);
-		
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,6,10,"main.do");
-		
+
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 6, 10, "main.do");
+
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
-		
+
 		List<HouseVO> list = null;
-		if(count > 0) {
+		if (count > 0) {
 			list = houseService.selectList(map);
+			for(int i=0;i<list.size();i++) {
+				HouseVO vo = list.get(i); 
+				vo.setLikecount(houseService.selectLikeCount(vo.getMarket_num()));
+				vo.setRatecount(houseService.selectRateCount(vo.getMarket_num()));
+			}
 		}
-		ModelAndView mav  = new ModelAndView();
+
+		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
 		mav.addObject("count", count);
-		mav.addObject("list",list);
-		mav.addObject("pagingHtml",page.getPagingHtml()); 
-		
+		mav.addObject("list", list);
+		mav.addObject("pagingHtml", page.getPagingHtml());
+
 		return mav;
 	}
-	//이미지 출력
+
+	// 이미지 출력
 	@RequestMapping("/main/imageView.do")
 	public ModelAndView viewImage(@RequestParam int market_num) {
 		HouseVO house = houseService.selectHouse(market_num);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
 		mav.addObject("imageFile", house.getPhoto());

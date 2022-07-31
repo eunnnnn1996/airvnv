@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -13,44 +14,15 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3dccf85e0bda66300f299b635dec74c&libraries=services"></script>
 <!-- ckeditor 임포트 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<!-- 슬라이더 임포트 -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- 결제 임포트 -->
+<script src="${pageContext.request.contextPath}/resources/js/detail/payment.js"></script>
+<!-- 캘린더 임포트 -->
+<script src="${pageContext.request.contextPath}/resources/js/detail/cal.js"></script>
 <script>
 $(function(){
-	var cal = {
-			closeText : "닫기",
-			prevText : "이전달",
-			nextText : "다음달",
-			currentText : "오늘",
-			changeMonth: true, // 월을 바꿀 수 있는 셀렉트 박스
-			changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스
-			monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
-			monthNamesShort : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월",	"9월", "10월", "11월", "12월" ],
-			dayNames : [ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" ],
-			dayNamesShort : [ "일", "월", "화", "수", "목", "금", "토" ],
-			dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
-			weekHeader : "주",
-			dateFormat : "yy-mm-dd",
-			firstDay : 0,
-			minDate: 0,
-			isRTL : false,
-			showMonthAfterYear : true, // 연,월,일 순으로
-			yearSuffix : '',
-			showOn: 'both', // 텍스트와 버튼을 함께 보여준다
-			buttonImage:'https://www.shareicon.net/data/16x16/2016/08/13/808501_calendar_512x512.png', //날짜 버튼 이미지
-			buttonImageOnly: true,
-			
-			showButtonPanel: true,
-			
-			dateFormat:"yy-mm-dd",
-	};
-
-     $("#startdate").datepicker(cal);
-     $("#enddate").datepicker(cal);
-     
-
-     $('img.ui-datepicker-trigger').css({'cursor':'pointer', 'margin-left':'5px'});  //아이콘(icon) 위치	
-     $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
-
-
 	var status; //noFav or yesFav
 	function selectData(market_num){ //77라인 초기값 세팅
 	   $.ajax({
@@ -112,82 +84,9 @@ $(function(){
 	
 	   selectData(${house.market_num}); //초기값 세팅
 	   
- //캘린더 구현
-//캘린더 한글화
-  $.datepicker.setDefaults({
-         dateFormat: 'yymmdd',
-         prevText: '이전 달',
-         nextText: '다음 달',
-         monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-         monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-         dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-         dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-         dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-         showMonthAfterYear: true,
-         yearSuffix: '년'
-     });  
-  $("#checkIn").datepicker({
-  	 minDate: 0,
-  	 onSelect: function(selected) {
-  		 $("#checkOut").datepicker("option","minDate", selected)
-  	 	}
-  	 });
-  $("#checkOut").datepicker({
-  	 onSelect: function(selected) {
-  		$("#checkIn").datepicker("option","maxDate", selected)
-  	 }
-  });   
- });
  
-//결제 코드
-function iamport(){
-	
-	const email = "1";
-	const on_price = "1";
-	const id = "1";
-	const phone = "1";
-	const address1 = "1";
-	const address2 = "1";
-	const on_name = "1";
-	
-	const user_num = "1";
-	
-	console.log(user_num);
-	
-	if(user_num == ""){
-		alert('로그인 후 구매 가능합니다.')
-	}else if(user_num != null){
-		//가맹점 식별코드
-		IMP.init('imp62760166');
-		IMP.request_pay({
-		    pg : 'kcp',
-		    pay_method : 'card',
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : on_name , //결제창에서 보여질 이름
-		    amount : on_price, //실제 결제되는 가격, 최소금액 500원 이상 , 500이하시 결제 오류
-		    buyer_email : email,
-		    buyer_name : id,
-		    buyer_tel : phone,
-		    buyer_addr : address1+address2
-		    /* buyer_postcode : '123-456' */
-		}, function(rsp) {
-			console.log(rsp);
-		    if ( rsp.success ) {
-		    	var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        document.getElementById('paymentData_btn').submit();
-		    } else {
-		    	 var msg = '결제에 실패하였습니다.';
-		         msg += '에러내용 : ' + rsp.error_msg;
-		    }
-		    alert(msg);
-		});
-	
-}
-}
+ });
+
 </script>
 <script>
 function call()
@@ -208,6 +107,7 @@ function call()
 	document.getElementById("data").innerHTML=parseInt((dif/cDay)*price)
 	if((dif/cDay)*price >= 0){
 	document.paymentData_btn.sum_price.value = (dif/cDay)*price; /* 총액 controll로 넘기는 코드 */
+	document.income_form.sum_income.value = (dif/cDay)*price; /* 총액 controll로 넘기는 코드 */
 	}else if((dif/cDay)*price < 0){
 		alert('날짜를 다시 선택하세요!');
 		document.getElementById("enddate").value ='';
@@ -215,30 +115,18 @@ function call()
  }
 }
 </script>
-<!-- ajax 페이지 이동
-<script>
- 
-    function acyncMovePage(url){
-        // ajax option
-        var ajaxOption = {
-                url : url,
-                async : true,
-                type : "POST",
-                dataType : "html",
-                cache : false
-        };
-        
-        $.ajax(ajaxOption).done(function(data){
-            // Contents 영역 삭제
-            $('.detail-content').children().remove();
-            $('.detail-content').remove();
-            // Contents 영역 교체
-            $('.detail-content2').html(data);
-        });
-    }
-</script> -->
-<!-- 실험 -->
-
+<b id="user_num" style="displat:none;">${payment.user_num}</b>
+<%-- <b id="price">${payment.price}</b> --%>
+<b id="user_id" style="displat:none;">${payment.user_id}</b>
+<b id="phone" style="displat:none;">${payment.phone}</b>
+<b id="address1" style="displat:none;">${payment.address1}</b>
+<b id="address2" style="displat:none;">${payment.address2}</b>
+<b id="market_title" style="displat:none;">${house.market_title}</b>
+<form action="income.do" id="income_form" name="income_form" method="post">
+	<input type="hidden" name="market_num" value="${house.market_num}">
+	<input type="hidden" name="sum_income" value="">
+	<input type="submit" value="전송" style="display:none">
+</form>
 <div class="main-image-outer">    
     <div class="main-image-inner">
 		<div class="left-image">
@@ -279,7 +167,7 @@ function call()
 				</c:if>
 				
 				<div class="allimage">
-					<button>전체보기</button>
+					<button id="btn2" class="inva-btn-2">전체보기</button>
 				</div>
 			</div>
 		</div>				
@@ -302,7 +190,7 @@ function call()
 						<div class="item_type">
 						<span>가격</span>
 						</div>
-						<div class="item-content"><span>${house.otherpay}원 <b style="font-size:18px">/ 박</b></span></div>
+						<div class="item-content"><span><fmt:formatNumber value="${house.otherpay}" pattern="#,###"/>원 <b style="font-size:18px">/ 박</b></span></div>
 					</li>
 					<li>
 						<div class="item_type">방종류</div>
@@ -354,7 +242,7 @@ function call()
 						<c:if test="${house.trade_type == 3}">게스트하우스</c:if>
 						<c:if test="${house.trade_type == 4}">아파트</c:if>
 						<c:if test="${house.trade_type == 5}">방 종류 없음</c:if>						 
-						${house.otherpay}원</b>
+						<fmt:formatNumber value="${house.otherpay}" pattern="#,###"/>원</b>
 						<span style="padding-left:10px;color:#b1b1b1;">*하루기준</span>
 						</div>
 					</li>					
@@ -469,10 +357,10 @@ function call()
         		<li style="padding-top:60px;">
         			<ul>
 	        			<li style="float:left;">
-	        			<b style="font-size:24px;">총 합계</b> <div id="data"></div>
+	        			<b style="font-size:24px;">총 합계</b> 	        			
 	        			</li>
 	        			<li style="text-align:right;">
-	        			<b style="font-size:24px;">₩54000000</b>
+	        			<b id="data" style="font-size:24px;"></b>원
 	        			</li>
         			</ul>		
         		</li>
@@ -495,15 +383,37 @@ function call()
         </form>
         </div>
         </div>
-        
     </div>
-		<!-- ///////////// -->
-		
-		
+<!-- 사진 전체보기 모달 시작 -->
+<div id="modal2" class="modal_Wrap2">
+	<div class="modal_Content2">
+		<span class="close2">&times;</span>
+			<div class="swiper">
+				<!-- Additional required wrapper -->
+				<div class="swiper-wrapper" style="text-align:center;">
+					<!-- Slides -->
+					<c:forEach var="imglist" items="${imglist}" varStatus="status">
+						<div class="swiper-slide">
+							${imglist}
+						</div>
+					</c:forEach>
+				</div>
+				<!-- If we need pagination -->
+				<div class="swiper-pagination"></div>
+				<!-- If we need navigation buttons -->
+				<div class="swiper-button-prev" style="width: 85px"></div>
+				<div class="swiper-button-next" style="width: 85px"></div>
+				<!-- If we need scrollbar -->
+				<div class="swiper-scrollbar"></div>
+			</div>
 	</div>
 </div>
+		<!-- 사진 전체보기 모달 끝 -->
+	</div>
+</div>
+
 <script>
-	//모달창
+	/* 모달창 */
 	const modal = document.getElementById('modal');
 	const button = document.getElementById('btn');
 	const span = document.querySelector('.close');
@@ -513,12 +423,49 @@ function call()
 	}
 	span.onclick = function() {
 	    modal.style.display = 'none';
+	}   
+	/* 사진 전체보기 모달 */
+	const modal2 = document.getElementById('modal2');
+	const button2 = document.getElementById('btn2');
+	const span2 = document.querySelector('.close2');
+
+	button2.onclick = function() {
+	    modal2.style.display = 'block';
+	}
+	span2.onclick = function() {
+	    modal2.style.display = 'none';
 	}
 	window.onclick = function(event) {
 	    if(event.target == modal) {
 	        modal.style.display = 'none';
 	    }
-	}     
+	    if(event.target == modal2) {
+	        modal2.style.display = 'none';
+	    }
+	}  
+</script>
+<script>
+	$(document).ready(function(){
+		$(".exit-img").click(function(){
+			$(".modal-bg").css({"display" : "none"})
+		})
+	});
+</script>    
+<script>
+const swiper = new Swiper('.swiper', {
+	  loop: true,
+
+	  // If we need pagination
+	  pagination: {
+	    el: '.swiper-pagination',
+	  },
+
+	  // Navigation arrows
+	  navigation: {
+	    nextEl: '.swiper-button-next',
+	    prevEl: '.swiper-button-prev',
+	  },
+	});
 </script>
 <script>
 //카카오 지도

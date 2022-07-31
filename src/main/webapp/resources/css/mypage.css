@@ -1,17 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 * {
-	margin: 0;
-	padding: 0;
+	font-family: 'Jua', sans-serif;
+}
+html, body{
+	height:100%;
+}
+ul, li {
+	list-style:none;
 }
 .main-outer {
 	margin-left: 350px;
 	margin-top: 150px;
 	width: 1200px;
-	height: 500px;
+	height: 800px;
 }
 
 .main-inner {
 	width: 100%;
-	height: 500px;
+	height: 800px;
 	margin: auto;
 }
 
@@ -40,7 +46,7 @@
 }
 
 .my-menu ul li p {
-	padding-top: 7px;
+	padding-top: 12px;
 	font-size: 25px;
 }
 
@@ -56,18 +62,42 @@
 
 .my-info ul li p {
 	font-size: 22px;
-	padding-right: 130px;
+	padding-right: 150px;
 }
 
 .my-info ul li .my-con {
-	width: 200px;
-	height: 30px;
+	width:180px;
+	height:35px;
+	border:0.1px solid #d7d7d7;
+	font-size:22px;
+	border-radius: 12px;
+	padding-left:10px;
 }
-
+.my-info ul li .profile-btn{
+	font-size:22px;
+	width:180px;
+	height:35px;
+	background-color:#0092db;
+	border:0.1px solid #0092db;
+	color:#fff;
+	/* display:inline-block; */
+	border-radius: 12px;
+	padding-top:5px;
+}
+.my-info ul li .profile-btn:hover{
+	background-color:#0088cc;
+	border:0.1px solid #0088cc;	
+	cursor:pointer;
+}
+.userDelete-btn{
+	font-size:16px;
+}
 .my-info ul li form {
 	height: 220px;
 }
-
+.btn-black{
+	
+}
 hr.two_1 {
 	width: 900px;
 	border-bottom: 0px;
@@ -111,21 +141,6 @@ hr.two_1 {
 .reser-content ul li p{
 	font-size:18px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* ///////테이블 스타일//////// */
@@ -200,4 +215,97 @@ table, tr, td{
 }
 .refont-2{
 	font-size:18px;
+}
+
+/* money 페이지 css */
+.coin-img{
+	width: 300px; 
+	height: 225px;
+	margin: auto;
+}
+.price-con{
+	width: 300px; 
+	height: 225px;
+	margin: auto;
+	text-align:center;
+}
+.price-con p{
+	font-size:35px;
+}
+
+/* 회원탈퇴 모달 디자인 */
+@keyframes fadeInDown {
+	0% {opacity: 0;transform: translate3d(0, -100%, 0);}
+    to {opacity: 1;transform: translateZ(0);}
+    }
+    .login-modal {position: relative;animation: fadeInDown 1s;}
+
+/* 로그인모달창 백그라운드 */
+.modal-bg{
+	display:none;
+	position: absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:1250px;
+	background:rgba(0,0,0,0.5);
+}
+
+.login-modal{
+	position: absolute;
+	left:calc(50% - 275px);
+	top:calc(50% - 275px);
+	width:550px;
+	height:350px;
+	background:#fff;
+	border-radius: 10px;
+}
+.modal-header{
+	height:5%;
+	/* background-color:#f7f7f7; */
+	font-size:15px;
+}
+.exit-img{
+	margin:5px 5px 0 0;
+	cursor:pointer;
+	float:right;		
+}
+.del-main{
+	padding-left:25px;
+}
+.del-title{
+	font-size:26px;
+}
+.del-title-sub{
+	font-size:20px;
+}
+.del-main p{
+	font-size:16px;	
+}
+.delete-passwd{
+	width:120px;
+	border: 1px solid #d3d3d3;
+	border-radius:5px;
+}
+.delete-btn{
+	width:50px;
+	height:25px;
+	font-size:14px;
+	border: 1px solid #d3d3d3;
+	color:gray;
+	background-color:#fff;
+	border-radius:5px;
+}
+.delete-btn:hover{
+	background-color:#d3d3d3;	
+}
+.delete-form{
+	width:500px;
+}
+.align-center a,span {
+	font-size:22px;
+	/* border: 1px solid #000;	 */
+}
+.align-center{
+	padding-right:100px;
 }

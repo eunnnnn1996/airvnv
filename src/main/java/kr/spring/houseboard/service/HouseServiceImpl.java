@@ -13,6 +13,7 @@ import kr.spring.houseboard.vo.HouseLikeVO;
 import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.houseboard.vo.PaymentVO;
 import kr.spring.houseboard.vo.RateVO;
+import kr.spring.user.vo.HitVO;
 import kr.spring.user.vo.UserVO;
 
 @Service
@@ -163,6 +164,58 @@ public class HouseServiceImpl implements HouseService{
 		return houseMapper.selectRowCountRate(map);
 	}
 
+	@Override
+	public void marketHit(int market_num) {
+		// TODO Auto-generated method stub
+		houseMapper.marketHit(market_num);
+	}
 
+	@Override
+	public int houseAllHitCount() {
+		// TODO Auto-generated method stub
+		return houseMapper.houseAllHitCount();
+	}
+
+	@Override
+	public void insertHitMonth(int hit, int month) {
+		// TODO Auto-generated method stub
+		houseMapper.insertHitMonth(hit, month);
+	}
+
+	@Override
+	public List<HitVO> selectHitMonth() {
+		// TODO Auto-generated method stub
+		return houseMapper.selectHitMonth();
+	}
+
+	@Override
+	public void incomeInsert(int sumprice, Integer user_num, int market_num) {
+		// TODO Auto-generated method stub
+		houseMapper.incomeInsert(sumprice, user_num, market_num);
+	}
+
+	@Override
+	public void incomeUpdate(int sumprice, int market_num) {
+		// TODO Auto-generated method stub
+		houseMapper.incomeUpdate(sumprice, market_num);
+	}
+
+	@Override
+	public int incomeSelect(int market_num) {
+		// TODO Auto-generated method stub
+		return houseMapper.incomeSelect(market_num);
+	}
+
+	@Override
+	public int incomePriceSelect(Integer user_num) {
+		// TODO Auto-generated method stub
+		return houseMapper.incomePriceSelect(user_num);
+	}
+
+	@Override
+	public int selectRateCount(int market_num) {
+		// TODO Auto-generated method stub
+		return houseMapper.selectRateCount(market_num);
+	}
 
 }

@@ -15,7 +15,29 @@ public class RateVO {
 	private Date reg_date;
 	private int user_num;
 	private int market_num;
+	private String user_name;
+	private byte[] photo;
+	private String photo_name;
 	
+	
+	public byte[] getPhoto() {
+		return photo;
+	}
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+	public String getPhoto_name() {
+		return photo_name;
+	}
+	public void setPhoto_name(String photo_name) {
+		this.photo_name = photo_name;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 	public int getRate_num() {
 		return rate_num;
 	}

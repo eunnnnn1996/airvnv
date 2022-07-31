@@ -21,6 +21,22 @@
     	<put-attribute name="title" value="내가 게시한 방"/>
     	<put-attribute name="body" value="/WEB-INF/views/user/myPost.jsp"/>
     </definition>
+    <definition name="money" extends="main">
+    	<put-attribute name="title" value="내 수익"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/money.jsp"/>
+    </definition>
+    <definition name="stats" extends="main">
+    	<put-attribute name="title" value="통계/회원관리"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/stats.jsp"/>
+    </definition>
+    <definition name="userBoard" extends="main">
+    	<put-attribute name="title" value="회원관리"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/userBoard.jsp"/>
+    </definition>
+    <definition name="standBoard" extends="main">
+    	<put-attribute name="title" value="게시물 승인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/standBoard.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

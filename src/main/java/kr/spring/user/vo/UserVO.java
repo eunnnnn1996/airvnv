@@ -3,8 +3,11 @@ package kr.spring.user.vo;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +40,10 @@ public class UserVO {
 	private String address1;
 	@NotEmpty
 	private String address2;
+	@NotNull
+	@Positive
+	@Max(99)
+	private int age;
 	private Date reg_date;
 	private Date modify_date;
 	@Pattern(regexp="^[A-Za-z0-9]{4,12}")
@@ -68,7 +75,12 @@ public class UserVO {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
 	public int getUser_auth() {
 		return user_auth;
 	}

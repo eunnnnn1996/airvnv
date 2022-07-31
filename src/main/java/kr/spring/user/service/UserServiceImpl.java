@@ -94,6 +94,58 @@ public class UserServiceImpl implements UserService{
 		userMapper.deletePost(user_num, market_num);
 		
 	}
-	
-	
+
+	@Override
+	public List<HouseVO> selectListUser(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectListUser(map);
+	}
+
+	@Override
+	public int selectRowCountListUser(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectRowCountListUser(map);
+	}
+
+	@Override
+	public void updateUserAuthMaster(int user_auth, Integer user_num) {
+		// TODO Auto-generated method stub
+		userMapper.updateUserAuthMaster(user_auth, user_num);
+	}
+
+	@Override
+	public void updateBoardShow(int show,int market_num) {
+		// TODO Auto-generated method stub
+		userMapper.updateBoardShow(show,market_num);
+	}
+
+	@Override
+	public int twenty() {
+		// TODO Auto-generated method stub
+		return userMapper.twenty();
+	}
+
+	@Override
+	public int thirty() {
+		// TODO Auto-generated method stub
+		return userMapper.thirty();
+	}
+
+	@Override
+	public int forty() {
+		// TODO Auto-generated method stub
+		return userMapper.forty();
+	}
+
+	@Override
+	public int fifty() {
+		// TODO Auto-generated method stub
+		return userMapper.fifty();
+	}
+
+	@Override
+	public int sixty() {
+		// TODO Auto-generated method stub
+		return userMapper.sixty();
+	}
 }

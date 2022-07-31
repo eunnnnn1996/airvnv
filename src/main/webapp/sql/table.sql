@@ -22,6 +22,7 @@ create table auser_detail(
 	constraint auser_detail_fk foreign key (user_num) references auser (user_num)
 );
 alter table amarket_detail add onoff number(1) default 1 not null;
+alter table auser_detail add age number(20) default 0 not null;
 create sequence auser_seq;
 
 --게시판 (매물 등록)
@@ -59,6 +60,8 @@ create table amarket_detail(
 	constraint amarket_detail_pk primary key (market_num),
 	constraint amarket_detail_fk foreign key (user_num) references auser (user_num)
 );
+alter table amarket_detail add hit number(20) default 0 not null;
+
 create table amarket_photo(
 	market_num number not null,
 	user_num number not null,
@@ -142,7 +145,17 @@ create table arate(
 
 create sequence arate_seq;
 
-
+create table aincome(
+    income_num number not null,
+    sum_income number(20) not null, --수입 총 합계
+    reg_date date not null,		--마지막 수입
+    market_num number not null,
+    user_num number not null,
+    constraint aincome_pk primary key (income_num),
+	constraint aincome_fk1 foreign key (user_num) references auser (user_num),
+    constraint aincome_fk2 foreign key (market_num) references amarket (market_num)
+);
+create sequence aincome_seq;
 
 
 

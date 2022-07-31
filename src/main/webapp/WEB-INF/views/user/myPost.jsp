@@ -14,7 +14,7 @@
 				<li><p><a href="${pageContext.request.contextPath}/user/myPage.do">내 정보</a></p></li>
 				<li><p><a href="${pageContext.request.contextPath}/user/myPost.do">내가 올린 방</a></p></li>
 				<li><p><a href="${pageContext.request.contextPath}/user/myReservation.do">내가 예약한 방</a></p></li>
-				<li><p>내 후기</p></li>								
+				<li><p><a href="${pageContext.request.contextPath}/user/money.do">내 수익</a></p></li>								
 			</ul>
 		</div>
 		<div class="my-reser">
@@ -80,6 +80,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<div class="align-center">${pagingHtml }</div>
 		</c:if>
 	</div>
 </section>

@@ -7,11 +7,13 @@ import java.util.Map;
 import javax.xml.crypto.Data;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import kr.spring.houseboard.vo.HouseLikeVO;
 import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.houseboard.vo.PaymentVO;
 import kr.spring.houseboard.vo.RateVO;
+import kr.spring.user.vo.HitVO;
 import kr.spring.user.vo.UserVO;
 
 public interface HouseService {
@@ -33,6 +35,8 @@ public interface HouseService {
 	public void UpdateMarket(HouseVO houseVO);
 	//집 삭제
 	public void DeleteMarketDetail(@Param("user_num") Integer user_num, @Param("market_num") int market_num);
+	//집 조회수
+	public void marketHit(int market_num);
 	//좋아요 누른 목록 보기
 	public HouseLikeVO selectLike(@Param("user_num") Integer user_num,@Param("market_num") Integer market_num);
 	//좋아요 취소
@@ -62,4 +66,20 @@ public interface HouseService {
 	public List<RateVO> selectListRate(Map<String,Object> map);
 	//rate 목록 갯수
 	public int selectRowCountRate(Map<String,Object> map);
+	//댓글 개수
+	public int selectRateCount(int market_num);
+	//날짜별로 모든 조회수 합계
+	public int houseAllHitCount();
+	//월별 총 조회수를 ahitdate 테이블에 저장
+	public void insertHitMonth(@Param("hit") int hit,@Param("month") int month);
+	//월별 총 조회수 조회하기
+	public List<HitVO> selectHitMonth();
+	//수익 저장하기 
+	public void incomeInsert(@Param("sumprice") int sumprice,@Param("user_num") Integer user_num, @Param("market_num") int market_num);
+	//수익 더하기
+	public void incomeUpdate(@Param("sumprice") int sumprice, @Param("market_num") int market_num);
+	//aincome 테이블에 해당 market_num이 있는지 확인
+	public int incomeSelect(int market_num);
+	//유저 넘으로 총액 조회하기
+	public int incomePriceSelect(Integer user_num);
 }

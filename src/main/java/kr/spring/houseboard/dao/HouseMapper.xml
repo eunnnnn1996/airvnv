@@ -21,27 +21,174 @@
 					m.veranda,
 					m.optionitem,
 					m.photo_name,
+					m.show,
 					m.reg_date,
 					m.modify_date,
-					d.market_content		
+					d.market_content,
+					d.hit,
+					u.user_num,
+					u.user_id		
 					FROM amarket m
 					JOIN auser u 
 					ON m.user_num = u.user_num
 					JOIN amarket_detail d
 					ON m.market_num = d.market_num
-					ORDER BY m.market_num DESC)a)
-		 	 
+					<if test="city == 1">
+					<![CDATA[
+					AND address1 like '서울%'
+					]]>
+					</if>
+					<if test="city == 2">
+					<![CDATA[
+					AND address1 like '인천%'
+					]]>
+					</if>
+					<if test="city == 3">
+					<![CDATA[
+					AND address1 like '대전%'
+					]]>
+					</if>
+					<if test="city == 4">
+					<![CDATA[
+					AND address1 like '광주%'
+					]]>
+					</if>
+					<if test="city == 5">
+					<![CDATA[
+					AND address1 like '울산%'
+					]]>
+					</if>
+					<if test="city == 6">
+					<![CDATA[
+					AND address1 like '대구%'
+					]]>
+					</if>
+					<if test="city == 7">
+					<![CDATA[
+					AND address1 like '부산%'
+					]]>
+					</if>
+					<if test="city == 8">
+					<![CDATA[
+					AND address1 like '경기%'
+					]]>
+					</if>
+					<if test="city == 9">
+					<![CDATA[
+					AND address1 like '강원%'
+					]]>
+					</if>
+					<if test="city == 10">
+					<![CDATA[
+					AND address1 like '충청%'
+					]]>
+					</if>
+					<if test="city == 11">
+					<![CDATA[
+					AND address1 like '전라%'
+					]]>
+					</if>
+					<if test="city == 12">
+					<![CDATA[
+					AND address1 like '경상%'
+					]]>
+					</if>
+					<if test="city == 13">
+					<![CDATA[
+					AND address1 like '제주%'
+					]]>
+					</if>
+					<if test="keyword == '호텔'">
+					and m.market_type = 1
+					</if>
+					<if test="keyword == '펜션'">
+					and m.market_type = 2
+					</if>
+					<if test="keyword == '게스트하우스'">
+					and m.market_type = 3
+					</if>
+					<if test="keyword == '아파트'">
+					and m.market_type = 4
+					</if>
+					<if test="keyword == '기타'">
+					and m.market_type = 5
+					</if>
+					ORDER BY d.hit DESC)a)
 		<![CDATA[
 			WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
-
 	</select>
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT
 		COUNT(*)
 		FROM amarket m
 		JOIN auser u 
-		ON m.user_num = u.user_num
+		ON m.user_num = u.user_num where show = 1
+		<if test="city == 1">
+		<![CDATA[
+		AND address1 like '서울%'
+		]]>
+		</if>
+		<if test="city == 2">
+		<![CDATA[
+		AND address1 like '인천%'
+		]]>
+		</if>
+		<if test="city == 3">
+		<![CDATA[
+		AND address1 like '대전%'
+		]]>
+		</if>
+		<if test="city == 4">
+		<![CDATA[
+		AND address1 like '광주%'
+		]]>
+		</if>
+		<if test="city == 5">
+		<![CDATA[
+		AND address1 like '울산%'
+		]]>
+		</if>
+		<if test="city == 6">
+		<![CDATA[
+		AND address1 like '대구%'
+		]]>
+		</if>
+		<if test="city == 7">
+		<![CDATA[
+		AND address1 like '부산%'
+		]]>
+		</if>
+		<if test="city == 8">
+		<![CDATA[
+		AND address1 like '경기%'
+		]]>
+		</if>
+		<if test="city == 9">
+		<![CDATA[
+		AND address1 like '강원%'
+		]]>
+		</if>
+		<if test="city == 10">
+		<![CDATA[
+		AND address1 like '충청%'
+		]]>
+		</if>
+		<if test="city == 11">
+		<![CDATA[
+		AND address1 like '전라%'
+		]]>
+		</if>
+		<if test="city == 12">
+		<![CDATA[
+		AND address1 like '경상%'
+		]]>
+		</if>
+		<if test="city == 13">
+		<![CDATA[
+		AND address1 like '제주%'
+		]]>
+		</if>
 	</select>
 	
 	
@@ -63,6 +210,9 @@
 	join amarket m on p.market_num = m.market_num
 	join amarket_detail d on p.market_num = d.market_num where p.user_num = #{user_num}
 	ORDER BY m.market_num DESC)a)
+	<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>
 	</select>
 	<select id="selectRowCountPayment" parameterType="map" resultType="integer">
 	SELECT
@@ -88,12 +238,18 @@
     r.communication_rate,
     r.reg_date,
     u.user_name,
-    u.address1
+    u.address1,
+    u.photo,
+    u.photo_name,
+    u.user_num
 	from arate r
 	join amarket_detail d on r.market_num = d.market_num 
     join auser_detail u on r.user_num = u.user_num
     where d.market_num = #{market_num}
 	ORDER BY r.rate_num DESC)a)
+	<![CDATA[
+	WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>
 	</select>
 	<select id="selectRowCountRate" parameterType="map" resultType="integer">
 	SELECT
@@ -102,5 +258,50 @@
 	join amarket_detail d on r.market_num = d.market_num 
     join auser_detail u on r.user_num = u.user_num
     where d.market_num = #{market_num}
+	</select>
+	<select id="houseAllHitCount" resultType="integer">
+		select sum(d.hit) as allhit
+		from amarket_detail d join amarket a on d.market_num = a.market_num
+		group by to_char(a.reg_date, 'yyyymm')
+		having to_char(a.reg_date,'yyyymm') = to_char(sysdate,'yyyymm')
+	</select>
+	<select id="insertHitMonth" parameterType="integer">
+		<if test="month == 1">
+		update ahitdate set january = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 2">
+		update ahitdate set feburary = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 3">
+		update ahitdate set march = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 4">
+		update ahitdate set april = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 5">
+		update ahitdate set may = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 6">
+		update ahitdate set june = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 7">
+		<!-- insert into ahitdate values(arate_seq.nextval,'0','0','0','0','0','0',#{hit},'0','0','0','0','0') -->
+		update ahitdate set july = #{hit} where hitdate_num = 110 
+		</if>
+		<if test="month == 8">
+		update ahitdate set august = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 9">
+		update ahitdate set september = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 10">
+		update ahitdate set october = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 11">
+		update ahitdate set november = #{hit} where hitdate_num = 110
+		</if>
+		<if test="month == 12">
+		update ahitdate set december = #{hit} where hitdate_num = 110
+		</if>
 	</select>
 </mapper>
