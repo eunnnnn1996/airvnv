@@ -3,6 +3,7 @@ package kr.spring.user.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -46,4 +47,10 @@ public interface UserService {
 	public int fifty();
 	//평균 나이 60대 이상
 	public int sixty();
+	
+	//메뉴 관리
+	//메뉴 추가
+	public void menuInsert(String category_name);
+	//메뉴 삭제
+	public void menuDelete(String category_name);
 }

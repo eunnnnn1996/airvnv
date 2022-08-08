@@ -77,4 +77,12 @@ public interface UserMapper {
 	//평균 나이 60대 이상
 	@Select("select count(age) from auser_detail where age >= 60")
 	public int sixty();
+	
+	//메뉴관리
+	//메뉴 추가
+	@Update("update acategory set category_onoff = 1 where category_name = #{category_name}")
+	public void menuInsert(String category_name);
+	//메뉴 삭제
+	@Update("update acategory set category_onoff = 2 where category_name = #{category_name}")
+	public void menuDelete(String category_name);
 }

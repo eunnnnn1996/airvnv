@@ -52,7 +52,7 @@ $(function(){
 			dataType:'json',
 			cache:false,
 			timeout:30000,
-			success:function(data){
+			success:function(data){ // data는 서버가 리턴해준 데이터
 					if(data.result=='logout'){
 		               alert('로그인 후 누르세요');
 		            }else if(data.result=='success'){ //추천하트 표시
@@ -115,13 +115,13 @@ function call()
  }
 }
 </script>
-<b id="user_num" style="displat:none;">${payment.user_num}</b>
+<b id="user_num" style="display:none;">${payment.user_num}</b>
 <%-- <b id="price">${payment.price}</b> --%>
-<b id="user_id" style="displat:none;">${payment.user_id}</b>
-<b id="phone" style="displat:none;">${payment.phone}</b>
-<b id="address1" style="displat:none;">${payment.address1}</b>
-<b id="address2" style="displat:none;">${payment.address2}</b>
-<b id="market_title" style="displat:none;">${house.market_title}</b>
+<b id="user_id" style="display:none;">${payment.user_id}</b>
+<b id="phone" style="display:none;">${payment.phone}</b>
+<b id="address1" style="display:none;">${payment.address1}</b>
+<b id="address2" style="display:none;">${payment.address2}</b>
+<b id="market_title" style="display:none;">${house.market_title}</b>
 <form action="income.do" id="income_form" name="income_form" method="post">
 	<input type="hidden" name="market_num" value="${house.market_num}">
 	<input type="hidden" name="sum_income" value="">

@@ -38,8 +38,16 @@ public class HouseVO {
 	private int show;
 	private int likecount;
 	private int ratecount;
+	private String country;
 	
-	
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	public int getRatecount() {
 		return ratecount;
 	}

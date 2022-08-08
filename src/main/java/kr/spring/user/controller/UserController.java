@@ -326,7 +326,7 @@ public class UserController {
 			
 			Integer user_num = (Integer) session.getAttribute("user_num");
 			
-			int price = houseService.incomePriceSelect(user_num);
+			Integer price = houseService.incomePriceSelect(user_num);
 			
 			model.addAttribute("price",price);
 			

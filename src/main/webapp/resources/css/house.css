@@ -127,6 +127,7 @@
 	background-color:#f1f1f1;
 }
 .sort-choice{
+	width:200px;
 	font-size:24px;
 	font-weight:700;
 }
@@ -158,10 +159,11 @@
 }
 .kakaomap{
 	margin-top:20px;
-	margin-left:100px;
+	margin-left:20px;
 	float:right;
 	width:350px;
 	height:260px;
+	padding-right:260px;
 }
 .address-input-first{
 	width:200px;
@@ -170,6 +172,14 @@
 	margin-top:5px;
 	font-size:18px;
 	padding-left:10px;
+}
+.country-input-first{
+	width:200px;
+	height:30px;
+	border: 1px solid #d3d3d3;
+	margin-top:5px;
+	font-size:18px;
+	padding-left:10px;	
 }
 .address-input{
 	width:200px;
@@ -304,4 +314,24 @@
 	font-weight: bold;
 	display:inline-block;
 	cursor:pointer; /* 손가락 표시 */
+}
+.country-btn{
+	position: static;
+	top:0;
+	left:0;
+	width:350px;
+	float:right;
+	margin: 10px 10px 0 0;
+}
+.country-btn p{
+	height:30px;
+	border:0.1px solid #d3d3d3;
+	border-radius: 12px;
+	float:right;
+	font-size:16px;
+	cursor:pointer; /* 손가락 표시 */
+	padding:5px 10px 0 10px;
+}
+.country-btn p:hover{
+	background-color:#d3d3d3;
 }

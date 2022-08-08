@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.houseboard.service.HouseService;
+import kr.spring.houseboard.vo.CategoryVO;
 import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.user.service.UserService;
 import kr.spring.user.vo.HitVO;
@@ -29,12 +31,13 @@ public class UserAdminController {
 	//관리자 페이지
 	@RequestMapping("/user/stats.do")
 	public String statsForm(Model model) {
-		int allhit = houseService.houseAllHitCount();
+		Integer allhit = houseService.houseAllHitCount();
 
 		model.addAttribute("allhit",allhit);
 		
 		List<HitVO> list = houseService.selectHitMonth();
 		
+		if(list.size() > 0) {
 		model.addAttribute("January",list.get(0).getJanuary());
 		model.addAttribute("Feburary",list.get(0).getFeburary());
 		model.addAttribute("March",list.get(0).getMarch());
@@ -47,6 +50,7 @@ public class UserAdminController {
 		model.addAttribute("October",list.get(0).getOctober());
 		model.addAttribute("November",list.get(0).getNovember());
 		model.addAttribute("December",list.get(0).getDecember());
+		}
 		model.addAttribute("twenty",userService.twenty());
 		model.addAttribute("thirty",userService.thirty());
 		model.addAttribute("forty",userService.forty());
@@ -92,9 +96,6 @@ public class UserAdminController {
 	@GetMapping("/user/authChange.do")
 	public String authChangeAct(int user_auth,Integer user_num) {
 		
-		System.out.println("유저 번호 : " + user_num);
-		System.out.println("유저 상태 : " + user_auth);
-		
 		userService.updateUserAuthMaster(user_auth, user_num);
 		
 		
@@ -114,6 +115,7 @@ public class UserAdminController {
 	  	
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("board_type",0);
 		
 		int count = houseService.selectRowCount(map);
 		
@@ -135,11 +137,22 @@ public class UserAdminController {
 		return mav;
 	}
 	
-		//게시물 승인하기
-		@GetMapping("/user/approve.do")
-		public String approve(int show,int market_num) {
+	//게시물 승인하기
+	@GetMapping("/user/approve.do")
+	public String approve(int show,int market_num) {
 			userService.updateBoardShow(show,market_num);
 			
 			return "redirect:/user/standBoard.do";
 		}
+	
+	//메뉴 추가, 삭제
+	@RequestMapping("/user/menuAdd.do")
+	public String menuAddForm(Model model) {
+		
+		List<CategoryVO> clist = houseService.categorySelect();
+		
+		model.addAttribute("clist",clist);
+		
+		return "menuAdd";
+	}
 }

@@ -39,11 +39,11 @@ $(document).ready(function() {
 	
 	<!-- 두번째 섹션 -->
 	<div class="section" id="section2">
+	<div class="list-wrap">
+	<p style="font-size:26px; padding-bottom:10px;">인기 TOP6</p>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 상품이 없습니다.</div>
 	</c:if>
-	<div class="list-wrap">
-	<p style="font-size:26px; padding-bottom:10px;">인기 TOP6</p>
 	<c:if test="${count > 0}">	
 		<ul>
 		<c:forEach var="house" items="${list}">

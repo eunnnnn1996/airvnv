@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.houseboard.service.HouseService;
+import kr.spring.houseboard.vo.CategoryVO;
 import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.houseboard.vo.RateVO;
 import kr.spring.houseboard.vo.ReviewVO;
@@ -71,7 +71,9 @@ public class HouseController {
 		int amarket_num = houseService.amarketNumSelect();
 		houseVO.setUser_num(user_num);
 		houseVO.setMarket_num(amarket_num);
-
+		if(houseVO.getCountry() == null) {
+			houseVO.setCountry("대한민국");
+		}
 		houseService.houseDetailInsert(houseVO);
 		houseService.houseInsert(houseVO);
 
@@ -85,7 +87,6 @@ public class HouseController {
 		HouseVO vo = houseService.selectHouse(market_num);
 		UserVO uvo = houseService.selectSellerInfo(market_num);
 		houseService.marketHit(market_num);
-		UserVO svo = userService.selectUser(user_num);
 		
 		// 이미지 태그를 추출하기 위한 정규식
 		Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
@@ -104,9 +105,11 @@ public class HouseController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("houseDetail");
 		mav.addObject("house", vo);
-		mav.addObject("user", uvo);
-		mav.addObject("payment",svo);
-		
+		mav.addObject("user", uvo);		
+		if(user_num != null) {
+			UserVO svo = userService.selectUser(user_num);
+			mav.addObject("payment",svo);
+		}
 		for (int i = 0; i < list.size(); i++) {
 			mav.addObject("list" + i, list.get(i));
 		}
@@ -270,6 +273,16 @@ public class HouseController {
 	public String rateInsertGetForm(@ModelAttribute("rateVO") RateVO rateVO) {
 		return "rateInsert";
 	}
+	
+	@GetMapping("/house/rateReplyList.do")
+	public String rateReplyListGetForm(Integer rate_num,Model model) {
+		RateVO vo = new RateVO();
+		vo = houseService.selectRate(rate_num);
+		
+		model.addAttribute("rate",vo);
+		
+		return "rateReplyList";
+	}
 
 	
 	  @PostMapping("/house/rateInsert.do") 
@@ -286,7 +299,6 @@ public class HouseController {
 	  }
 	  
 	  @RequestMapping("/house/allHouse.do")
-	  @ResponseBody
 	  public ModelAndView allHouseForm(@RequestParam(value="pageNum",defaultValue="1")
 									int currentPage,
 									@RequestParam(value="keyfield",defaultValue="")
@@ -294,17 +306,29 @@ public class HouseController {
 									@RequestParam(value="keyword",defaultValue="")
 									String keyword,
 									@RequestParam(value="city",defaultValue="")
-									String city) {
+									String city,
+									@RequestParam(value="market_type",defaultValue="")
+									String market_type,
+									@RequestParam(value="price",defaultValue="")
+									String price,
+									@RequestParam(value="board_type",defaultValue="")
+									String board_type,
+									@RequestParam(value="day_type",defaultValue="")
+									String day_type) {
 		  
 		  	Map<String,Object> map = new HashMap<String,Object>();
 		  	
 			map.put("keyfield", keyfield);
 			map.put("keyword", keyword);
 			map.put("city", city);
+			map.put("market_type", market_type);
+			map.put("price", price);
+			map.put("board_type", board_type);
+			map.put("day_type", day_type);
 			
 			int count = houseService.selectRowCount(map);
 			
-			PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,6,10,"allHouse.do","&city="+city);
+			PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,6,10,"allHouse.do","&city="+city+"&market_type="+market_type+"&price="+price);
 			
 			map.put("start", page.getStartCount());
 			map.put("end", page.getEndCount());
@@ -322,6 +346,62 @@ public class HouseController {
 			mav.setViewName("allHouse");
 			mav.addObject("count", count);
 			mav.addObject("list",list);
+			mav.addObject("pagingHtml",page.getPagingHtml()); 
+			
+			return mav;
+	  }
+	  
+	  @RequestMapping("/house/worldList.do")
+	  public ModelAndView worldListForm(@RequestParam(value="pageNum",defaultValue="1")
+										int currentPage,
+										@RequestParam(value="keyfield",defaultValue="")
+										String keyfield,
+										@RequestParam(value="keyword",defaultValue="")
+										String keyword,
+										@RequestParam(value="market_type",defaultValue="")
+										String market_type,
+										@RequestParam(value="price",defaultValue="")
+										String price,
+										@RequestParam(value="board_type",defaultValue="")
+										String board_type,
+										@RequestParam(value="day_type",defaultValue="")
+										String day_type,
+										@RequestParam(value="country",defaultValue="")
+										String country) {
+		  
+		  	Map<String,Object> map = new HashMap<String,Object>();
+		  	
+			map.put("keyfield", keyfield);
+			map.put("keyword", keyword);
+			map.put("market_type", market_type);
+			map.put("price", price);
+			map.put("board_type", board_type);
+			map.put("day_type", day_type);
+			map.put("country", country);
+			
+			int count = houseService.selectWorldRowCount(map);
+			
+			PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,6,10,"worldList.do","&market_type="+market_type+"&price="+price+"&country="+country);
+			
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
+			
+			List<HouseVO> list = null;
+			if(count > 0) {
+				list = houseService.selectWorldList(map);
+				for(int i=0;i<list.size();i++) {
+					HouseVO vo = list.get(i); 
+					vo.setLikecount(houseService.selectLikeCount(vo.getMarket_num()));
+					vo.setRatecount(houseService.selectRateCount(vo.getMarket_num()));
+				}
+			}
+			List<CategoryVO> clist = houseService.categorySelectShow();
+			
+			ModelAndView mav  = new ModelAndView();
+			mav.setViewName("worldList");
+			mav.addObject("count", count);
+			mav.addObject("list",list);
+			mav.addObject("clist",clist);
 			mav.addObject("pagingHtml",page.getPagingHtml()); 
 			
 			return mav;

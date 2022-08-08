@@ -1,20 +1,33 @@
 package kr.spring.houseboard.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.houseboard.service.HouseService;
 import kr.spring.houseboard.vo.HouseLikeVO;
+import kr.spring.houseboard.vo.ReplyVO;
+import kr.spring.util.PagingUtil;
 
 @Controller
 public class HouseAjaxController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HouseController.class); // 로그찍기
+	
+	private int rowCount = 10;
+	
 	@Autowired
 	private HouseService houseService;
 	
@@ -71,4 +84,117 @@ public class HouseAjaxController {
 		}
 		return map;
 	}
+	
+	//댓글 시작
+	//댓글 List
+	@RequestMapping("/house/replyList.do")
+	@ResponseBody
+	public Map<String,Object> replyList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+										@RequestParam Integer rate_num, HttpSession session){
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("rate_num",rate_num);
+		
+		int count = houseService.selectRowCountReply(map);
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, null);
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		List<ReplyVO> list = null;
+		if(count>0) {
+			list = houseService.selectListReply(map);
+		}else {
+			list = Collections.emptyList(); //null값을 넘겨주지 않기 위해서 list를 빈값으로 
+		}
+		
+		Map<String,Object> mapj = new HashMap<String,Object>();
+		mapj.put("count", count);
+		mapj.put("rowCount", rowCount);
+		mapj.put("list", list);
+		mapj.put("user_num", (Integer)session.getAttribute("user_num"));
+		
+		return mapj;
+	}
+	
+	//댓글 insert
+	@RequestMapping("/house/replyInsert.do")
+	@ResponseBody
+	public Map<String,String> replyInsert(ReplyVO replyVO,HttpSession session, 
+														HttpServletRequest request){
+		Map<String,String> map = new HashMap<String,String>();
+		
+		Integer user_num = (Integer)session.getAttribute("user_num");
+		
+		if(user_num == null) {
+			map.put("result", "logout");
+		}else {
+			replyVO.setUser_num(user_num);
+			houseService.replyInsert(replyVO);
+			map.put("result", "success");
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("/house/replyUpdate.do")
+	@ResponseBody
+	public Map<String,String> replyUpdate(ReplyVO replyVO, HttpSession session, 
+														HttpServletRequest request){
+		
+		Map<String,String>map = new HashMap<String,String>();
+		
+		Integer user_num = (Integer)session.getAttribute("user_num");
+		ReplyVO dbVO = houseService.selectReply(replyVO.getReply_num());
+		
+		if(user_num==null) {
+			map.put("result","logout");
+		}else if(user_num!=null && user_num == dbVO.getUser_num()){
+			houseService.updateReply(replyVO);
+			map.put("result","success");
+		}else {
+			map.put("result","wrongAccess");
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("/house/replyDelete.do")
+	@ResponseBody
+	public Map<String,String> deleteReply(@RequestParam int re_num, HttpSession session){
+		
+		Map<String,String> map = new HashMap<String,String>();
+		Integer user_num = (Integer)session.getAttribute("user_num");
+		
+		ReplyVO dvo = houseService.selectReply(re_num);
+		
+		if(user_num ==null) {
+			map.put("result","logout");
+		}else if(user_num!=null && user_num == dvo.getUser_num()) {
+			houseService.deleteReply(re_num);
+			map.put("result","success");
+		}
+		else {
+			map.put("result","wrongAccess");
+		}
+		
+		return map;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

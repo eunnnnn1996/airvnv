@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.houseboard.dao.HouseMapper;
+import kr.spring.houseboard.vo.CategoryVO;
 import kr.spring.houseboard.vo.HouseLikeVO;
 import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.houseboard.vo.PaymentVO;
 import kr.spring.houseboard.vo.RateVO;
+import kr.spring.houseboard.vo.ReplyVO;
 import kr.spring.user.vo.HitVO;
 import kr.spring.user.vo.UserVO;
 
@@ -171,7 +173,7 @@ public class HouseServiceImpl implements HouseService{
 	}
 
 	@Override
-	public int houseAllHitCount() {
+	public Integer houseAllHitCount() {
 		// TODO Auto-generated method stub
 		return houseMapper.houseAllHitCount();
 	}
@@ -207,7 +209,7 @@ public class HouseServiceImpl implements HouseService{
 	}
 
 	@Override
-	public int incomePriceSelect(Integer user_num) {
+	public Integer incomePriceSelect(Integer user_num) {
 		// TODO Auto-generated method stub
 		return houseMapper.incomePriceSelect(user_num);
 	}
@@ -216,6 +218,72 @@ public class HouseServiceImpl implements HouseService{
 	public int selectRateCount(int market_num) {
 		// TODO Auto-generated method stub
 		return houseMapper.selectRateCount(market_num);
+	}
+
+	@Override
+	public RateVO selectRate(Integer rate_num) {
+		// TODO Auto-generated method stub
+		return houseMapper.selectRate(rate_num);
+	}
+
+	@Override
+	public void replyInsert(ReplyVO replyVO) {
+		// TODO Auto-generated method stub
+		houseMapper.replyInsert(replyVO);
+	}
+
+	@Override
+	public int selectRowCountReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return houseMapper.selectRowCountReply(map);
+	}
+
+	@Override
+	public List<ReplyVO> selectListReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return houseMapper.selectListReply(map);
+	}
+
+	@Override
+	public ReplyVO selectReply(Integer reply_num) {
+		// TODO Auto-generated method stub
+		return houseMapper.selectReply(reply_num);
+	}
+
+	@Override
+	public void updateReply(ReplyVO replyVO) {
+		// TODO Auto-generated method stub
+		houseMapper.updateReply(replyVO);
+	}
+
+	@Override
+	public void deleteReply(Integer reply_num) {
+		// TODO Auto-generated method stub
+		houseMapper.deleteReply(reply_num);
+	}
+
+	@Override
+	public List<HouseVO> selectWorldList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return houseMapper.selectWorldList(map);
+	}
+
+	@Override
+	public int selectWorldRowCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return houseMapper.selectWorldRowCount(map);
+	}
+
+	@Override
+	public List<CategoryVO> categorySelect() {
+		// TODO Auto-generated method stub
+		return houseMapper.categorySelect();
+	}
+
+	@Override
+	public List<CategoryVO> categorySelectShow() {
+		// TODO Auto-generated method stub
+		return houseMapper.categorySelectShow();
 	}
 
 }

@@ -148,4 +148,17 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userMapper.sixty();
 	}
+
+	@Override
+	public void menuDelete(String category_name) {
+		// TODO Auto-generated method stub
+		userMapper.menuDelete(category_name);
+	}
+
+	@Override
+	public void menuInsert(String category_name) {
+		// TODO Auto-generated method stub
+		userMapper.menuInsert(category_name);
+		
+	}
 }

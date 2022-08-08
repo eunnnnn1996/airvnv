@@ -83,6 +83,11 @@
 	height:500px;	
 	margin-top:50px;
 }
+.main-content-outer2{
+	width:1100px;
+	height:500px;	
+	margin-top:50px;
+}
 .main-content-inner{
 	width:1100px;
 	height:400px;
@@ -410,6 +415,15 @@ ul{
 	font-size:18px;
 	margin-bottom:3px;
 }
+.reply-list-btn{
+	float:right;
+	border:none;
+	font-size:18px;
+}
+.reply-list-btn:hover{
+	color:#d3d3d3;
+	cursor:pointer;
+}
 .insert-btn:hover{
 	background-color:#f7f7f7;	
 }
@@ -586,4 +600,114 @@ ul{
 .swiper-slide img{
 	width:600px;
 	height:600px;
+}
+
+
+/* 댓글 디자인 */
+#reply_div2{
+	margin:30px auto;
+	margin-top:10px;
+}
+#re_form{
+	width:650px;
+	border:none;
+}
+textarea.rep-content{
+	width:90%;
+	height:50px;
+	/* margin:0px 40px; */
+	padding: 14px 16px;
+    border: 1px solid #dfe0e6;
+    resize: vertical;
+ 	/* line-height: 50px; */
+ 	resize: none;
+ 	font-size:18px;
+}
+#re_first, #mre_first{
+	float:left;
+	width:90%;
+	padding-left:15px;
+	margin-bottom:10px;
+	text-align:right;
+}
+.letter-count{
+	font-size:10pt;
+	color:#999;
+	float:left;
+}
+#re_second, #mre_second{
+	float:right;
+	width:60px;
+	margin-bottom:10px;
+	padding-left:35px;
+}
+.align-right{
+	text-align:right;
+	padding:0 20px 0 0;
+}
+.gradation2, #gradation2{
+	width: 50px;
+    height: 30px;
+    color: #000;
+    background-color:#fff;
+    border-color:#d3d3d3;
+    border-radius: 10%;
+    right:0px;
+    font-size:18px;
+}
+.gradation2:hover{
+	background-color:#d3d3d3;	
+}
+#output{
+	clear:both;
+}
+.paging-button{
+	text-align:right;
+}
+.align-center{
+	text-align:center;
+}
+.btn-black{
+	width: 156px;
+    height: 41px;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    margin-left: 0px;
+    cursor: pointer;
+}
+#mre_form{
+	width:650px;
+	border:none;
+	margin:5px;
+}
+.modify-date{
+	font-size:18px;
+	width:650px;
+}
+.item{
+	padding:50px 0 0 10px;
+}
+.sub-item p{
+	word-break: break-all;
+	font-size:28px;
+	width:650px;
+}
+.re-option-btn{
+	width:600px;
+	height:30px;
+}
+.modify-btn, .delete-btn{
+	background-color:#fff;
+	width:60px;
+	height:25px;
+	float:right;
+	font-size:20px;
+}
+.reset-update-btn, .reset-btn{
+	background-color:#fff;
+	width:60px;
+	height:25px;
+	float:right;
+	font-size:20px;
 }

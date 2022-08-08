@@ -37,6 +37,10 @@
     	<put-attribute name="title" value="게시물 승인"/>
     	<put-attribute name="body" value="/WEB-INF/views/user/standBoard.jsp"/>
     </definition>
+    <definition name="menuAdd" extends="main">
+    	<put-attribute name="title" value="메뉴 추가"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/menuAdd.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

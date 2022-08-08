@@ -36,7 +36,8 @@ public class MainController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-
+		map.put("board_type", 0);
+		
 		int count = houseService.selectRowCount(map);
 
 		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 6, 10, "main.do");

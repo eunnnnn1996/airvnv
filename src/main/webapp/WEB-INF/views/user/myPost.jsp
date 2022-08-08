@@ -65,7 +65,7 @@
 					<td class="refont">
 					<c:if test="${post.onoff == 1}">
 						<button class="btn btn-primary btn-sm refont-2"
-							onclick="location.href='${pageContext.request.contextPath}/user/postCencel.do?market_num=${post.market_num}&onoff=${post.onoff}'">예약취소</button>
+							onclick="location.href='${pageContext.request.contextPath}/user/postCencel.do?market_num=${post.market_num}&onoff=${post.onoff}'">게시중단</button>
 					</c:if>
 					<c:if test="${post.onoff == 2}">
 						<button class="btn btn-primary btn-sm refont-2"

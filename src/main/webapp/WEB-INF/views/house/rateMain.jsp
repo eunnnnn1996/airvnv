@@ -30,6 +30,24 @@ function acyncMovePage(url){
 	            $('.rate-list').html(data);
 	        });
 	    }
+function acyncMovePageReply(url){
+	        // ajax option
+	        var ajaxOption = {
+	                url : url,
+	                async : true,
+	                type : "GET",
+	                dataType : "html",
+	                cache : false
+	        };
+	        
+	        $.ajax(ajaxOption).done(function(data){
+	            // Contents 영역 삭제
+	            $('.rate-list').children().remove();
+				$('.replyinsert_btn').children().remove();
+	            // Contents 영역 교체
+	            $('.rate-list').html(data);
+	        });
+	    }	
 </script>
 <!-- 헤더 이미지 시작  -->
 <div class="main-image-outer">    
@@ -139,7 +157,7 @@ function acyncMovePage(url){
 	<%-- <canvas id="myChart" width="400" height="400"></canvas> --%>
 	
 	<!-- <hr style="clear:both;margin-top:130px;width:630px;color:#f7f7f7;float:left;"> -->
-	<div style="padding-top:100px;width:300px;">
+	<div class="replyinsert_btn" style="padding-top:100px;width:300px;">
 		<%-- <button class="insert-btn" onclick="location.href='${pageContext.request.contextPath}/house/rateInsert.do'">후기작성</button> --%>
 		<button class="insert-btn" onclick="acyncMovePage('${pageContext.request.contextPath}/house/rateInsert.do')">후기작성</button>
 	</div>
@@ -185,6 +203,11 @@ function acyncMovePage(url){
 					<ul>
 						<li class="rate-content-title"><b>"${rate.title}"</b></li>
 						<li class="rate-content-content">${rate.content}</li>
+						<li style="padding-top:50px;padding-right:10px;">
+							<button class="reply-list-btn"
+									onclick="acyncMovePageReply('${pageContext.request.contextPath}/house/rateReplyList.do?rate_num='+${rate.rate_num})">답글보기</button>
+							<!-- <button style="float:right;">답글보기</button> -->
+						</li>
 					</ul>
 				</div>		
 			</div>

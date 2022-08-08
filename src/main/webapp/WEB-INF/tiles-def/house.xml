@@ -37,9 +37,17 @@
     	<put-attribute name="title" value="리뷰작성"/>
     	<put-attribute name="body" value="/WEB-INF/views/house/rateInsert.jsp"/>
     </definition>
+    <definition name="rateReplyList" template="/WEB-INF/views/template/deleteHeader.jsp">
+    	<put-attribute name="title" value="리뷰 답글"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/rateReplyList.jsp"/>
+    </definition>
     <definition name="allHouse" extends="main">
     	<put-attribute name="title" value="모든 호스팅"/>
     	<put-attribute name="body" value="/WEB-INF/views/house/allHouse.jsp"/>
+    </definition>
+    <definition name="worldList" extends="main">
+    	<put-attribute name="title" value="모든 호스팅"/>
+    	<put-attribute name="body" value="/WEB-INF/views/house/worldList.jsp"/>
     </definition>
 </tiles-definitions>
 

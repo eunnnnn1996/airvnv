@@ -77,8 +77,9 @@ public class UserAjaxController {
 		Map<String,String> map = new HashMap<String,String>();
 		Map<String,Integer> mapB = new HashMap<String,Integer>();
 		
-		int allhit = houseService.houseAllHitCount();
+		Integer allhit = houseService.houseAllHitCount();
 		mapB.put("allhit", allhit);
+		
 		//현재 날짜 구하기
 		LocalDate now = LocalDate.now(); 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM"); 
@@ -117,6 +118,34 @@ public class UserAjaxController {
 		return map;
 	}
 	
+	@RequestMapping("/user/menuDelete.do")
+	@ResponseBody
+	public Map<String,String> menuDeleteForm(String countryRadio) {
+		Map<String,String> map = new HashMap<String,String>();
+		
+		if(countryRadio == null) {
+			map.put("result","fail");
+		}else if(countryRadio != null) {
+			userService.menuDelete(countryRadio);
+			map.put("result","success");
+		}
+		
+		return map;
+	}
 	
+	@RequestMapping("/user/menuInsert.do")
+	@ResponseBody
+	public Map<String,String> menuInsertForm(String countryRadio) {
+		Map<String,String> map = new HashMap<String,String>();
+		
+		if(countryRadio == null) {
+			map.put("result","fail");
+		}else if(countryRadio != null) {
+			userService.menuInsert(countryRadio);
+			map.put("result","success");
+		}
+		
+		return map;
+	}
 	
 }

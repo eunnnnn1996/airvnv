@@ -158,7 +158,14 @@ create table aincome(
 create sequence aincome_seq;
 
 
+create table acategory(
+    category_num number not null,
+    category_name varchar2(30) not null,
+    category_onoff number(1) default 1 not null, -- 1 : on , 2 : off
+    constraint acategory_pk primary key (category_num)
+);
 
+create sequence acategory_seq;
 
 
 

@@ -10,16 +10,20 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.houseboard.vo.CategoryVO;
 import kr.spring.houseboard.vo.HouseLikeVO;
 import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.houseboard.vo.PaymentVO;
 import kr.spring.houseboard.vo.RateVO;
+import kr.spring.houseboard.vo.ReplyVO;
 import kr.spring.user.vo.HitVO;
 import kr.spring.user.vo.UserVO;
 
 public interface HouseMapper {
 	public List<HouseVO> selectList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
+	public List<HouseVO> selectWorldList(Map<String,Object> map);
+	public int selectWorldRowCount(Map<String,Object> map);
 	@Select("select amarket_seq.nextval from dual")
 	public int amarketNumSelect();
 	@Insert("insert into amarket_detail(market_num,market_title,market_content,user_num) "
@@ -28,11 +32,11 @@ public interface HouseMapper {
 	@Insert("insert into amarket(market_num,market_type,market_type_sort, "
 			+ "address1,address2,address3,trade_type,trade_short,otherpay, "
 			+ "elevator,parking,veranda,optionitem,reg_date,modify_date,user_num,"
-			+ "photo,photo_name) "
+			+ "photo,photo_name,country) "
 			+ "values(#{market_num},#{market_type},#{market_type_sort},"
 			+ "#{address1},#{address2},#{address3},#{trade_type},#{trade_short},"
 			+ "#{otherpay},#{elevator},#{parking},#{veranda},#{optionitem},sysdate,null,#{user_num},"
-			+ "#{photo},#{photo_name})")
+			+ "#{photo},#{photo_name},#{country})")
 	public void houseInsert(HouseVO houseVO);
 	@Select("select * from amarket m join auser u on m.user_num = u.user_num "
 			+ "join amarket_detail d on d.market_num = m.market_num "
@@ -93,12 +97,15 @@ public interface HouseMapper {
 	public void insertRate(RateVO vo);
 	public List<RateVO> selectListRate(Map<String,Object> map);
 	public int selectRowCountRate(Map<String,Object> map);
+	//특정 댓글 내용 가져오기
+	@Select("select * from arate where rate_num = #{rate_num}")
+	public RateVO selectRate(Integer rate_num); 
 	//댓글 개수
 	@Select("select count(*) from arate where market_num = #{market_num}")
 	public int selectRateCount(int market_num);
 	@Update("update amarket_detail set hit=hit+1 where market_num = #{market_num}")
 	public void marketHit(int market_num);
-	public int houseAllHitCount();
+	public Integer houseAllHitCount();
 	//월별 총 조회수를 ahitdate 테이블에 저장
 	public void insertHitMonth(@Param("hit") int hit,@Param("month") int month);
 	//월별 총 조회수 조회하기
@@ -115,6 +122,32 @@ public interface HouseMapper {
 	public int incomeSelect(int market_num);
 	//유저 넘으로 총액 조회하기
 	@Select("select sum(sum_income) from aincome where user_num = #{user_num}")
-	public int incomePriceSelect(Integer user_num);
+	public Integer incomePriceSelect(Integer user_num);
 
+	//댓글구현
+	//댓글 리스트
+	public List<ReplyVO> selectListReply(Map<String,Object> map);
+	//댓글 인서트
+	@Insert("insert into areply values(areply_seq.nextval,#{rate_num},#{user_num},#{content},sysdate)")
+	public void replyInsert(ReplyVO replyVO);
+	//해당 rate 답글 개수 구하기
+	@Select("select count(*) from areply where rate_num = #{rate_num}")
+	public int selectRowCountReply(Map<String,Object> map);
+	//해당 댓글 내용 조회하기
+	@Select("select * from areply where reply_num = #{reply_num}")
+	public ReplyVO selectReply(Integer reply_num);
+	//댓글 업데이트
+	@Update("update areply set content = #{content} where reply_num = #{reply_num}") 
+	public void updateReply(ReplyVO replyVO);
+	//댓글 삭제
+	@Delete("delete from areply where reply_num = #{reply_num}")
+	public void deleteReply(Integer reply_num);
+	
+	/* 카테고리 관리 */
+	//모든 카테고리 조회
+	@Select("select * from acategory")
+	public List<CategoryVO> categorySelect();
+	//보여지는 카테고리 조회
+	@Select("select * from acategory where category_onoff = 1")
+	public List<CategoryVO> categorySelectShow();
 }

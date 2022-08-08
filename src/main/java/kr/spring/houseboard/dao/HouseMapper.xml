@@ -26,6 +26,7 @@
 					m.modify_date,
 					d.market_content,
 					d.hit,
+					d.onoff,
 					u.user_num,
 					u.user_id		
 					FROM amarket m
@@ -98,32 +99,71 @@
 					AND address1 like '제주%'
 					]]>
 					</if>
-					<if test="keyword == '호텔'">
-					and m.market_type = 1
+					<if test="market_type == 1">
+					and market_type = 1
 					</if>
-					<if test="keyword == '펜션'">
-					and m.market_type = 2
+					<if test="market_type == 2">
+					and market_type = 2
 					</if>
-					<if test="keyword == '게스트하우스'">
-					and m.market_type = 3
+					<if test="market_type == 3">
+					and market_type = 3
 					</if>
-					<if test="keyword == '아파트'">
-					and m.market_type = 4
+					<if test="market_type == 4">
+					and market_type = 4
 					</if>
-					<if test="keyword == '기타'">
-					and m.market_type = 5
+					<if test="market_type == 5">
+					and market_type = 5
 					</if>
+					<if test="price == 1">
+					and otherpay between 0 and 30000
+					</if>
+					<if test="price == 2">
+					and otherpay between 0 and 50000
+					</if>
+					<if test="price == 3">
+					and otherpay between 0 and 100000
+					</if>
+					<if test="price == 4">
+					and otherpay between 0 and 200000
+					</if>
+					<if test="price == 5">
+					and otherpay between 0 and 300000
+					</if>
+					<if test="price == 6">
+					and otherpay >= 300000
+					</if>
+					<if test="day_type == 1">
+					and trade_short =1
+					</if>					
+					<if test="board_type == 1">
+					ORDER BY d.market_num DESC)a)
+					</if>
+					<if test="board_type == 2">
 					ORDER BY d.hit DESC)a)
+					</if>
+					<if test="board_type == 3">
+					ORDER BY d.market_num DESC)a)
+					</if>
+					<if test="board_type == 4">
+					ORDER BY d.market_num DESC)a)
+					</if>
+					<if test="board_type == ''">
+					ORDER BY d.market_num DESC)a)
+					</if>
 		<![CDATA[
 			WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
-	<select id="selectRowCount" parameterType="map" resultType="integer">
+	<select id="selectRowCount" parameterType="map" resultType="integer">                
 		SELECT
 		COUNT(*)
 		FROM amarket m
 		JOIN auser u 
-		ON m.user_num = u.user_num where show = 1
+		ON m.user_num = u.user_num
+		JOIN amarket_detail d
+		ON m.market_num = d.market_num
+		where show = 1
+		and onoff = 1
 		<if test="city == 1">
 		<![CDATA[
 		AND address1 like '서울%'
@@ -138,6 +178,9 @@
 		<![CDATA[
 		AND address1 like '대전%'
 		]]>
+		<if test="market_type == 5">
+		and market_type = 5
+		</if>
 		</if>
 		<if test="city == 4">
 		<![CDATA[
@@ -189,9 +232,152 @@
 		AND address1 like '제주%'
 		]]>
 		</if>
+		<if test="market_type == 1 and city == ''">
+		and market_type = 1
+		</if>
+		<if test="market_type == 2">
+		and market_type = 2
+		</if>
+		<if test="market_type == 3">
+		and market_type = 3
+		</if>
+		<if test="market_type == 4">
+		and market_type = 4
+		</if>
+		<if test="market_type == 5">
+		and market_type = 5
+		</if>
 	</select>
 	
-	
+	<select id="selectWorldList" parameterType="map" resultType="houseVO">
+	SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT 
+		m.market_num,
+					<![CDATA[
+					REPLACE(REPLACE(d.market_title, '<', '&lt;'),'>','&gt;') market_title,
+					]]>
+					m.market_type,
+					m.address1,
+					m.address2,
+					m.address3,
+					m.trade_type,
+					m.trade_short,
+					m.otherpay,
+					m.elevator,
+					m.parking,
+					m.veranda,
+					m.optionitem,
+					m.photo_name,
+					m.show,
+					m.reg_date,
+					m.modify_date,
+					d.market_content,
+					d.hit,
+					d.onoff,
+					u.user_num,
+					u.user_id		
+					FROM amarket m
+					JOIN auser u 
+					ON m.user_num = u.user_num
+					JOIN amarket_detail d
+					ON m.market_num = d.market_num
+					and country != '대한민국'
+					<if test="market_type == 1">
+					and market_type = 1
+					</if>
+					<if test="market_type == 2">
+					and market_type = 2
+					</if>
+					<if test="market_type == 3">
+					and market_type = 3
+					</if>
+					<if test="market_type == 4">
+					and market_type = 4
+					</if>
+					<if test="market_type == 5">
+					and market_type = 5
+					</if>
+					<if test="price == 1">
+					and otherpay between 0 and 30000
+					</if>
+					<if test="price == 2">
+					and otherpay between 0 and 50000
+					</if>
+					<if test="price == 3">
+					and otherpay between 0 and 100000
+					</if>
+					<if test="price == 4">
+					and otherpay between 0 and 200000
+					</if>
+					<if test="price == 5">
+					and otherpay between 0 and 300000
+					</if>
+					<if test="price == 6">
+					and otherpay >= 300000
+					</if>
+					<if test="day_type == 1">
+					and trade_short =1
+					</if>
+					<if test="country == 1">
+					and country = '미국'
+					</if>
+					<if test="country == 2">
+					and country = '일본'
+					</if>
+					<if test="country == 3">
+					and country = '중국'
+					</if>
+					<if test="country == 4">
+					and country = '태국'
+					</if>
+					<if test="country == 5">
+					and country = '필리핀'
+					</if>					
+					<if test="board_type == 1">
+					ORDER BY d.market_num DESC)a)
+					</if>
+					<if test="board_type == 2">
+					ORDER BY d.hit DESC)a)
+					</if>
+					<if test="board_type == 3">
+					ORDER BY d.market_num DESC)a)
+					</if>
+					<if test="board_type == 4">
+					ORDER BY d.market_num DESC)a)
+					</if>
+					<if test="board_type == ''">
+					ORDER BY d.market_num DESC)a)
+					</if>
+		<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	<select id="selectWorldRowCount" parameterType="map" resultType="integer">
+		SELECT
+		COUNT(*)
+		FROM amarket m
+		JOIN auser u 
+		ON m.user_num = u.user_num
+		JOIN amarket_detail d
+		ON m.market_num = d.market_num
+		where show = 1
+		and onoff = 1
+		and country != '대한민국'
+		<if test="market_type == 1 and city == ''">
+		and market_type = 1
+		</if>
+		<if test="market_type == 2">
+		and market_type = 2
+		</if>
+		<if test="market_type == 3">
+		and market_type = 3
+		</if>
+		<if test="market_type == 4">
+		and market_type = 4
+		</if>
+		<if test="market_type == 5">
+		and market_type = 5
+		</if>
+	</select>
 	<!-- 예약한 방 조회 -->
 	<select id="selectListPayment" parameterType="map" resultType="paymentVO">
 	SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT 
@@ -262,8 +448,6 @@
 	<select id="houseAllHitCount" resultType="integer">
 		select sum(d.hit) as allhit
 		from amarket_detail d join amarket a on d.market_num = a.market_num
-		group by to_char(a.reg_date, 'yyyymm')
-		having to_char(a.reg_date,'yyyymm') = to_char(sysdate,'yyyymm')
 	</select>
 	<select id="insertHitMonth" parameterType="integer">
 		<if test="month == 1">
@@ -303,5 +487,27 @@
 		<if test="month == 12">
 		update ahitdate set december = #{hit} where hitdate_num = 110
 		</if>
+	</select>
+	
+	<!-- 댓글 목록 -->
+	<select id="selectListReply" parameterType="map" resultType="ReplyVO">
+		SELECT * FROM(SELECT a.*, rownum rnum
+		FROM (
+		SELECT
+		r.reply_num reply_num,
+		r.rate_num,
+		r.user_num,
+		<![CDATA[
+		REPLACE(REPLACE(r.content, '<', '&lt;'),'>','&gt;')content,
+		]]>
+		r.reg_date,
+		d.user_name
+		FROM areply r JOIN auser u on r.user_num = u.user_num
+		JOIN auser_detail d on r.user_num = d.user_num
+		WHERE rate_num = #{rate_num}
+		ORDER BY r.reply_num DESC)a)
+		<![CDATA[
+		WHERE rnum>=#{start} AND rnum <= #{end}
+		]]>			 
 	</select>
 </mapper>

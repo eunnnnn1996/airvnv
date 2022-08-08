@@ -5,6 +5,9 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3dccf85e0bda66300f299b635dec74c&libraries=services"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/house/houseInsert.js"></script>
+<!-- lottie 애니메이션 임포트 -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <!-- ckedior 라이브러리 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ckeditor_style.js"></script>
@@ -63,28 +66,29 @@ CKEDITOR.editorConfig = function(config) {
 		<ul>
 		<li>
 		<div class="four-gpscon">		
-			<p style="font-size:16px;margin-bottom:20px;">도로명,건물명,지번에 대해 통합검색이 가능합니다.</p>
+			<p style="font-size:16px;margin-bottom:20px; width:380px">도로명,건물명,지번에 대해 통합검색이 가능합니다.</p>
 		</div>
 		</li>
 		<li>
 			<form:input class="address-input" id="sample5_address" onclick="sample5_execDaumPostcode()" path="address1" placeholder="주소" readonly="true"/><br>
 			<form:errors path="address1" cssClass="error-color"/>
 		</li>
-		<li>
-			<input class="address-btn" type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+		<li id="country-input">
+			<input class="address-btn" id="add-btn" type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 		</li>
 		<li>
-			<form:input class="address-input-first" path="address2" placeholder="동"/><br>
+			<form:input class="address-input-first" id="address1-1" path="address2" placeholder="동"/><br>
 			<form:errors path="address2" cssClass="error-color"/>
 		</li>
 		<li>
-			<form:input class="address-input" path="address3" placeholder="호수"/><br>
+			<form:input class="address-input" id="address1-2" path="address3" placeholder="호수"/><br>
 			<form:errors path="address3" cssClass="error-color"/>
 		</li>
 		</ul>
 		<div id="map" class="kakaomap"></div> <!-- 카카오 지도 위치  -->
+		<div class="country-btn"><p class="country-btn-p">해외 주소라면 여기를 클릭!</p></div>
 		</div>		
-		
+			
 		<div class="market-content-second">
 			<div class="market-title2"><b>거래 정보</b></div>
 		</div>
