@@ -48,7 +48,14 @@ public class UserVO {
 	private Date modify_date;
 	@Pattern(regexp="^[A-Za-z0-9]{4,12}")
 	private String now_passwd;
+	private int sum_income;
 	
+	public int getSum_income() {
+		return sum_income;
+	}
+	public void setSum_income(int sum_income) {
+		this.sum_income = sum_income;
+	}
 	public boolean isCheckedPassword(String userPasswd) {
 		if(user_auth >= 1 && passwd.equals(userPasswd)) {
 			return true;

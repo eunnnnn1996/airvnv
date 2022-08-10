@@ -4,8 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
  <!-- 제이쿼리, css 임포트 -->   
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
 <script type="text/javascript">
 	$(function(){
@@ -34,46 +32,7 @@
 			reader.onload=function(){
 				$('.my-photo').attr('src',reader.result);
 			};
-		});//end of change
-		
-		/* //이미지를 서버에 전송
-		$('#photo_submit').click(function(){
-			if($('#upload').val()==''){
-				alert('파일을 선택하세요!');
-				$('#upload').focus();
-				return;
-			}
-			
-			//파일 전송
-			var form_data = new FormData();
-			form_data.append('upload',my_photo);
-			
-			$.ajax({
-				url:'updateMyPhoto.do',
-				type:'post',
-				data:form_data,
-				dataType:'json',
-				contentType:false,
-				enctype:'multipart/form-data',
-				processData:false,
-				success:function(param){
-					if(param.result == 'logout'){
-						alert('로그인 후 사용하세요!');
-					}else if(param.result == 'success'){
-						alert('프로필 사진이 수정되었습니다.');
-						photo_path = $('.my-photo').attr('src');
-						$('#upload').val('');
-						$('#photo_btn').show();
-					}else{
-						alert('파일 전송 오류 발생');
-					}
-				},
-				errror:function(){
-					alert('네트워크 오류 발생');
-				}
-			});
-		});//end of click */
-		
+		});//end of change	
 		//프로필 삭제
 		$('#photo_reset').click(function(){
 			$('.my-photo').attr('src',photo_path);
@@ -133,6 +92,7 @@
 				<li style="border-radius:12px 0px 0px 12px;"><p><a href="${pageContext.request.contextPath}/user/myPage.do">내 정보</a></p></li>
 				<li><p><a href="${pageContext.request.contextPath}/user/myPost.do">내가 올린 방</a></p></li>
 				<li><p><a href="${pageContext.request.contextPath}/user/myReservation.do">내가 예약한 방</a></p></li>
+				<li><p><a href="${pageContext.request.contextPath}/user/ReservationOn.do">승인 대기중인 방</a></p></li>
 				<li style="border-radius:0px 12px 12px 0px;"><p><a href="${pageContext.request.contextPath}/user/money.do">내 수익</a></p></li>								
 			</ul>
 		</div>

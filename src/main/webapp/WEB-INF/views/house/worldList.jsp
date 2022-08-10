@@ -153,9 +153,9 @@ $(function(){
 			<form action="worldList.do" class="country-form" id="countryName" method="get">
 				<select name="country" id="country">
 					<option value='' selected>국가 선택</option>
-					<option value="0" <c:if test="${param.country == 0}">selected</c:if>>모든 국가</option>
+					<option value="all" <c:if test="${param.country == 'all'}">selected</c:if>>모든 국가</option>
 					<c:forEach var="category" items="${clist}">
-					<option value="${category.category_num}" <c:if test="${param.country == category.category_num}">selected</c:if>>${category.category_name}</option>
+					<option value='${category.category_name}' <c:if test="${param.country == category.category_name}">selected</c:if>>${category.category_name}</option>
 					</c:forEach>
 				</select>
 					<input type="hidden" name="market_type" value="${param.market_type}">

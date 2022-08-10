@@ -378,7 +378,7 @@ function call()
 							border-radius: 12px;" 
 							class="quickbtn" onclick="iamport()" type="button" value="바로 예약">
         		</li>
-        		<li><input type="submit" value="임시구매"></li>
+        		<li><input id="temp-payment-btn" type="submit" value="임시구매"></li>
         	</ul>
         </form>
         </div>

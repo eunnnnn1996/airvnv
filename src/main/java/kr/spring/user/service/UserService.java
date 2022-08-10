@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.houseboard.vo.HouseVO;
 import kr.spring.houseboard.vo.PaymentVO;
@@ -31,8 +33,20 @@ public interface UserService {
 	public void deletePost(@Param("user_num") Integer user_num,@Param("market_num") int market_num);
 	//모든 회원 정보조회(관리자)
 	public List<HouseVO> selectListUser(Map<String,Object> map);
-	//모든 회원 갯수(관리자)
+	//모든 회원 개수(관리자)
 	public int selectRowCountListUser(Map<String,Object> map);
+	//판매한 기록이 있는 회원 조회(관리자)
+	public List<HouseVO> selectListIncome(Map<String,Object> map);
+	//판매한 기록이 있는 회원 개수(관리자)
+	public int selectRowCountIncomeList(Map<String,Object> map);
+	//승인대기 중인 방 리스트
+	public List<HouseVO> selectListReservationOnOff(Map<String,Object> map);
+	//승인대기 중인 방 개수
+	public int selectRowCountReservationOnOff(Map<String,Object> map);
+	//승인대기 중인 방 승인
+	public void ReservationOnOffUpdate(Integer date_num);
+	//승인대기 중인 방 취소
+	public void ReservationOnOffCencel(Integer date_num);
 	//회원 상태 변경
 	public void updateUserAuthMaster(@Param("user_auth")int user_auth,@Param("user_num")Integer user_num);
 	//게시물 상태 변경
@@ -53,4 +67,11 @@ public interface UserService {
 	public void menuInsert(String category_name);
 	//메뉴 삭제
 	public void menuDelete(String category_name);
+	//카테고리 추가
+	public void categoryInsert(String category_name);
+	
+	//좋아요 누른 방 조회
+	public List<HouseVO> selectListLikeBoard(Map<String,Object> map);
+	//좋아요 누른 방 개수
+	public int selectRowCountLikeBoard(Map<String,Object> map);
 }

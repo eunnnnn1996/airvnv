@@ -148,4 +148,19 @@ public class UserAjaxController {
 		return map;
 	}
 	
+	@RequestMapping("/user/categoryInsert.do")
+	@ResponseBody
+	public Map<String,String> categoryInsertForm(String categoryInsert) {
+		Map<String,String> map = new HashMap<String,String>();
+		
+		if(categoryInsert == null) {
+			map.put("result","fail");
+		}else if(categoryInsert != null) {
+			userService.categoryInsert(categoryInsert);
+			map.put("result","success");
+		}
+		
+		return map;
+	}
+	
 }

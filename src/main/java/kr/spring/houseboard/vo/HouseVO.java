@@ -39,7 +39,45 @@ public class HouseVO {
 	private int likecount;
 	private int ratecount;
 	private String country;
+	private String user_name;
+	private int age;
+	private int sum_income;
+	private int date_num;
 	
+	
+	
+	public int getDate_num() {
+		return date_num;
+	}
+
+	public void setDate_num(int date_num) {
+		this.date_num = date_num;
+	}
+
+	public int getSum_income() {
+		return sum_income;
+	}
+
+	public void setSum_income(int sum_income) {
+		this.sum_income = sum_income;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
 	public String getCountry() {
 		return country;
 	}

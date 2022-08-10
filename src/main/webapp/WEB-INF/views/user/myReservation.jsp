@@ -14,6 +14,7 @@
 				<li><p><a href="${pageContext.request.contextPath}/user/myPage.do">내 정보</a></p></li>
 				<li><p><a href="${pageContext.request.contextPath}/user/myPost.do">내가 올린 방</a></p></li>
 				<li><p><a href="${pageContext.request.contextPath}/user/myReservation.do">내가 예약한 방</a></p></li>
+				<li><p><a href="${pageContext.request.contextPath}/user/ReservationOn.do">승인 대기중인 방</a></p></li>
 				<li><p><a href="${pageContext.request.contextPath}/user/money.do">내 수익</a></p></li>								
 			</ul>
 		</div>
@@ -21,9 +22,6 @@
 <section class="main-content">
 	<div class="container">
 		<hr size="1" style="width:900px;padding-left:130px">
-			<c:if test="${count == 0}">
-				<div class="result-display">표시할 상품이 없습니다.</div>
-			</c:if>
 		<c:if test="${count > 0}">	
 		<table class="table">
 			<thead>
@@ -48,14 +46,17 @@
 							</div>
 						</div>
 					</td>
-					<td>	
+					<td style="width:100px">	
 						<c:choose>
 						<c:when test="${reser.onoff == 1}">
-							<span class="active-circle bg-success"></span><b style="font-size:17px">게시중</b>
+							<span class="active-circle bg-danger"></span><b style="font-size:17px">대기중</b>
 						</c:when>
 						<c:when test="${reser.onoff == 2}">
-							<span class="active-circle bg-danger"></span><b style="font-size:17px">게시중단</b>
+							<span class="active-circle bg-success"></span><b style="font-size:17px">예약성공</b>
 						</c:when>
+						<c:when test="${reser.onoff == 3}">
+							<span class="active-circle bg-danger"></span><b style="font-size:17px">예약취소</b>
+						</c:when>																				
 						</c:choose>
 					</td>
 					<td class="refont">${reser.address1}${reser.address2}${reser.address3}</td>
@@ -63,12 +64,11 @@
 					<td class="refont">${reser.price}</td>
 					<td class="refont">
 					<c:if test="${reser.onoff == 1}">
-						<button class="btn btn-primary btn-sm refont-2"
-							onclick="location.href='${pageContext.request.contextPath}/user/reservationCencel.do?date_num=${reser.date_num}&onoff=${reser.onoff}'">예약취소</button>
+						대기중
 					</c:if>
 					<c:if test="${reser.onoff == 2}">
 						<button class="btn btn-primary btn-sm refont-2"
-							onclick="location.href='${pageContext.request.contextPath}/user/reservationCencel.do?date_num=${reser.date_num}&onoff=${reser.onoff}'">다시시작</button>
+							onclick="location.href='${pageContext.request.contextPath}/user/reservationCencel.do?date_num=${reser.date_num}&onoff=${reser.onoff}'">예약취소</button>
 					</c:if>							
 					</td>
 					<td>

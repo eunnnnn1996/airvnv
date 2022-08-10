@@ -65,17 +65,15 @@ public class UserController {
 
 			boolean check = false;
 			if (user != null) {
-				// 비밀번호 일치 여부 체크 //사용자가 입력한 비밀번호
 				check = user.isCheckedPassword(userVO.getPasswd());
 			}
-			if (user.getUser_auth() == 0) { // 탈퇴회원의 경우 - 아이디만 확인 후
+			if (user.getUser_auth() == 0) {
 				throw new AuthCheckException();
 			} else {
-				if (user.getUser_auth() == 1 && check) {// 정지회원의 경우 - 아이디, 비번 확인 후
+				if (user.getUser_auth() == 1 && check) {
 					throw new AuthBlockException();
 				}
 				if (check) {
-					// 인증 성공, 로그인 처리
 					session.setAttribute("user_num", user.getUser_num());
 					session.setAttribute("user_name", user.getUser_name());
 					session.setAttribute("user_auth", user.getUser_auth());
@@ -86,11 +84,10 @@ public class UserController {
 			}
 
 			throw new Exception();
-		} catch (AuthCheckException e) {// 로그인 오류
-			// 인증 실패로 로그인 폼을 호출
+		} catch (AuthCheckException e) {
 			model.addAttribute("message", "로그인 오류"); 
 			model.addAttribute("url", request.getContextPath() + "/main/main.do");
-		} catch (AuthBlockException e) {// 정지회원의 경우
+		} catch (AuthBlockException e) {
 			model.addAttribute("message", "정지된 회원 입니다"); 
 			model.addAttribute("url", request.getContextPath() + "/main/main.do");
 		} catch (Exception e) {
@@ -100,7 +97,6 @@ public class UserController {
 		return "common/resultView";
 	}
 	
-	//로그아웃
 	@RequestMapping("/user/logout.do")
 	public String processLogout(HttpSession session) {
 		
@@ -109,7 +105,6 @@ public class UserController {
 		return "redirect:/main/main.do";
 	}
 	
-	//myPage
 	@RequestMapping("/user/myPage.do")
 	public String myPageForm(HttpSession session, Model model) {
 		
@@ -175,16 +170,18 @@ public class UserController {
 										HttpServletRequest request,int date_num,int onoff) {
 		Integer user_num = (Integer) session.getAttribute("user_num");
 		
-		if(onoff == 2) {
+		if(onoff == 1) {
+			model.addAttribute("message", "취소 처리중"); 
+			model.addAttribute("url", request.getContextPath() + "/user/myReservation.do");
+			return "common/resultView";
+		}else if(onoff == 2) { 
+			model.addAttribute("message", "예약 중단 후 삭제하세요 (예약 중단 문의는 방 상세페이지 호스트에게 연락)");
+		    model.addAttribute("url", request.getContextPath() + "/user/myReservation.do"); 
+		    return "common/resultView"; 
+		}else if(onoff == 3) {
 			houseService.deleteReservation(user_num, date_num);
-			model.addAttribute("message", "삭제 완료"); 
-			model.addAttribute("url", request.getContextPath() + "/user/myReservation.do");
-			return "common/resultView";
-		}else if(onoff == 1) {
-			model.addAttribute("message", "예약 중단 후 삭제하세요"); 
-			model.addAttribute("url", request.getContextPath() + "/user/myReservation.do");
-			return "common/resultView";
 		}
+		 
 		model.addAttribute("message", "오류"); 
 		model.addAttribute("url", request.getContextPath() + "/user/myReservation.do");
 		return "common/resultView";
@@ -241,7 +238,7 @@ public class UserController {
 		
 	    if(deletePasswd.equals(userCheckVO.getPasswd())) {
 		  userService.deleteUser(userCheckVO);
-		  session.invalidate(); //로그아웃
+		  session.invalidate();
 		  model.addAttribute("message", "회원탈퇴 완료"); 
 		  model.addAttribute("url", request.getContextPath() + "/main/main.do");
 	    }else {
@@ -333,4 +330,87 @@ public class UserController {
 			return "money";
 		}
 		
+		@RequestMapping("/user/ReservationOn.do")
+		public ModelAndView ReservationOnForm(@RequestParam(value="pageNum",defaultValue="1")
+												int currentPage,
+												HttpSession session) {
+			
+			Integer user_num = (Integer) session.getAttribute("user_num");
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("user_num", user_num);
+			
+			int count = userService.selectRowCountReservationOnOff(map);
+			
+			PagingUtil page = new PagingUtil(currentPage,count,10,10,"ReservationOn.do");
+			
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
+			
+			List<HouseVO> list = null;
+			if(count > 0) {
+				list = userService.selectListReservationOnOff(map);
+			}
+			
+			ModelAndView mav  = new ModelAndView();
+			mav.setViewName("ReservationOn");
+			mav.addObject("count", count);
+			mav.addObject("list",list);
+			mav.addObject("pagingHtml",page.getPagingHtml()); 
+			
+			return mav;
+		}
+		
+		@RequestMapping("/user/ReservationOnUpdate.do")
+		public String ReservationOnUpdate(Integer date_num) {
+			
+			userService.ReservationOnOffUpdate(date_num);
+			
+			return "redirect:/user/ReservationOn.do";
+		}
+		
+		@RequestMapping("/user/ReservationOnCencel.do")
+		public String ReservationOnCencel(Integer date_num) {
+			
+			userService.ReservationOnOffCencel(date_num);
+			
+			return "redirect:/user/ReservationOn.do";
+		}
+		
+		@RequestMapping("/user/likeBoard.do")
+		public ModelAndView likeBoardForm(HttpSession session,
+											@RequestParam(value="pageNum",defaultValue="1")
+											int currentPage) {
+						
+			Integer user_num = (Integer) session.getAttribute("user_num");
+			Map<String,Object> map = new HashMap<String,Object>();
+			
+			map.put("user_num", user_num);
+			
+			int count = userService.selectRowCountLikeBoard(map);
+			
+			PagingUtil page = new PagingUtil(currentPage,count,6,10,"likeBoard.do");
+			
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
+			
+			List<HouseVO> list = null;
+			
+			if(count > 0) {
+				list = userService.selectListLikeBoard(map);
+				for(int i=0;i<list.size();i++) {
+					HouseVO vo = list.get(i); 
+					vo.setLikecount(houseService.selectLikeCount(vo.getMarket_num()));
+					vo.setRatecount(houseService.selectRateCount(vo.getMarket_num()));
+				}
+			}
+			
+			ModelAndView mav  = new ModelAndView();
+			mav.setViewName("likeBoard");
+			mav.addObject("count", count);
+			mav.addObject("list",list);
+			mav.addObject("pagingHtml",page.getPagingHtml()); 
+			
+			return mav;
+		}
 }

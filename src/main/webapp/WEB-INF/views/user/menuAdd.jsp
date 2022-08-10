@@ -58,6 +58,32 @@ $(function(){
 			}
 		});
 	});
+	//카테고리 추가
+	$('#category-insert-btn').click(function(){
+		var categoryInsert = $("#category-insert-input").val();
+		$.ajax({
+			url:'categoryInsert.do',
+			type:'post',
+			data:{categoryInsert:categoryInsert},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){ // data는 서버가 리턴해준 데이터
+					if(data.result=='fail'){
+		               alert('추가할 카테고리를 입력하세요');
+		            }else if(data.result=='success'){
+		            	acyncMovePageReply();
+		            	$('#category-insert-input').val('');
+		            }
+		            else{
+		               alert('등록시 오류 발생!');
+		            }
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	});
 });
 function acyncMovePageReply(){
 	$('.reload1').load(location.href+' .reload1');
@@ -69,10 +95,9 @@ function acyncMovePageReply(){
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
-                    	<!-- 사이드 바 시작 -->
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/main/main.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 홈
                             </a>
@@ -106,16 +131,11 @@ function acyncMovePageReply(){
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/user/menuAdd.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 메뉴 관리
                             </a>
                         </div>
-                        <!-- 사이드 바 끝 -->
                     </div>
                 </nav>
             </div>
@@ -128,41 +148,42 @@ function acyncMovePageReply(){
                         </ol>       
                         
                         <!-- 나라이름 추가하기 시작 -->
-	                        <div id="card-ma" class="card mb-4" style="width:450px;margin: auto; float:left;">
-	                            <div id="card-body" class="card-body" style="width:450px;height:400px">
+                        	<span style="float:left; padding-left:0;width:555px;height:20px;font-size:22px">추가된 국가이름 메뉴</span>
+	                        <div id="card-ma" class="card mb-4" style="width:450px;margin: auto; clear:both;float:left;margin-top:45px;">
+	                            <div id="card-body" class="card-body" style="width:450px;height:350px;overflow: auto;">
 	                            	<!-- 변경구간 -->
 	                            	<div class="reload1">
 	                            	<c:forEach var="category" items="${clist}">
-	                            	
-	                            	<c:if test="${category.category_onoff == 1}">
-	                            	<div class="radio-div">	                            	
-	                                <input type="radio" id="radio${category.category_num}" name="countryRadio" value="${category.category_name}"> 
-	                                <label for="radio${category.category_num}">${category.category_name}</label><br>
-	                                </div>
-	                                </c:if>
-	                                
+	                            	<c:if test="${category.category_onoff == 1}">      	
+	                                <input class="radio-btn" type="radio" id="radio${category.category_num}" name="countryRadio" value="${category.category_name}"> 
+	                                <label for="radio${category.category_num}" style="font-size:22px;">${category.category_name}</label><br>
+	                                </c:if>	                                
 	                                </c:forEach>
 	                                </div>
 	                            </div>
 	                        </div>
 	                        <!-- 나라이름 추가하기 끝 -->
-	                        <div style="width:50px;float:left;margin:auto;padding-left:28px;padding-top:130px;">
+	                        <div style="width:50px;height:400px;float:left;margin:auto;padding-left:28px;padding-top:130px;">
 		                        <input id="menu-insert-btn" type="button" value="추가"/>
 		                        <input id="menu-delete-btn" type="button" value="삭제"/>
 	                        </div>
-	                        
-                        <div id="card-maa" class="card mb-4" style="width:450px;margin: auto; ">
-                            <div class="card-body cardre" style="width:450px;height:400px">
+	                    <span style="width:70px;height:20px;font-size:22px">삭제된 국가이름 메뉴</span>
+                        <div id="card-maa" class="card mb-4" style="width:450px;margin: auto;margin-top:30px;">
+                            <div class="card-body cardre" style="width:450px;height:350px;overflow: auto;">
                             	<!-- 변경구간 -->
                             	<div class="reload2">
                             	<c:forEach var="category" items="${clist}">
 								<c:if test="${category.category_onoff == 2}">
-                                <input type="radio" id="radio${category.category_num}" name="countryRadio" value="${category.category_name}"> 
-                                <label for="radio${category.category_num}">${category.category_name}</label><br>
+                                <input class="radio-btn" type="radio" id="radio${category.category_num}" name="countryRadio" value="${category.category_name}"> 
+                                <label for="radio${category.category_num}"style="font-size:23px;">${category.category_name}</label><br>
                                 </c:if>
                                 </c:forEach>
                                 </div>
                             </div>
+                        </div>
+                        <div style="float:left;clear:both">
+                        <input type="text" id="category-insert-input" class="category-insert-input">
+                        <input type="button" id="category-insert-btn" class="category-insert-btn" value="생성">
                         </div>
                         </div>
                     </div>                   

@@ -52,41 +52,6 @@
 						</form>
 					</div>
 				</li>
-				<%-- <li>
-					<div class="selectbox">
-						<form action="allHouse.do" id="house-price-form" method="get">
-							<select name="price" id="price">
-								<option selected>가격 선택 / 1박</option>
-								<option value="1">3만원이하</option>
-								<option value="2">5만원이하</option>
-								<option value="3">10만원이하</option>
-								<option value="4">20만원이하</option>
-								<option value="5">30만원이하</option>
-								<option value="6">30만원이상${param.market_type}</option>
-							</select> 
-							<input type="hidden" value="${param.market_type}">
-							<input type="submit" id="house-price-form-btn" style="display: none">
-						</form>
-					</div>
-				</li> --%>
-				<!-- <li>
-					<div class="selectbox">
-						<select id="board_type">
-							<option selected>게시글 유형</option>
-							<option>조회수 순</option>
-							<option>찜 순</option>
-							<option>후기 많은 순</option>
-						</select>
-					</div>
-				</li> -->
-				<!-- <li>
-					<div class="selectbox">
-						<select id="day_type">
-							<option selected>장기예약</option>
-							<option>장기예약 가능</option>
-						</select>
-					</div>
-				</li> -->
 			</ul>
 		</div>
 		<!-- 검색창 끝 -->

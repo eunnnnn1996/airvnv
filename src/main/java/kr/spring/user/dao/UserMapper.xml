@@ -44,7 +44,8 @@
 		d.phone,
 		d.address1,
 		d.address2,
-		d.reg_date
+		d.reg_date,
+		d.age
 		from auser a
 		join auser_detail d on a.user_num = d.user_num
 		ORDER BY a.user_num DESC)a)
@@ -54,5 +55,90 @@
 		COUNT(*)
 		from auser a
 		join auser_detail d on a.user_num = d.user_num
+	</select>
+	<!-- 판매내역 있는 사람 조회 -->
+	<select id="selectListIncome" parameterType="map" resultType="houseVO">
+		SELECT * FROM 
+        (SELECT a.*, rownum rnum FROM 
+        (SELECT 
+		a.user_num,
+		d.user_name,
+		d.reg_date,
+		d.age,
+		i.sum_income,
+        i.market_num
+		from auser a
+		join auser_detail d on a.user_num = d.user_num
+		join aincome i on a.user_num = i.user_num
+		ORDER BY i.sum_income DESC)a)
+	</select>
+	<!-- 판매내역 있는 사람의 수 -->
+	<select id="selectRowCountIncomeList" parameterType="map" resultType="integer">
+		SELECT
+		COUNT(*)
+		from auser a
+		join auser_detail d on a.user_num = d.user_num
+		join aincome i on a.user_num = i.user_num
+	</select>
+	<!-- 승인대기중인 방 목록 -->
+	<select id="selectListReservationOnOff" parameterType="map" resultType="houseVO">
+	SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT 
+	p.date_num,
+	<![CDATA[
+	REPLACE(REPLACE(d.market_title, '<', '&lt;'),'>','&gt;') market_title,
+	]]>
+	m.address1,
+	m.address2,
+	m.address3,
+	p.user_num,
+	p.onoff,
+	p.startdate,
+	p.enddate,
+	p.price,
+	p.market_num,
+	d.user_name
+	from apayment p
+	join amarket m on p.market_num = m.market_num
+	join auser_detail d on p.user_num = d.user_num
+	join amarket_detail d on p.market_num = d.market_num where m.user_num = #{user_num} and p.onoff = '1'
+	ORDER BY m.market_num DESC)a)
+	</select>
+	<!-- 승인대기중인 방 개수 -->
+	<select id="selectRowCountReservationOnOff" parameterType="map" resultType="integer">
+	SELECT
+	COUNT(*)
+	from apayment p
+	join amarket m on p.market_num = m.market_num
+	join auser_detail d on p.user_num = d.user_num
+	join amarket_detail d on p.market_num = d.market_num where m.user_num = #{user_num} and p.onoff = '1' 
+	</select>
+	
+	<!-- 좋아요 누른 방 조회  -->
+	<select id="selectListLikeBoard" parameterType="map" resultType="houseVO">
+		SELECT * FROM 
+        (SELECT a.*, rownum rnum FROM 
+        (SELECT 
+        m.market_num,
+        m.otherpay,
+        m.photo_name,
+        d.market_content,
+        d.hit,
+        d.market_title,
+        u.user_num,
+        u.user_id
+		from houselike l
+        join auser u on l.user_num = u.user_num 
+        join amarket m on l.market_num = m.market_num
+        join amarket_detail d on l.market_num = d.market_num and l.user_num = #{user_num}
+		ORDER BY l.houselike_num DESC)a)
+	</select>
+	<!-- 좋아요 누른 방 개수  -->
+	<select id="selectRowCountLikeBoard" parameterType="map" resultType="integer">
+		SELECT
+		COUNT(*)
+		from houselike l
+        join auser u on l.user_num = u.user_num 
+        join amarket m on l.market_num = m.market_num
+        join amarket_detail d on l.market_num = d.market_num and l.user_num = #{user_num}
 	</select>
 </mapper>

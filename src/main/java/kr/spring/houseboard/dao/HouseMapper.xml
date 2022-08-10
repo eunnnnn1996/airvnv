@@ -317,21 +317,13 @@
 					<if test="day_type == 1">
 					and trade_short =1
 					</if>
-					<if test="country == 1">
-					and country = '미국'
+					
+					<if test='country != "all" and country != ""'>
+					and country in
+					<foreach collection="countrylist" item="item" index="index" separator="," open="(" close=")">
+					 #{item}
+					</foreach>
 					</if>
-					<if test="country == 2">
-					and country = '일본'
-					</if>
-					<if test="country == 3">
-					and country = '중국'
-					</if>
-					<if test="country == 4">
-					and country = '태국'
-					</if>
-					<if test="country == 5">
-					and country = '필리핀'
-					</if>					
 					<if test="board_type == 1">
 					ORDER BY d.market_num DESC)a)
 					</if>

@@ -61,9 +61,7 @@ public class HouseController {
 		logger.info("집 내놓기 정보 : " + houseVO);
 
 		if (errors.hasErrors()) {
-			/* 회원가입 실패시 입력 데이터 값을 유지 */
 			model.addAttribute("houseVO", houseVO);
-			/* 회원가입 페이지로 다시 리턴 */
 			return "houseInsert";
 		}
 
@@ -135,9 +133,7 @@ public class HouseController {
 		logger.info("집 내놓기 정보 : " + houseVO);
 
 		if (errors.hasErrors()) {
-			/* 회원가입 실패시 입력 데이터 값을 유지 */
 			model.addAttribute("houseVO", houseVO);
-			/* 회원가입 페이지로 다시 리턴 */
 			return "houseModify";
 		}
 
@@ -378,7 +374,9 @@ public class HouseController {
 			map.put("board_type", board_type);
 			map.put("day_type", day_type);
 			map.put("country", country);
-			
+			String[] countrylist = country.split(",");
+			map.put("countrylist", countrylist);
+				
 			int count = houseService.selectWorldRowCount(map);
 			
 			PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,6,10,"worldList.do","&market_type="+market_type+"&price="+price+"&country="+country);

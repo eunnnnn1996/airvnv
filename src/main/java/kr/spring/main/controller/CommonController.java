@@ -23,11 +23,8 @@ public class CommonController {
 			                              HttpServletResponse response,
 			                              HttpServletRequest request)
 			                            		      throws Exception{
-		//업로드할 폴더 경로
-		String realFolder = 
-		session.getServletContext().getRealPath("/resources/image_upload");
+		String realFolder = session.getServletContext().getRealPath("/resources/image_upload");
 		
-		//업로드할 파일 이름
 		String org_filename = upload.getOriginalFilename();
 		String str_filename = System.currentTimeMillis() + org_filename;
 		

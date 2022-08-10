@@ -44,8 +44,18 @@ public interface UserMapper {
 	public void updateUserAuth(UserVO userVO);
 	//내가 올린 방 리스트
 	public List<HouseVO> selectListPostHouse(Map<String,Object> map);
-	//내가 올린 방 갯수
+	//내가 올린 방 개수
 	public int selectRowCountPostHouse(Map<String,Object> map);
+	//승인대기 중인 방 리스트
+	public List<HouseVO> selectListReservationOnOff(Map<String,Object> map);
+	//승인대기 중인 방 개수
+	public int selectRowCountReservationOnOff(Map<String,Object> map);
+	//승인대기 중인 방 승인
+	@Update("update apayment set onoff = '2' where date_num = #{date_num}")
+	public void ReservationOnOffUpdate(Integer date_num);
+	//승인대기 중인 방 취소
+	@Update("update apayment set onoff = '3' where date_num = #{date_num}")
+	public void ReservationOnOffCencel(Integer date_num);
 	@Update("update amarket_detail set onoff = 2 where user_num = #{user_num} and market_num = #{market_num}")
 	public void postCencelUpdate(@Param("user_num") Integer user_num,@Param("market_num") int market_num);
 	@Update("update amarket_detail set onoff = 1 where user_num = #{user_num} and market_num = #{market_num}")
@@ -54,8 +64,12 @@ public interface UserMapper {
 	public void deletePost(@Param("user_num") Integer user_num,@Param("market_num") int market_num);
 	//모든 회원 정보조회(관리자)
 	public List<HouseVO> selectListUser(Map<String,Object> map);
-	//모든 회원 갯수(관리자)
+	//모든 회원 개수(관리자)
 	public int selectRowCountListUser(Map<String,Object> map);
+	//판매한 기록이 있는 회원 조회(관리자)
+	public List<HouseVO> selectListIncome(Map<String,Object> map);
+	//판매한 기록이 있는 회원 개수(관리자)
+	public int selectRowCountIncomeList(Map<String,Object> map);
 	//회원 상태 변경
 	@Update("update auser set user_auth = #{user_auth} where user_num = #{user_num}")
 	public void updateUserAuthMaster(@Param("user_auth")int user_auth,@Param("user_num")Integer user_num);
@@ -85,4 +99,12 @@ public interface UserMapper {
 	//메뉴 삭제
 	@Update("update acategory set category_onoff = 2 where category_name = #{category_name}")
 	public void menuDelete(String category_name);
+	//카테고리 추가
+	@Insert("insert into acategory values(acategory_seq.nextval,#{category_name},'1')")
+	public void categoryInsert(String category_name);
+	
+	//좋아요 누른 방 조회
+	public List<HouseVO> selectListLikeBoard(Map<String,Object> map);
+	//좋아요 누른 방 개수
+	public int selectRowCountLikeBoard(Map<String,Object> map);
 }

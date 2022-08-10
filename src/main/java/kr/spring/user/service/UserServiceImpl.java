@@ -161,4 +161,58 @@ public class UserServiceImpl implements UserService{
 		userMapper.menuInsert(category_name);
 		
 	}
+
+	@Override
+	public void categoryInsert(String category_name) {
+		// TODO Auto-generated method stub
+		userMapper.categoryInsert(category_name);
+	}
+
+	@Override
+	public int selectRowCountIncomeList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectRowCountIncomeList(map);
+	}
+
+	@Override
+	public List<HouseVO> selectListIncome(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectListIncome(map);
+	}
+
+	@Override
+	public List<HouseVO> selectListReservationOnOff(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectListReservationOnOff(map);
+	}
+
+	@Override
+	public int selectRowCountReservationOnOff(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectRowCountReservationOnOff(map);
+	}
+
+	@Override
+	public void ReservationOnOffUpdate(Integer date_num) {
+		// TODO Auto-generated method stub
+		userMapper.ReservationOnOffUpdate(date_num);
+	}
+
+	@Override
+	public void ReservationOnOffCencel(Integer date_num) {
+		// TODO Auto-generated method stub
+		userMapper.ReservationOnOffCencel(date_num);
+	}
+
+	@Override
+	public List<HouseVO> selectListLikeBoard(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectListLikeBoard(map);
+	}
+
+	@Override
+	public int selectRowCountLikeBoard(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectRowCountLikeBoard(map);
+	}
 }

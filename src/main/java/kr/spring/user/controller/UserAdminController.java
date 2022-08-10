@@ -30,7 +30,22 @@ public class UserAdminController {
 	
 	//관리자 페이지
 	@RequestMapping("/user/stats.do")
-	public String statsForm(Model model) {
+	public ModelAndView statsForm(Model model,
+							@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		int count = userService.selectRowCountIncomeList(map);
+		
+		PagingUtil page = new PagingUtil(currentPage,count,6,10,"stats.do");
+		
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		List<HouseVO> ilist = null;
+		if(count > 0) {
+			ilist = userService.selectListIncome(map);
+		}
+		
 		Integer allhit = houseService.houseAllHitCount();
 
 		model.addAttribute("allhit",allhit);
@@ -57,7 +72,13 @@ public class UserAdminController {
 		model.addAttribute("fifty",userService.fifty());
 		model.addAttribute("sixty",userService.sixty());
 	
-		return "stats";
+		ModelAndView mav  = new ModelAndView();
+		mav.setViewName("stats");
+		mav.addObject("count", count);
+		mav.addObject("list",ilist);
+		mav.addObject("pagingHtml",page.getPagingHtml());
+
+		return mav;
 	}
 
 	//관리자 유저 정보 페이지
