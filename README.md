@@ -93,5 +93,5 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
   * 예약자가 예약한 방들 호출, 승인 및 승인취소, 예약 취소
 
 
-![image](https://user-images.githubusercontent.com/84512966/184163379-796f8a90-83af-4896-87a4-0dfbd7b24b64.png)
+![image](https://user-images.githubusercontent.com/84512966/184163814-e05d0f3d-e14d-4e79-b466-9569983a37f6.png)
 
