@@ -67,8 +67,23 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 ![image](https://user-images.githubusercontent.com/84512966/183961226-56c1eafc-30d8-46b3-bace-ce9d206701ac.png)
 
 
-* MY 정보
+* MY 정보 - 내정보
   * 프로필사진 설정 및 아이디,닉네임,휴대폰번호 변경
   * 회원탈퇴 (비밀번호 확인)
   * 내가 올린 방 확인, 내가 예약한 방 확인, 승인 대기중인 방 확인, 수익확인
-![image](https://user-images.githubusercontent.com/84512966/183961744-1c0c3fd2-b22a-46e1-ae8f-bdb31dc13dad.png)
+![image](https://user-images.githubusercontent.com/84512966/184159365-1b8ca865-ffb8-4a5d-98af-b5e5191efe46.png)
+
+* MY 정보 - 내가 올린 방
+  * 게시중단 및 재시작 , 목록삭제
+![image](https://user-images.githubusercontent.com/84512966/184159857-1a24f955-5704-4f72-bfa5-daf984def475.png)
+
+
+* MY 정보 - 내가 예약한 방
+  * 예약상태 확인 , 예약취소, 목록 삭제
+![image](https://user-images.githubusercontent.com/84512966/184161202-ad5ad663-3e87-4d42-8b9b-e2aa25849137.png)
+
+
+* MY 정보 - 승인 대기중인 방
+  * 예약자가 예약한 방들 호출, 승인 및 승인취소, 예약 취소
+![image](https://user-images.githubusercontent.com/84512966/184161773-6448b6df-ad46-4031-a6b0-ec65583120fe.png)
+
