@@ -101,8 +101,7 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 
 * 게시물(방) 작성하기
  
-![insert]()
-<img src="https://user-images.githubusercontent.com/84512966/184326596-90502c34-b787-4608-a53c-0a216e7d6c0f.gif"  width="700" height="600"/>
+<img src="https://user-images.githubusercontent.com/84512966/184326596-90502c34-b787-4608-a53c-0a216e7d6c0f.gif"  width="850" height="600"/>
 
 
 * 전체보기
