@@ -144,6 +144,8 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 <img src="https://user-images.githubusercontent.com/84512966/184342660-b3ac57d7-d2ce-467d-94dc-9e792ff2908c.png"  width="700" height="400"/>
 <img src="https://user-images.githubusercontent.com/84512966/184342690-abe1e0f0-8fa4-4867-971e-64ae2db4f2f0.png"  width="700" height="400"/>
 <img src="https://user-images.githubusercontent.com/84512966/184342726-c3b24422-d7ec-4eda-bafe-b2ea4e97ef5e.png"  width="700" height="400"/> 
+<img src="https://user-images.githubusercontent.com/84512966/184344296-53c24bc9-ced3-4899-959a-1c3a3cea2c13.gif"  width="700" height="400"/> 
+
 
 
 
