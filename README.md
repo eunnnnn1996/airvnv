@@ -109,3 +109,7 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 
 ![likemap](https://user-images.githubusercontent.com/84512966/184301934-e8a99831-8eb1-4586-936a-27f5c315f09b.gif)
 
+* 방 사진 보기
+  * 메인 5개 사진 및 전체보기를 통해 모든사진 보기
+
+![imgmodal](https://user-images.githubusercontent.com/84512966/184302999-4a125a09-8e2e-4f21-8e0a-6a6370c13d9b.gif)
