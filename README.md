@@ -59,6 +59,8 @@ airbnb 시스템을 가져온 숙박 공유서비스 웹사이트 입니다
 
 <img src="https://user-images.githubusercontent.com/84512966/184344768-bf2fb3d3-4471-4eda-9a5e-0d9d10894f67.gif"  width="700" height="600"/>
 
+한페이지 스크롤로 총 3개의 섹션을 나누어 3번 스크롤을 할 수 있게 만들었습니다
+
 * 회원가입
   * ajax 활용 아이디 중복 검사 및 비밀번호 확인
   * 다음 api 활용 주소 찾기
@@ -69,6 +71,7 @@ airbnb 시스템을 가져온 숙박 공유서비스 웹사이트 입니다
 
 <img src="https://user-images.githubusercontent.com/84512966/183961226-56c1eafc-30d8-46b3-bace-ce9d206701ac.png"  width="400" height="400"/>
 
+로그인을 하게 되면 세션스토리지에 담길 수 있도록 했습니다
 
 * MY 정보 - 내정보
   * 프로필사진 설정 및 아이디,닉네임,휴대폰번호 변경
@@ -78,11 +81,20 @@ airbnb 시스템을 가져온 숙박 공유서비스 웹사이트 입니다
 
 ![image](https://user-images.githubusercontent.com/84512966/184163963-6c197bab-de88-4b19-bf3a-e7a9bf8513ca.png)
 
+프로필 이미지는 BLOB으로 처리 하였습니다. VO에서 byte로 변환을 했습니다. 
+
+굳이 BLOB로 저장한 이미지를 byte로 바꾸는 이유는 자바에서 byte[]눈 JDBC에서 BLOB로 **자동매핑** 되기 때문입니다.
+
+프로필 이미지는 **AJAX**를 활용하여 수정이 가능하도록 했습니다.
+
+
+
 * MY 정보 - 내가 올린 방
   * 게시중단 및 재시작 , 목록삭제
 
 
 ![image](https://user-images.githubusercontent.com/84512966/184164040-6f58bd59-6997-4fde-b479-ff915abb806d.png)
+
 
 
 * MY 정보 - 내가 예약한 방
@@ -101,6 +113,12 @@ airbnb 시스템을 가져온 숙박 공유서비스 웹사이트 입니다
  
 <img src="https://user-images.githubusercontent.com/84512966/184326596-90502c34-b787-4608-a53c-0a216e7d6c0f.gif"  width="850" height="600"/>
 
+국내와 해외 주소를 **구분**하여 작성할 수 있게 했습니다.
+
+**다음주소 api**와 **kakaomap api**를 사용하여 국내주소를 입력하면 kakaomap이 **좌표를 자동**으로 찍어 표시되게 했습니다.
+
+글 content는 **ckeditor를 사용**하여 여러 옵션을 사용자가 사용할 수 있게 했습니다.
+
 
 * 전체보기
   * 모든 게시물을 확인, 카테고리별 확인
@@ -115,10 +133,21 @@ airbnb 시스템을 가져온 숙박 공유서비스 웹사이트 입니다
 
 <img src="https://user-images.githubusercontent.com/84512966/184330184-6251f54e-a4d5-41f5-abcb-b5777750f50e.gif"  width="700" height="500"/>
 
+방 상세보기 페이지에서 바로 결제를 할 수 있도록 했습니다.
+
+**아임포트 api**를 이용하여 결제를 할 수 있게 했습니다.
+
 * 방 사진 보기
   * 메인 5개 사진 및 전체보기를 통해 모든사진 보기
 
 <img src="https://user-images.githubusercontent.com/84512966/184330706-72034f79-30a9-40d9-9063-d534ae5c99d9.gif"  width="700" height="400"/>
+
+방 상세보기 페이지 상단에 5개의 메인 이미지가 올라가고 **전체보기**를 누르면 스와이프로 주인이 올린 이미지를 모두 확인 할 수 있습니다.
+
+사진은 content를 작성할 때 같이 업로드를 하지만 controller에서 **정규식을 사용하여 <img>태그만 따로 추출**하여 상세보기 페이지 상단에 사진만 추출했고
+
+하단에 방 상세설명부분에는 <img>태그만 제외하여 상세설명만 볼 수 있도록 했습니다.
+
 
 ---
 
@@ -128,6 +157,9 @@ airbnb 시스템을 가져온 숙박 공유서비스 웹사이트 입니다
   * 리뷰작성
 
 <img src="https://user-images.githubusercontent.com/84512966/184335148-80fc551b-e565-4056-af7a-d783f7d82869.gif"  width="700" height="400"/>
+
+상세보기 페이지에서 후기 버튼을 누르면
+
 
 * 리뷰에 답글 남기기
 
@@ -148,6 +180,8 @@ airbnb 시스템을 가져온 숙박 공유서비스 웹사이트 입니다
 <img src="https://user-images.githubusercontent.com/84512966/184344296-53c24bc9-ced3-4899-959a-1c3a3cea2c13.gif"  width="700" height="400"/> 
 
 
+---
 
+## 코드리뷰
 
 
