@@ -103,7 +103,7 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 * 방 자세히 보기
   * 게시글 자세한 설명 및 가격, 지도표시, 예약결제, 찜하기
 
-![detail](https://user-images.githubusercontent.com/84512966/184300531-f31ad864-9785-49e0-a73c-2d49a7f9fadd.gif)
+![20220812_161447_AdobeExpress](https://user-images.githubusercontent.com/84512966/184304126-53f3383c-ff44-4cd5-ac35-28d3c6f9c1cb.gif)
 
 ![pay](https://user-images.githubusercontent.com/84512966/184301505-def1d735-2994-4603-abf2-7ef9c8e19ac7.gif)
 
