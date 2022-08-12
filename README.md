@@ -137,3 +137,6 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 * 리뷰 작성하기
 
 <img src="https://user-images.githubusercontent.com/84512966/184314685-633c4b06-2887-418a-b182-e94d3e4bac42.gif"  width="300" height="400"/>
+
+![20220812_180514_AdobeExpress (2)](https://user-images.githubusercontent.com/84512966/184323366-bce0363e-738e-4589-a879-fbbf7bfdd0e1.gif)
+
