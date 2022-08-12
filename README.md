@@ -112,7 +112,7 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 
 ![20220812_161447_AdobeExpress](https://user-images.githubusercontent.com/84512966/184304126-53f3383c-ff44-4cd5-ac35-28d3c6f9c1cb.gif)
 
-![22](https://user-images.githubusercontent.com/84512966/184330184-6251f54e-a4d5-41f5-abcb-b5777750f50e.gif)
+<img src="https://user-images.githubusercontent.com/84512966/184330184-6251f54e-a4d5-41f5-abcb-b5777750f50e.gif"  width="850" height="600"/>
 
 * 방 사진 보기
   * 메인 5개 사진 및 전체보기를 통해 모든사진 보기
