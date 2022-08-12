@@ -56,7 +56,7 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 * 메인페이지
   * 게시글 전체보기,로그인,회원가입,로그아웃
 
-<img src="https://user-images.githubusercontent.com/84512966/183959563-9e7b12cb-2c14-4ee0-b0ea-788aa19901b3.png"  width="600" height="400"/>
+<img src="https://user-images.githubusercontent.com/84512966/184344768-bf2fb3d3-4471-4eda-9a5e-0d9d10894f67.gif"  width="700" height="600"/>
 
 * 회원가입
   * ajax 활용 아이디 중복 검사 및 비밀번호 확인
