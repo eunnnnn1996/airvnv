@@ -22,7 +22,7 @@
 * JQUERY
 ---
 ## ER다이어그램
-<img src="https://user-images.githubusercontent.com/84512966/184344768-bf2fb3d3-4471-4eda-9a5e-0d9d10894f67.gif"  width="700" height="600"/>
+<img src="https://user-images.githubusercontent.com/84512966/183927684-ebc59009-f302-4023-bfb4-0576951deba9.png" width="700" height="600"/>
 
 ---
 
