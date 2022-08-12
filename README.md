@@ -65,7 +65,7 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 * 로그인
   * 아이디와 비밀번호 일치 확인
 
-![image](https://user-images.githubusercontent.com/84512966/183961226-56c1eafc-30d8-46b3-bace-ce9d206701ac.png)
+<img src="https://user-images.githubusercontent.com/84512966/183961226-56c1eafc-30d8-46b3-bace-ce9d206701ac.png"  width="400" height="400"/>
 
 
 * MY 정보 - 내정보
