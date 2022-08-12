@@ -105,11 +105,11 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 
 ![20220812_161447_AdobeExpress](https://user-images.githubusercontent.com/84512966/184304126-53f3383c-ff44-4cd5-ac35-28d3c6f9c1cb.gif)
 
-![pay](https://user-images.githubusercontent.com/84512966/184301505-def1d735-2994-4603-abf2-7ef9c8e19ac7.gif)
+![20220812_162215_AdobeExpress](https://user-images.githubusercontent.com/84512966/184306048-70d0204b-d025-437f-9110-780cbf8adbed.gif)
 
-![likemap](https://user-images.githubusercontent.com/84512966/184301934-e8a99831-8eb1-4586-936a-27f5c315f09b.gif)
+![20220812_162346_AdobeExpress](https://user-images.githubusercontent.com/84512966/184306110-ffe3cbeb-60b0-4d31-8d7a-30aadbbefb1e.gif)
 
 * 방 사진 보기
   * 메인 5개 사진 및 전체보기를 통해 모든사진 보기
 
-![imgmodal](https://user-images.githubusercontent.com/84512966/184302999-4a125a09-8e2e-4f21-8e0a-6a6370c13d9b.gif)
+![20220812_162644_AdobeExpress](https://user-images.githubusercontent.com/84512966/184305990-0e596d50-cfb9-4494-813f-c672109e7ad2.gif)
