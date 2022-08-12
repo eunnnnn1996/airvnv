@@ -131,3 +131,20 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 * 리뷰에 답글 남기기
 
 <img src="https://user-images.githubusercontent.com/84512966/184338484-e4f2ac43-7271-415e-b9f6-30bca4d68e81.gif"  width="700" height="400"/>
+
+---
+
+* 관리자 페이지
+  * 월별 총 조회수 통계, 회원 나이 통계, 수익 통계
+  * 회원관리 - 정지,탈퇴,활동,운영진 설정
+  * 게시물관리 - 대기중,게시승인
+  * 메뉴관리 - 카테고리 추가 및 삭제
+
+
+<img src="https://user-images.githubusercontent.com/84512966/184342660-b3ac57d7-d2ce-467d-94dc-9e792ff2908c.png"  width="700" height="400"/>
+<img src="https://user-images.githubusercontent.com/84512966/184342690-abe1e0f0-8fa4-4867-971e-64ae2db4f2f0.png"  width="700" height="400"/>
+<img src="https://user-images.githubusercontent.com/84512966/184342726-c3b24422-d7ec-4eda-bafe-b2ea4e97ef5e.png"  width="700" height="400"/>
+
+
+
+
