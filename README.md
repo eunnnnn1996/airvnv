@@ -97,7 +97,7 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 
 * 좋아요 누른 방
 
-![image](https://user-images.githubusercontent.com/84512966/184318440-29386331-1610-48b8-8e84-a8574e41f99e.png)
+<img src="https://user-images.githubusercontent.com/84512966/184318440-29386331-1610-48b8-8e84-a8574e41f99e.png"  width="700" height="600"/>
 
 
 * 전체보기
