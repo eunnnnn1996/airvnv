@@ -117,7 +117,7 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 * 방 사진 보기
   * 메인 5개 사진 및 전체보기를 통해 모든사진 보기
 
-<img src="https://user-images.githubusercontent.com/84512966/184330706-72034f79-30a9-40d9-9063-d534ae5c99d9.gif"  width="700" height="500"/>
+<img src="https://user-images.githubusercontent.com/84512966/184330706-72034f79-30a9-40d9-9063-d534ae5c99d9.gif"  width="700" height="400"/>
 
 ---
 
