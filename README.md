@@ -72,7 +72,7 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 * MY 정보 - 내정보
   * 프로필사진 설정 및 아이디,닉네임,휴대폰번호 변경
   * 회원탈퇴 (비밀번호 확인)
-  * 내가 올린 방 확인, 내가 예약한 방 확인, 승인 대기중인 방 확인, 수익확인
+  * 내가 올린 방 확인, 내가 예약한 방 확인, 승인 대기중인 방 확인, 좋아요 누른 방 , 수익확인
 
 
 ![image](https://user-images.githubusercontent.com/84512966/184163963-6c197bab-de88-4b19-bf3a-e7a9bf8513ca.png)
@@ -95,9 +95,6 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 
 ![image](https://user-images.githubusercontent.com/84512966/184163814-e05d0f3d-e14d-4e79-b466-9569983a37f6.png)
 
-* 좋아요 누른 방
-
-<img src="https://user-images.githubusercontent.com/84512966/184318440-29386331-1610-48b8-8e84-a8574e41f99e.png"  width="700" height="600"/>
 
 * 게시물(방) 작성하기
  
