@@ -22,7 +22,8 @@
 * JQUERY
 ---
 ## ER다이어그램
-![image](https://user-images.githubusercontent.com/84512966/183927684-ebc59009-f302-4023-bfb4-0576951deba9.png)
+<img src="https://user-images.githubusercontent.com/84512966/183927684-ebc59009-f302-4023-bfb4-0576951deba9.png"  width="600" height="400"/>
+
 ---
 
 ## 프로젝트 목적
