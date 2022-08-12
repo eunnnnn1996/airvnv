@@ -124,11 +124,10 @@ airbnb 시스템을 그대로 가져온 숙박 공유서비스 웹사이트 입�
 
 * 리뷰 메인
   * 정확성,철결,편의성,위치,소통 각각 점수 작성
-
-![image](https://user-images.githubusercontent.com/84512966/184313563-b5d26462-f579-499c-8c86-cd13d5135556.png)
-
----
-
-* 리뷰 작성하기
+  * 리뷰작성
 
 <img src="https://user-images.githubusercontent.com/84512966/184335148-80fc551b-e565-4056-af7a-d783f7d82869.gif"  width="700" height="400"/>
+
+* 리뷰에 답글 남기기
+
+<img src="https://user-images.githubusercontent.com/84512966/184338484-e4f2ac43-7271-415e-b9f6-30bca4d68e81.gif"  width="700" height="400"/>
