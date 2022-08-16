@@ -182,7 +182,7 @@ BLOB로 저장한 이미지를 byte로 바꾸어 JDBC에서 BLOB로 **자동매�
 
 <img src="https://user-images.githubusercontent.com/84512966/184836939-db21cdc1-6035-4531-a84a-904f0ed68ab6.png"  width="700" height="400"/>
 <img src="https://user-images.githubusercontent.com/84512966/184342690-abe1e0f0-8fa4-4867-971e-64ae2db4f2f0.png"  width="700" height="400"/>
-<img src="https://user-images.githubusercontent.com/84512966/184342726-c3b24422-d7ec-4eda-bafe-b2ea4e97ef5e.png"  width="700" height="400"/> 
+<img src="https://user-images.githubusercontent.com/84512966/184838366-739887c1-1302-4e26-8601-6750d94a6500.png"  width="700" height="400"/>
 <img src="https://user-images.githubusercontent.com/84512966/184344296-53c24bc9-ced3-4899-959a-1c3a3cea2c13.gif"  width="700" height="400"/> 
 
 관리자 페이지는 bootstrap template을 사용하여 디자인을 했습니다.
