@@ -180,7 +180,7 @@ BLOB로 저장한 이미지를 byte로 바꾸어 JDBC에서 BLOB로 **자동매�
   * 메뉴관리 - 카테고리 추가 및 삭제
 
 
-<img src="https://user-images.githubusercontent.com/84512966/184342660-b3ac57d7-d2ce-467d-94dc-9e792ff2908c.png"  width="700" height="400"/>
+<img src="https://user-images.githubusercontent.com/84512966/184836939-db21cdc1-6035-4531-a84a-904f0ed68ab6.png"  width="700" height="400"/>
 <img src="https://user-images.githubusercontent.com/84512966/184342690-abe1e0f0-8fa4-4867-971e-64ae2db4f2f0.png"  width="700" height="400"/>
 <img src="https://user-images.githubusercontent.com/84512966/184342726-c3b24422-d7ec-4eda-bafe-b2ea4e97ef5e.png"  width="700" height="400"/> 
 <img src="https://user-images.githubusercontent.com/84512966/184344296-53c24bc9-ced3-4899-959a-1c3a3cea2c13.gif"  width="700" height="400"/> 
