@@ -106,9 +106,9 @@
 	                                            <td>${list.user_num}</td>
 	                                            <td>${list.user_id}</td>
 	                                            <td>${list.market_num}</td>
-	                                            <td>${list.address1}</td>
-	                                            <td>${list.price}</td>
 	                                            <td>${list.market_title}</td>
+	                                            <td>${list.address1}</td>
+	                                            <td>${list.otherpay}</td>
 	                                            <td>${list.reg_date}</td>
 	                                            <td>
 		                                            <form action="approve.do" id="authChangeForm" method="get">

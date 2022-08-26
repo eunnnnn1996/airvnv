@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>      
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">   
@@ -21,19 +22,16 @@
 		<div class="my-reser">
 <section class="main-content">
 	<div class="container">
-		<hr size="1" style="width:900px;padding-left:130px">
-			<c:if test="${count == 0}">
-				<div class="result-display">표시할 상품이 없습니다.</div>
-			</c:if>
+		<hr size="1" style="width:900px;padding-left:30px">
 		<c:if test="${count > 0}">	
-		<table class="table">
+		<table class="table" style="padding-right:200px;">
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th>게시상태</th>
+					<th style="width:100px">게시상태</th>
 					<th>숙소명</th>
 					<th>주소</th>
-					<th>게시날짜</th>
+					<th style="width:150px">게시날짜</th>
 					<th>가격</th>					
 					<th>중단/재시작</th>
 					<th>제거</th>
@@ -52,17 +50,17 @@
 					<td>	
 						<c:choose>
 						<c:when test="${post.onoff == 1}">
-							<span class="active-circle bg-success"></span><b style="font-size:17px">예약중</b>
+							<span class="active-circle bg-success"></span><b style="font-size:17px">게시중</b>
 						</c:when>
 						<c:when test="${post.onoff == 2}">
-							<span class="active-circle bg-danger"></span><b style="font-size:17px">예약중단</b>
+							<span class="active-circle bg-danger"></span><b style="font-size:17px">게시중단</b>
 						</c:when>
 						</c:choose>
 					</td>
 					<td>${post.market_title}</td>
 					<td class="refont">${post.address1}${post.address2}${post.address3}</td>
-					<td class="refont">${post.startdate} ~ ${post.enddate}</td>
-					<td class="refont">${post.price}</td>
+					<td class="refont">${post.reg_date}</td>
+					<td class="refont"><fmt:formatNumber value="${post.otherpay}" pattern="#,###"/>₩</td>
 					<td class="refont">
 					<c:if test="${post.onoff == 1}">
 						<button class="btn btn-primary btn-sm refont-2"

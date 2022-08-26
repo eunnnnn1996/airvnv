@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,6 +52,10 @@ public class UserController {
 			return signUpForm();
 		}
 		
+		BCryptPasswordEncoder sc = new BCryptPasswordEncoder();
+		String scPassword = sc.encode(userVO.getPasswd());
+		userVO.setPasswd(scPassword);
+
 		userService.insertUser(userVO);
 		
 		return "redirect:/main/main.do";
@@ -61,7 +66,7 @@ public class UserController {
 												HttpServletRequest request) {
 
 		try {
-			UserVO user = userService.selectCheckUser(userVO.getUser_id());
+			UserVO user = userService.selectCheckUser(userVO.getUser_id()); //form에서 가져온거
 
 			boolean check = false;
 			if (user != null) {
@@ -304,7 +309,7 @@ public class UserController {
 			Integer user_num = (Integer) session.getAttribute("user_num");
 			
 			if(onoff == 2) {
-				houseService.DeleteMarketDetail(user_num,market_num);
+				houseService.DeleteMarketDetail(market_num);
 				model.addAttribute("message", "삭제 완료"); 
 				model.addAttribute("url", request.getContextPath() + "/user/myPost.do");
 				return "common/resultView";

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">   
     
@@ -21,9 +22,9 @@
 <div class="my-reser">
 <section class="main-content">
 	<div class="container">
-		<hr size="1" style="width:900px;padding-left:130px">
+		<hr size="1" style="width:900px;padding-left:30px">
 		<c:if test="${count > 0}">	
-		<table class="table">
+		<table class="table" style="padding-right:230px">
 			<thead>
 				<tr>
 					<th>숙소명</th>
@@ -61,7 +62,7 @@
 					</td>
 					<td class="refont">${reser.address1}${reser.address2}${reser.address3}</td>
 					<td class="refont">${reser.startdate} ~ ${reser.enddate}</td>
-					<td class="refont">${reser.price}</td>
+					<td class="refont"><fmt:formatNumber value="${reser.price}" pattern="#,###"/>₩</td>
 					<td class="refont">
 					<c:if test="${reser.onoff == 1}">
 						대기중

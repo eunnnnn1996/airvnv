@@ -222,7 +222,7 @@ function call()
 			</div>
 		</div>	
 		
-		<div class="sub-menu">
+		<div class="sub-menu" style="position: sticky;">
 			<div>
 				<ul>
 					<li>
@@ -247,7 +247,7 @@ function call()
 						</div>
 					</li>					
 					<li>
-						<div style="color:gray;padding-left:20px;">이 방을 살펴본 이용자 :
+						<div style="color:gray;padding-left:20px;">이 방을 좋아요 누른 이용자 :
 						<span id="output_fcount" class="margin_right_10"></span>명
 						</div>
 					</li>
@@ -305,7 +305,7 @@ function call()
 					</li>
 					<li>
 						<div class="item_type">기타옵션</div>
-						<div>${house.optionitem}</div>
+						<div style="font-size:20px;">${house.optionitem}</div>
 					</li>				
 				</ul>
 			</div>
@@ -323,7 +323,6 @@ function call()
 			<span style="font-size:30px;"><b>상세 설명</b></span>
 			<div class="detail-title">
 				<div class="market_title"><b>${house.market_title}</b></div>
-				<%-- <div class="market_content">${house.market_content}</div> --%>
 				<div class="market_content">${noneTag}</div>
 			</div>
 		</div>
@@ -348,7 +347,7 @@ function call()
         		${house.address2}동${house.address3}호
         		</div>
         		</li>
-        		<li style="padding-top:20px;"><label>호스텔 이름</label><b>${house.market_title}</b></li>
+        		<li style="padding-top:20px;"><label style="width:100px;">호스텔 이름</label><b>${house.market_title}</b></li>
         		
         		<li style="padding-top:30px;">
         			<b style="font-size:20px">체크인 : </b><input class="hostcheck" type="text" name="startdate" id="startdate" onchange="call()">부터<br>   
@@ -378,7 +377,7 @@ function call()
 							border-radius: 12px;" 
 							class="quickbtn" onclick="iamport()" type="button" value="바로 예약">
         		</li>
-        		<li><input id="temp-payment-btn" type="submit" value="임시구매"></li>
+        		<li><input id="temp-payment-btn" type="submit" value="임시구매" style="display:none"></li>
         	</ul>
         </form>
         </div>

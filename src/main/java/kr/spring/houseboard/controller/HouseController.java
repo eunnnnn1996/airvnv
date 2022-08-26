@@ -111,6 +111,7 @@ public class HouseController {
 		for (int i = 0; i < list.size(); i++) {
 			mav.addObject("list" + i, list.get(i));
 		}
+
 		mav.addObject("imglist",list); // 이미지 전체보기, 모든 img
 		mav.addObject("noneTag",noneTag);
 		
@@ -130,13 +131,11 @@ public class HouseController {
 	public String houseModify(@Valid HouseVO houseVO, int market_num, BindingResult result, Model model,
 			HttpServletRequest request, Errors errors, HttpSession session) {
 
-		logger.info("집 내놓기 정보 : " + houseVO);
-
 		if (errors.hasErrors()) {
 			model.addAttribute("houseVO", houseVO);
 			return "houseModify";
 		}
-
+		System.out.println("마켙넘 : "+market_num);
 		houseService.UpdateMarket(houseVO);
 
 		model.addAttribute("message", "글 수정 완료");
@@ -148,7 +147,8 @@ public class HouseController {
 	@GetMapping("/house/houseDelete.do")
 	public String houseDelete(int market_num, Model model, HttpServletRequest request, HttpSession session) {
 		Integer user_num = (Integer) session.getAttribute("user_num");
-		houseService.DeleteMarketDetail(user_num, market_num);
+		System.out.println("삭제 마켙넘 : " + market_num);
+		houseService.DeleteMarketDetail(market_num);
 
 		model.addAttribute("message", "글 삭제 완료");
 		model.addAttribute("url", request.getContextPath() + "/main/main.do");
@@ -216,7 +216,7 @@ public class HouseController {
 		
 		int count = houseService.selectRowCountRate(map);
 		
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,2,10,"rateMain.do","&market_num="+market_num);
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,10,10,"rateMain.do","&market_num="+market_num);
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());

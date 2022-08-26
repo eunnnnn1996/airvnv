@@ -36,9 +36,6 @@
 				<beans:value>/WEB-INF/tiles-def/main.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/user.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/house.xml</beans:value>
-				<beans:value>/WEB-INF/tiles-def/three.xml</beans:value>
-				<beans:value>/WEB-INF/tiles-def/four.xml</beans:value>
-				<beans:value>/WEB-INF/tiles-def/five.xml</beans:value>
 			</beans:list>
 		</beans:property>	
 	</beans:bean>

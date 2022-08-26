@@ -203,7 +203,7 @@ function acyncMovePageReply(url){
 					<ul>
 						<li class="rate-content-title"><b>"${rate.title}"</b></li>
 						<li class="rate-content-content">${rate.content}</li>
-						<li style="padding-top:50px;padding-right:10px;">
+						<li style="padding-top:20px;padding-right:10px;">
 							<button class="reply-list-btn"
 									onclick="acyncMovePageReply('${pageContext.request.contextPath}/house/rateReplyList.do?rate_num='+${rate.rate_num})">답글보기</button>
 							<!-- <button style="float:right;">답글보기</button> -->

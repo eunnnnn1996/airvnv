@@ -33,16 +33,12 @@ public class UserAjaxController {
 		Map<String, String> map = new HashMap<String, String>();
 		
 		UserVO user= userService.selectCheckUser(user_id);
-		//경우의 수 세가지 
 		if(user!=null) {
-			//아이디 중복 
 			map.put("result", "idDuplicated");
 		}else {
 			if(!Pattern.matches("^[A-Za-z0-9]{4,12}$", user_id)) {
-				//패턴 불일치
-				map.put("result", "notMatchPattern");
+				map.put("result", "notMatchPattern"); //패턴 불일치
 			}else {
-				//아이디 미중복
 				map.put("result", "idNotFound");
 			}
 		}
@@ -57,7 +53,7 @@ public class UserAjaxController {
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num==null) {//로그인 되지 않은 경우
 			map.put("result", "logout");
-		}else {//로그인 된 경우
+		}else {
 			userVO.setUser_num(user_num);
 			userService.updateProfile(userVO);
 			

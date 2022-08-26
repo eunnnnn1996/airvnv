@@ -42,7 +42,7 @@ public interface HouseService {
 	//집 정보 업데이트
 	public void UpdateMarket(HouseVO houseVO);
 	//집 삭제
-	public void DeleteMarketDetail(@Param("user_num") Integer user_num, @Param("market_num") int market_num);
+	public void DeleteMarketDetail(@Param("market_num") int market_num);
 	//집 조회수
 	public void marketHit(int market_num);
 	//좋아요 누른 목록 보기

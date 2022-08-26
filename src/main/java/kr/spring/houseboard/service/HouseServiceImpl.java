@@ -74,10 +74,12 @@ public class HouseServiceImpl implements HouseService{
 	}
 
 	@Override
-	public void DeleteMarketDetail(Integer user_num, int market_num) {
+	public void DeleteMarketDetail(int market_num) {
 		// TODO Auto-generated method stub
-		int date_num = houseMapper.selectDateNum(market_num);
-		houseMapper.deleteReservation(user_num, date_num);
+		/*
+		 * int date_num = houseMapper.selectDateNum(market_num);
+		 * houseMapper.deleteReservation(user_num, date_num);
+		 */
 		houseMapper.DeleteMarketDetail(market_num);
 		houseMapper.DeleteMarket(market_num);
 	}
