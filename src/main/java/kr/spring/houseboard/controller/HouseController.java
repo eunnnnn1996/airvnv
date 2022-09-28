@@ -39,7 +39,7 @@ import kr.spring.util.PagingUtil;
 public class HouseController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HouseController.class); // 로그찍기
-
+	
 	@Autowired
 	private HouseService houseService;
 	@Autowired
@@ -146,8 +146,7 @@ public class HouseController {
 
 	@GetMapping("/house/houseDelete.do")
 	public String houseDelete(int market_num, Model model, HttpServletRequest request, HttpSession session) {
-		Integer user_num = (Integer) session.getAttribute("user_num");
-		System.out.println("삭제 마켙넘 : " + market_num);
+
 		houseService.DeleteMarketDetail(market_num);
 
 		model.addAttribute("message", "글 삭제 완료");
@@ -216,7 +215,7 @@ public class HouseController {
 		
 		int count = houseService.selectRowCountRate(map);
 		
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,10,10,"rateMain.do","&market_num="+market_num);
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,1,1,"rateMain.do","&market_num="+market_num);
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());

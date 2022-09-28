@@ -12,6 +12,7 @@
 		let my_photo;
 		$('#upload').change(function(){
 			my_photo = this.files[0];
+			console.log(my_photo);
 			if(!my_photo){
 				$('.my-photo').attr('src',photo_path);
 				return;
@@ -32,12 +33,6 @@
 			reader.onload=function(){
 				$('.my-photo').attr('src',reader.result);
 			};
-		});//end of change	
-		//프로필 삭제
-		$('#photo_reset').click(function(){
-			$('.my-photo').attr('src',photo_path);
-			$('#upload').val('');
-			$('#photo_btn').show();
 		});
 		
 		/* mypage에서 프로필사진 클릭시 파일선택 버튼 클릭 */
@@ -111,10 +106,7 @@
 				</li>
 				<li>
 					<div id="photo_choice">
-						<input type="file" id="upload" accept="image/gif,image/png,image/jpeg" class="btn btn-outline-secondary" style="display:none;">
-						<!-- <input type="button" value="바꾸기" id="photo_submit" class="btn-black"> -->
-						<!-- <input type="button" value="수정" id="photo_btn" class="btn-black"> -->
-						<!-- <input type="button" value="이미지 삭제" id="photo_reset" class="btn-black"> -->
+						<input type="file" id="upload" accept="image/gif,image/png,image/jpeg" class="btn btn-outline-secondary" style="display:none;">					
 					</div>
 				</li>
 					<form:form modelAttribute="user" action="userUpdate.do" enctype="multipart/form-data">

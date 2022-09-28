@@ -136,14 +136,6 @@ $(document).ready(function() {
 			<p style="font-size:18px;color:#0092db;padding-bottom:5px;">비밀번호를 잊어버리셨나요?</p>
 			<p style="font-size:18px;color:#0092db;padding-bottom:15px;">계정이 없으신가요?<b><a style="font-size:18px;color:#0092db;padding-bottom:15px;" href="${pageContext.request.contextPath}/user/signUp.do">회원가입</a></b></p>
 			</div>
-			
-			<!--  -->
-			<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d879879e0e9c44ce1893dc77fa44d21c&redirect_uri=REDIRECT_URI&response_type=code">
-			<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
-			<!-- 본인걸로 수정 시 띄어쓰기 절대 하지 마세요. 오류납니다. -->
-				<img src="../resources/images/kakaobanner.png" style="width:300px;height:45px">
-			</a>
-			<!--  -->
 		</div>
 	</div>
 </div>

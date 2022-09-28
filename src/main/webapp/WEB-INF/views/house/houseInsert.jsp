@@ -11,8 +11,9 @@
 <!-- ckedior 라이브러리 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ckeditor_style.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/uploadAdapter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/config.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/uploadAdapter.js"></script>
+
 
 <script>
 CKEDITOR.editorConfig = function(config) {
